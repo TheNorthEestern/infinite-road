@@ -9,8 +9,6 @@ public class RoadSegmentGenerator : MonoBehaviour {
 	void Start () {
 		_originalInstantiationPosition = roadSegment.transform.position;
 		_originalInstantiationSize = GameObject.FindGameObjectWithTag ("OriginalRoadSegment").GetComponent<Renderer>().bounds.size.x;
-		/* _originalInstantiationPosition.x += _originalInstantiationSize;
-		Instantiate(roadSegment, _originalInstantiationPosition, Quaternion.identity);*/
 	}
 
 	public void Generate() {
