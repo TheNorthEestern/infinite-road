@@ -2,14 +2,7 @@
 using System.Collections;
 
 public class SceneController : MonoBehaviour {
-
-	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		GameObject instance = Instantiate (Resources.Load ("Prefabs/RoadSegment", typeof(GameObject))) as GameObject;
 	}
 }

@@ -13,6 +13,7 @@ public class RoadSegmentBehavior : MonoBehaviour {
 	// view frustum
 	void OnBecameInvisible () {
 		if (gameObject.name.Contains ("Clone")) {
+			Debug.Log("Audi 5000");
 			Destroy (this.gameObject);
 		}
 	}

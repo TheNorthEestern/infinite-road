@@ -9,9 +9,11 @@ public class RoadSegmentGeneratorTriggerBehavior : MonoBehaviour {
 		mainController.SendMessage ("Generate");
 	}
 
-	// Use this for initialization
+	void Awake() {
+		mainController = GameObject.Find ("SceneController");
+	}
+
 	void Start () {
-		// Makes the trigger cube invisible.
 		GetComponent<Renderer> ().enabled = false;
 	}
 	
