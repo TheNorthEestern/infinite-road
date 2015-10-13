@@ -15,7 +15,7 @@ public class ZombieModelController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// float deltaX = Input.GetAxis ("Horizontal") * speed;
-		float deltaZ = Input.GetAxis ("Vertical") * speed;
+		// float deltaZ = Input.GetAxis ("Vertical") * speed;
 		Vector3 movement = new Vector3 (15 * travelDirection, 0, 0);
 		movement = Vector3.ClampMagnitude (movement, speed);
 
