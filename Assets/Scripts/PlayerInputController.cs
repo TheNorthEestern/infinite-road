@@ -7,19 +7,30 @@ public class PlayerInputController : MonoBehaviour {
 	public float gravity = -9.8f;
 	public float rotationalSpeed = 1.0f;
 	public float travelDirection;
-	// Use this for initialization
+
+	private bool autoPilot = false;
+
 	void Start () {
 		_characterController = GetComponent<CharacterController> ();
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-		// float deltaX = Input.GetAxis ("Horizontal") * speed;
+		Vector3 movement = new Vector3 (0, 0, 0);
+	
 		float deltaZ = Input.GetAxis ("Vertical") * speed;
-		Vector3 movement = new Vector3 (deltaZ * travelDirection, 0, 0);
+
+		if (Input.GetKeyDown (KeyCode.F)) {
+			autoPilot = !autoPilot;
+		}
+
+		if (autoPilot == true) {
+			movement = new Vector3 (10 * travelDirection, 0, 0);
+		} else {
+			movement = new Vector3 (deltaZ * travelDirection, 0, 0);
+		}
+
 		movement = Vector3.ClampMagnitude (movement, speed);
 
-		// movement.y = gravity;
 		movement *= Time.deltaTime;
 		movement = transform.TransformDirection (movement);
 		_characterController.Move (movement);

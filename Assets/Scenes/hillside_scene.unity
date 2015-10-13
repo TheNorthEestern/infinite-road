@@ -236,7 +236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &409377531
 Transform:
   m_ObjectHideFlags: 0
@@ -866,8 +866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d721c2b80e15447448855dd18c2bfa55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roadSegment: {fileID: 0}
-  intersection: {fileID: 409377530}
 --- !u!114 &1475718517
 MonoBehaviour:
   m_ObjectHideFlags: 0
