@@ -24,9 +24,9 @@ public class PlayerInputController : MonoBehaviour {
 		}
 
 		if (autoPilot == true) {
-			movement = new Vector3 (10 * travelDirection, 0, 0);
+			movement = new Vector3 (0, 0, 10 * travelDirection);
 		} else {
-			movement = new Vector3 (deltaZ * travelDirection, 0, 0);
+			movement = new Vector3 (0, 0, deltaZ * travelDirection);
 		}
 
 		movement = Vector3.ClampMagnitude (movement, speed);
