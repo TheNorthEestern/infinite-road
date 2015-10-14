@@ -11,6 +11,7 @@ public class CameraBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		transform.position.Set (0, 0, 0);
 		transform.position = focalPoint.transform.position + offset;
 	}
 }

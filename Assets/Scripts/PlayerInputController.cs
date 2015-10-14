@@ -29,6 +29,7 @@ public class PlayerInputController : MonoBehaviour {
 			movement = new Vector3 (0, 0, deltaZ * travelDirection);
 		}
 
+
 		movement = Vector3.ClampMagnitude (movement, speed);
 
 		movement *= Time.deltaTime;
