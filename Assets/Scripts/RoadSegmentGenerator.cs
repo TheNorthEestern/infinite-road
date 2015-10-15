@@ -27,7 +27,7 @@ public class RoadSegmentGenerator : MonoBehaviour {
 			Instantiate (_roadSegmentPrefab, _roadSegmentInstantiationPosition, Quaternion.identity);
 		} else {
 			Instantiate (_intersectionPrefab, _roadSegmentInstantiationPosition, Quaternion.identity);
-			_roadSegmentInstantiationPosition.x += _originalInstantiationSize + 4;
+			_roadSegmentInstantiationPosition.x += _originalInstantiationSize;
 		}
 	}
 }

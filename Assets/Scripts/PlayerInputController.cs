@@ -15,9 +15,16 @@ public class PlayerInputController : MonoBehaviour {
 	}
 
 	void Update () {
+
 		Vector3 movement = new Vector3 (0, 0, 0);
 	
 		float deltaZ = Input.GetAxis ("Vertical") * speed;
+
+		if (Application.platform == RuntimePlatform.IPhonePlayer) {
+			if (Input.GetTouch (0).phase == TouchPhase.Began) {
+				autoPilot = !autoPilot;
+			}
+		}
 
 		if (Input.GetKeyDown (KeyCode.F)) {
 			autoPilot = !autoPilot;
