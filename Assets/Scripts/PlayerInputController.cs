@@ -14,7 +14,7 @@ public class PlayerInputController : MonoBehaviour {
 		_characterController = GetComponent<CharacterController> ();
 	}
 
-	void Update () {
+	void FixedUpdate () {
 
 		Vector3 movement = new Vector3 (0, 0, 0);
 	
