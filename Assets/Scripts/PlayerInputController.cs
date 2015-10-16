@@ -21,8 +21,23 @@ public class PlayerInputController : MonoBehaviour {
 		float deltaZ = Input.GetAxis ("Vertical") * speed;
 
 		if (Application.platform == RuntimePlatform.IPhonePlayer) {
-			if (Input.GetTouch (0).phase == TouchPhase.Began) {
+			if ( Input.touchCount > 0 ) {
 				autoPilot = !autoPilot;
+				switch(Input.touchCount) {
+					case 1:
+					speed = 10;
+					break;
+
+					case 2:
+					speed = 100;
+					break;
+
+					default:
+					break;
+				}
+			} 
+			if ( Input.touchCount == 0 ) {
+				autoPilot = false;
 			}
 		}
 
@@ -31,16 +46,17 @@ public class PlayerInputController : MonoBehaviour {
 		}
 
 		if (autoPilot == true) {
-			movement = new Vector3 (0, 0, 10 * travelDirection);
+			movement = new Vector3 (0, 0, speed * travelDirection);
 		} else {
-			movement = new Vector3 (0, 0, deltaZ * travelDirection);
+			movement = new Vector3 (0, 0, (deltaZ * travelDirection * speed));
 		}
 
 
-		movement = Vector3.ClampMagnitude (movement, speed);
+		// movement = Vector3.ClampMagnitude (movement, travelDirection * speed);
 
 		movement *= Time.deltaTime;
 		movement = transform.TransformDirection (movement);
+		Debug.Log (deltaZ * travelDirection);
 		_characterController.Move (movement);
 	}
 }

@@ -8,8 +8,4 @@ public class SceneController : MonoBehaviour {
 		Application.targetFrameRate = 60;
 	}
 
-	void IncrementScore() {
-		_score += 1;
-		Debug.Log (_score);
-	}
 }
