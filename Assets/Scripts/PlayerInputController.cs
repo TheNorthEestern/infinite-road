@@ -21,8 +21,34 @@ public class PlayerInputController : MonoBehaviour {
 	void FixedUpdate() 
 	{
 		float moveVertical = Input.GetAxis ("Vertical");
-		Vector3 movement = new Vector3 (moveVertical, 0.0f, 0.0f);
-		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, 50.0f);
+		
+		Vector3 movement;
+
+		movement = new Vector3 (moveVertical, 0.0f, 0.0f);
+
+		if (Application.platform == RuntimePlatform.IPhonePlayer) {
+			if ( Input.touchCount > 0 ) {
+				movement = new Vector3(1.0f, 0.0f, 0.0f);
+				switch(Input.touchCount) {
+				case 1:
+					speed = 10;
+					break;
+					
+				case 2:
+					speed = -10;
+					break;
+					
+				default:
+					break;
+				}
+			} 
+			if ( Input.touchCount == 0 ) {
+				movement = new Vector3(0.0f, 0.0f, 0.0f);
+			}
+
+		}
+
+		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, 100.0f);
 		_rb.AddForce (movement * speed);
 	}
 
