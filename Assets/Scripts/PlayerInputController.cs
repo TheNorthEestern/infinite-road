@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerInputController : MonoBehaviour {
 	private CharacterController _characterController;
+	private Rigidbody _rb;
 	public float speed = 10.0f;
 	public float gravity = -9.8f;
 	public float rotationalSpeed = 1.0f;
@@ -10,11 +11,23 @@ public class PlayerInputController : MonoBehaviour {
 
 	private bool autoPilot = false;
 
-	void Start () {
+	void Start () 
+	{
+		_rb = GetComponent<Rigidbody> ();
+		_rb.freezeRotation = true;
 		_characterController = GetComponent<CharacterController> ();
 	}
 
-	void FixedUpdate () {
+	void FixedUpdate() 
+	{
+		float moveVertical = Input.GetAxis ("Vertical");
+		Vector3 movement = new Vector3 (moveVertical, 0.0f, 0.0f);
+		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, 50.0f);
+		_rb.AddForce (movement * speed);
+	}
+
+	/* void FixedUpdate () 
+	{
 
 		Vector3 movement = new Vector3 (0, 0, 0);
 	
@@ -58,5 +71,5 @@ public class PlayerInputController : MonoBehaviour {
 		movement = transform.TransformDirection (movement);
 		Debug.Log (deltaZ * travelDirection);
 		_characterController.Move (movement);
-	}
+	}*/
 }

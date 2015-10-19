@@ -28,8 +28,8 @@ GameObject:
   - 33: {fileID: 3327546}
   - 65: {fileID: 6535442}
   - 23: {fileID: 2326882}
-  - 54: {fileID: 5478148}
   - 114: {fileID: 11424628}
+  - 54: {fileID: 5441314}
   m_Layer: 0
   m_Name: RoadSegmentGeneratorTrigger
   m_TagString: Untagged
@@ -504,7 +504,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!54 &5478148
+--- !u!54 &5441314
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
