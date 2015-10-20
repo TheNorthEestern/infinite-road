@@ -12,7 +12,7 @@ public class NpcBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		int localSpeed = Random.Range (5, 15);
+		int localSpeed = Random.Range (1, 5);
 		Vector3 movement = new Vector3 (0, localSpeed, 0);
 		movement = Vector3.ClampMagnitude (movement, localSpeed);
 
