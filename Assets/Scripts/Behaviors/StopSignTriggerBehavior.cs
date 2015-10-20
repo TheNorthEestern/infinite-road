@@ -2,7 +2,10 @@
 using System.Collections;
 
 public class StopSignTriggerBehavior : MonoBehaviour {
-	void OnTriggerEnter(Collider other) {
+	void Start() {
+		GetComponent<Renderer> ().enabled = false;
+	}
+	void OnTriggerExit(Collider other) {
 		Messenger.Broadcast (GameEvent.RAN_STOP_SIGN);
 	}
 }

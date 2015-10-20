@@ -66,7 +66,6 @@ GameObject:
   - 65: {fileID: 6520298}
   - 23: {fileID: 2355664}
   - 54: {fileID: 5407142}
-  - 114: {fileID: 11413836}
   - 114: {fileID: 11447996}
   m_Layer: 0
   m_Name: StopSignTrigger
@@ -578,18 +577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76dd0e85097f64ff189f4ff49d33a0d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11413836
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 148750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f4ca4fc5690477d97b6cfd77972b83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainController: {fileID: 0}
 --- !u!114 &11424628
 MonoBehaviour:
   m_ObjectHideFlags: 1
