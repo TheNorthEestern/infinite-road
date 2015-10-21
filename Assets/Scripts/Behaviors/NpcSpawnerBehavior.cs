@@ -6,7 +6,6 @@ public class NpcSpawnerBehavior : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GetComponent<Renderer> ().enabled = false;
-		Debug.Log ("NPCSpawner transform: " + transform.position);
 		GameObject npc = Resources.Load ("Prefabs/npc") as GameObject;
 		Vector3 newTransform = new Vector3(transform.position.x, npc.transform.position.y, transform.position.z);
 		Instantiate (npc, newTransform, npc.transform.localRotation);

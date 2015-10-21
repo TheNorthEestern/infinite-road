@@ -21,6 +21,7 @@ public class RoadSegmentGenerator : MonoBehaviour {
 
 	public void Generate() {
 		// Create the a new road segment at the end of the previous road segment
+
 		int segmentChoice = Random.Range (1, 10);
 		if (segmentChoice % 2 == 0) {
 			_roadSegmentInstantiationPosition.x += _originalInstantiationSize;
