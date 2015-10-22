@@ -6,7 +6,7 @@ using System.Collections;
 public class CameraBehavior : MonoBehaviour {
 
 	public GameObject focalPoint;
-	private Camera _camera;
+	// private Camera _camera;
 	private MotionBlur _blurComponent;
 	private Vector3 offset;
 
@@ -15,12 +15,12 @@ public class CameraBehavior : MonoBehaviour {
 		_blurComponent = GetComponent<MotionBlur> ();
 		_blurComponent.enabled = false;
 
-		_camera = GetComponent<Camera> ();
+		// _camera = GetComponent<Camera> ();
 	}
 
 	void Update () {
-		TimeSpan timespan = DateTime.Now.TimeOfDay;
-		DateTime time = DateTime.Now;
+		// TimeSpan timespan = DateTime.Now.TimeOfDay;
+		// DateTime time = DateTime.Now;
 		CheckAndUpdateMotionBlur ();
 		// transform.position.Set (0, 0, 0);
 		// Trippy camera effect

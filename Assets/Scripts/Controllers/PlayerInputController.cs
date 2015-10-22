@@ -3,7 +3,6 @@ using UnityStandardAssets.ImageEffects;
 using System.Collections;
 
 public class PlayerInputController : MonoBehaviour {
-	private CharacterController _characterController;
 	private AudioSource _audioSource;
 	private Rigidbody _rb;
 	private bool _sonicBoom = false;
@@ -12,14 +11,17 @@ public class PlayerInputController : MonoBehaviour {
 	public float rotationalSpeed = 1.0f;
 	public float travelDirection;
 
-	private bool autoPilot = false;
+	void OnCollisionEnter(Collision other) {
+		if (other.gameObject.name == "npc(Clone)") {
+			Application.LoadLevel ("hillside_scene");
+		}
+	}
 
 	void Start () 
 	{
 		_audioSource = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
 		_rb.freezeRotation = true;
-		_characterController = GetComponent<CharacterController> ();
 	}
 
 	void FixedUpdate() 
@@ -53,7 +55,6 @@ public class PlayerInputController : MonoBehaviour {
 			_rb.drag = 0;
 		}
 
-		Debug.Log ("Sonic Boom " + _sonicBoom); 
 		if (_rb.velocity.x >= 70.0f && _sonicBoom == false) {
 			_audioSource.PlayOneShot (_audioSource.clip);
 			_sonicBoom = true;

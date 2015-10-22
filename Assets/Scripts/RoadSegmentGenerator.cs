@@ -16,6 +16,8 @@ public class RoadSegmentGenerator : MonoBehaviour {
 
 		_initialRoadSegmentInstance = Instantiate (_roadSegmentPrefab);
 		_roadSegmentInstantiationPosition = _initialRoadSegmentInstance.transform.position;
+		_intersectionInstantiationPosition = _intersectionPrefab.transform.position;
+
 		_originalInstantiationSize = GameObject.FindGameObjectWithTag ("OriginalRoadSegment").GetComponent<Renderer>().bounds.size.x;
 	}
 
@@ -27,7 +29,10 @@ public class RoadSegmentGenerator : MonoBehaviour {
 			_roadSegmentInstantiationPosition.x += _originalInstantiationSize;
 			Instantiate (_roadSegmentPrefab, _roadSegmentInstantiationPosition, Quaternion.identity);
 		} else {
-			Instantiate (_intersectionPrefab, _roadSegmentInstantiationPosition, Quaternion.identity);
+			Vector3 _correctedIntersectionPosition = new Vector3(_roadSegmentInstantiationPosition.x,
+			                                             _intersectionInstantiationPosition.y,
+			                                             _roadSegmentInstantiationPosition.z);
+			Instantiate (_intersectionPrefab, _correctedIntersectionPosition, Quaternion.identity);
 			_roadSegmentInstantiationPosition.x += _originalInstantiationSize;
 		}
 	}
