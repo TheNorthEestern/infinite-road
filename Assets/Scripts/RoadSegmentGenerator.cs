@@ -9,6 +9,7 @@ public class RoadSegmentGenerator : MonoBehaviour {
 	private Vector3 _intersectionInstantiationPosition;
 	private float _originalInstantiationSize;
 
+
 	void Start () {
 		// Load prefabs for various road segments
 		_intersectionPrefab = Resources.Load ("Prefabs/Intersection", typeof(GameObject)) as GameObject;
