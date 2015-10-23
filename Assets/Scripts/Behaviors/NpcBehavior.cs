@@ -8,7 +8,6 @@ public class NpcBehavior : MonoBehaviour {
 
 	void Start () {
 		_cc = GetComponent<CharacterController> ();
-
 	}
 
 	void Update () {
