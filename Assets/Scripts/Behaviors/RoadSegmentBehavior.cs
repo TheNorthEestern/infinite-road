@@ -15,7 +15,7 @@ public class RoadSegmentBehavior : MonoBehaviour {
 	}
 
 	void Discard() {
-		Destroy (this.gameObject);
+		// Destroy (this.gameObject);
 	}
 
 }

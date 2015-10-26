@@ -11,7 +11,6 @@ public class IntersectionBehavior : MonoBehaviour {
 		foreach (Transform child in transform) {
 			if ( child.name == "StopSignTriggers" ) {
 				foreach (Transform stopSign in child ) {
-					// Debug.Log (stopSign);
 					_stopSignTriggers.Add (stopSign);
 				}
 			}
@@ -20,7 +19,8 @@ public class IntersectionBehavior : MonoBehaviour {
 	}
 
 	void Update() {
-		// Debug.Log (_stopSignTriggers[0]);
+
+		// if ( _stopSignTriggers )
 	}
 
 }
