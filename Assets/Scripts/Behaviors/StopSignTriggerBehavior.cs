@@ -2,13 +2,14 @@
 using System.Collections;
 
 public class StopSignTriggerBehavior : MonoBehaviour {
+
 	void Start() {
 		GetComponent<Renderer> ().enabled = false;
 	}
 
 	void OnTriggerEnter(Collider collidingObject) {
-		Debug.Log ("Hello");
-		collidingObject.SendMessage("EncounteredStopSign");
+		Messenger.Broadcast(GameEvent.STOP_SIGN_ARRIVAL);
+		collidingObject.SendMessage("EncounteredStopSign", SendMessageOptions.DontRequireReceiver);
 	}
 
 	void OnTriggerExit(Collider collidingObject) {
