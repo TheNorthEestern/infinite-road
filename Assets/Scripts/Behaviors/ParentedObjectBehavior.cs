@@ -10,18 +10,8 @@ public class ParentedObjectBehavior : MonoBehaviour {
 		_parentObjectRenderer = GetComponent<Renderer>();
 	}
 
-	void OnBecameVisible() {
-		Debug.Log ("Hello");
-	}
-
 	void OnBecameInvisible() {
-		Debug.Log ("I'm invisible now!");
 		Destroy (this.gameObject);
-	}
-
-	void Update() {
-		// Debug.Log ("Renderer State -> " + GetComponent<Renderer>().isVisible);
-		// Debug.Log ("Times Seen By Camera -> " + _timesSeenByCamera);
 	}
 
 }

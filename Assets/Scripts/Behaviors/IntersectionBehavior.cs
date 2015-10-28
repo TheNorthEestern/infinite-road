@@ -9,11 +9,12 @@ public class IntersectionBehavior : MonoBehaviour {
 	private List<Transform> _stopSignTriggers;
 
 	void Start() {
+		arrivalCount = 0;
 		Messenger.AddListener (GameEvent.STOP_SIGN_ARRIVAL, IncrementArrivalCount);
 		_stopSignTriggers = new List<Transform>();
 		foreach (Transform child in transform) {
-			if ( child.name == "StopSignTriggers" ) {
-				foreach (Transform stopSign in child ) {
+			if (child.name == "StopSignTriggers") {
+				foreach (Transform stopSign in child) {
 					_stopSignTriggers.Add (stopSign);
 				}
 			}
@@ -26,6 +27,7 @@ public class IntersectionBehavior : MonoBehaviour {
 	}
 
 	private void IncrementArrivalCount() {
+		Debug.Log ("arrivalCount " + arrivalCount);
 		arrivalCount += 1;
 		Messenger<int>.Broadcast(GameEvent.NPC_SAW_OTHER_NPC, arrivalCount);
 	}
@@ -33,6 +35,5 @@ public class IntersectionBehavior : MonoBehaviour {
 	private int GetArrivalCount(int arc) {
 		return arrivalCount;
 	}
-
-
+	
 }

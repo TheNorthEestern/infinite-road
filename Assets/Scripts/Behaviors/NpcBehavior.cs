@@ -30,16 +30,6 @@ public class NpcBehavior : MonoBehaviour {
 		Messenger<int>.RemoveListener(GameEvent.NPC_SAW_OTHER_NPC, SetArrivalNumber);
 	}
 
-	/*void OnBecameVisible() {
-		Destroy (this.gameObject);
-		Destroy (transform.parent.gameObject);
-	}*/
-
-	/*void OnBecameInvisible() {
-			Destroy (this.gameObject);
-			Destroy (transform.parent.gameObject);
-	}*/
-
 	private void SetArrivalNumber(int reportedArrivalNumber) {
 		arrivalNumber = reportedArrivalNumber;
 		StartCoroutine(ShouldProceedFromStopSign());
@@ -50,7 +40,7 @@ public class NpcBehavior : MonoBehaviour {
 	}
 
 	private IEnumerator ShouldProceedFromStopSign() {
-		yield return new WaitForSeconds(arrivalNumber * 2);
+		yield return new WaitForSeconds(arrivalNumber);
 		encounteredStopSign = !encounteredStopSign;
 	}
 }

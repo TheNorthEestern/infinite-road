@@ -16,9 +16,5 @@ public class RoadSegmentGeneratorTriggerBehavior : MonoBehaviour {
 	void Start () {
 		GetComponent<Renderer> ().enabled = false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

@@ -547,8 +547,8 @@ GameObject:
   - 33: {fileID: 3370792}
   - 65: {fileID: 6599672}
   - 23: {fileID: 2314910}
-  - 54: {fileID: 5466208}
   - 114: {fileID: 11422846}
+  - 54: {fileID: 5429248}
   m_Layer: 0
   m_Name: StopSignTriggerWB2
   m_TagString: Untagged
@@ -1827,6 +1827,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &5429248
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191980}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &5437946
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -1863,21 +1878,6 @@ Rigidbody:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122558}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5466208
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191980}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
