@@ -7,6 +7,7 @@ public class NpcBehavior : MonoBehaviour {
 	private int arrivalNumber;
 	private float gravity = -9.8f;
 	private Vector3 movement;
+	private bool appearedOnScreen = false;
 	private bool encounteredStopSign = false;
 
 	void Start () {
@@ -25,17 +26,23 @@ public class NpcBehavior : MonoBehaviour {
 		_cc.Move (movement);
 	}
 
-	void OnBecameInvisible() {
-		Invoke ("Discard", 5);
+	void OnDestroy() {
+		Messenger<int>.RemoveListener(GameEvent.NPC_SAW_OTHER_NPC, SetArrivalNumber);
 	}
 
-	private void Discard() {
+	/*void OnBecameVisible() {
 		Destroy (this.gameObject);
-	}
+		Destroy (transform.parent.gameObject);
+	}*/
+
+	/*void OnBecameInvisible() {
+			Destroy (this.gameObject);
+			Destroy (transform.parent.gameObject);
+	}*/
 
 	private void SetArrivalNumber(int reportedArrivalNumber) {
 		arrivalNumber = reportedArrivalNumber;
-		Debug.Log ("My Arrival # " + arrivalNumber);
+		StartCoroutine(ShouldProceedFromStopSign());
 	}
 
 	private void EncounteredStopSign() {
@@ -43,6 +50,7 @@ public class NpcBehavior : MonoBehaviour {
 	}
 
 	private IEnumerator ShouldProceedFromStopSign() {
-		yield return new WaitForSeconds(0);
+		yield return new WaitForSeconds(arrivalNumber * 2);
+		encounteredStopSign = !encounteredStopSign;
 	}
 }

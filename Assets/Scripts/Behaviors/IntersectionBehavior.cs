@@ -21,6 +21,10 @@ public class IntersectionBehavior : MonoBehaviour {
 		}
 	}
 
+	void OnDestroy() {
+		Messenger.RemoveListener(GameEvent.STOP_SIGN_ARRIVAL, IncrementArrivalCount);
+	}
+
 	private void IncrementArrivalCount() {
 		arrivalCount += 1;
 		Messenger<int>.Broadcast(GameEvent.NPC_SAW_OTHER_NPC, arrivalCount);
@@ -30,8 +34,5 @@ public class IntersectionBehavior : MonoBehaviour {
 		return arrivalCount;
 	}
 
-	void Update() {
-		// if ( _stopSignTriggers )
-	}
 
 }

@@ -28,6 +28,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 414472}
+  - 114: {fileID: 11475406}
+  - 23: {fileID: 2383994}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -84,6 +86,30 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!23 &2383994
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198440}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &3378156
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -103,6 +129,17 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: 3f55df2eb03404f60be2a0c157fc647a, type: 3}
+--- !u!114 &11475406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c48accdf8edbb4eccb64b75f88cebe11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11476554
 MonoBehaviour:
   m_ObjectHideFlags: 1
