@@ -17,6 +17,10 @@ public class UIController : MonoBehaviour {
 		_score = 0;
 	}
 
+	void OnDestroy() {
+		Messenger.RemoveListener (GameEvent.RAN_STOP_SIGN, IncrementScore);
+	}
+
 	private void IncrementScore() {
 		_score += 1;
 		_audioSource.PlayOneShot (_audioSource.clip);

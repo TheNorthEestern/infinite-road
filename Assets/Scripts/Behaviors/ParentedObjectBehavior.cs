@@ -15,6 +15,7 @@ public class ParentedObjectBehavior : MonoBehaviour {
 	}
 
 	void OnBecameInvisible() {
+		Debug.Log ("I'm invisible now!");
 		Destroy (this.gameObject);
 	}
 

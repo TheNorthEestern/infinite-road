@@ -12,7 +12,8 @@ public class PlayerInputController : MonoBehaviour {
 	public float travelDirection;
 
 	void OnCollisionEnter(Collision other) {
-		if (other.gameObject.name == "npc(Clone)") {
+		Debug.Log (other.gameObject.name);
+		if (other.gameObject.name == "npc") {
 			Application.LoadLevel ("hillside_scene");
 		}
 	}
