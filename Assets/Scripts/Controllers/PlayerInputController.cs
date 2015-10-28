@@ -51,7 +51,9 @@ public class PlayerInputController : MonoBehaviour {
 		}
 
 		if (moveVertical < 0) {
-			_rb.drag += 10.0f;
+			_rb.drag += .5f;
+		} else if (moveVertical == 0) {
+			_rb.drag += .002f;
 		} else {
 			_rb.drag = 0;
 		}
