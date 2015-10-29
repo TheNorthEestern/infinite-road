@@ -28,6 +28,7 @@ public class PlayerInputController : MonoBehaviour {
 	void FixedUpdate() 
 	{
 		float moveVertical = Input.GetAxis ("Vertical");
+		float moveHorizontal = Input.GetAxis ("Horizontal");
 		Vector3 movement;
 
 		movement = new Vector3 (moveVertical, 0.0f, 0.0f);
@@ -37,11 +38,12 @@ public class PlayerInputController : MonoBehaviour {
 				switch(Input.touchCount) {
 					case 0:
 						movement = Vector3.zero;
-						moveVertical = -1.0f;
+						moveVertical = 0.0f;
 						break;
 
 					case 1:
 						movement = Vector3.right;
+						moveVertical = 1.0f;
 						break;
 					
 					default:

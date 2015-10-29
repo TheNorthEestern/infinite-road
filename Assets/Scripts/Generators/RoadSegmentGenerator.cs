@@ -26,16 +26,17 @@ public class RoadSegmentGenerator : MonoBehaviour {
 		// Create the a new road segment at the end of the previous road segment
 
 		int segmentChoice = Random.Range (1, 10);
-		if (segmentChoice % 2 == 0) {
-			_roadSegmentInstantiationPosition.x += _originalInstantiationSize;
-			Instantiate (_roadSegmentPrefab, _roadSegmentInstantiationPosition, Quaternion.identity);
-		} else {
+		Messenger<int>.Broadcast (GameEvent.RNG, segmentChoice);
+		if (segmentChoice % 4 == 0) {
 			Messenger.Broadcast(GameEvent.APPROACHING_STOP_SIGN);
 			Vector3 _correctedIntersectionPosition = new Vector3(_roadSegmentInstantiationPosition.x,
-			                                             _intersectionInstantiationPosition.y,
-			                                             _roadSegmentInstantiationPosition.z);
+			                                                     _intersectionInstantiationPosition.y,
+			                                                     _roadSegmentInstantiationPosition.z);
 			Instantiate (_intersectionPrefab, _correctedIntersectionPosition, Quaternion.identity);
 			_roadSegmentInstantiationPosition.x += _originalInstantiationSize;
+		} else {
+			_roadSegmentInstantiationPosition.x += _originalInstantiationSize;
+			Instantiate (_roadSegmentPrefab, _roadSegmentInstantiationPosition, Quaternion.identity);
 		}
 	}
 }

@@ -5,12 +5,14 @@ using CSupport;
 
 public class RoadSegmentBehavior : MonoBehaviour {
 	void Start() {
+		// 246	243	237 - snow white
+		// 133, 66, 0 - mountain brown
 		GameObject.Find ("Main Camera").GetComponent<Camera>().backgroundColor = Color.gray;
 		GameObject[] lo = GameObject.FindGameObjectsWithTag("Terrain");
 		foreach (GameObject go in lo) {
-			go.GetComponent<Renderer>().material.color = new Color(ColorSupport.Downvert(133.0f), 
-			                                                       ColorSupport.Downvert (66.0f),
-			                                                       0f);
+			go.GetComponent<Renderer>().material.color = new Color(ColorSupport.Downvert(246.0f), 
+			                                                       ColorSupport.Downvert (243.0f),
+			                                                       ColorSupport.Downvert (237.0f));
 		}
 	}
 

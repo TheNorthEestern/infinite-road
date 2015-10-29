@@ -10,6 +10,10 @@ public class SceneController : MonoBehaviour {
 		Messenger.AddListener (GameEvent.CHRACTER_STARTED_SPEEDING, MakeNoise);
 	}
 
+	void Update(){
+		Debug.Log (Time.time);
+	}
+
 	public void MakeNoise() 
 	{
 		_audioSource.PlayOneShot (_audioSource.clip);
