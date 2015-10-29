@@ -37,7 +37,6 @@ public class CameraBehavior : MonoBehaviour {
 	private void CheckAndUpdateMotionBlur() 
 	{
 		if (focalPoint.GetComponent<Rigidbody> ().velocity.x >= 70) {
-			Time.timeScale = 0.7f;
 			_blurComponent.enabled = true;
 		} else {
 			Time.timeScale = 1.0f;

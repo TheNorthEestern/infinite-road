@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class SceneController : MonoBehaviour {
 	[SerializeField] private AudioSource _audioSource;
+
 	void Awake () 
 	{
 		_audioSource = GetComponent<AudioSource> ();
@@ -11,7 +13,7 @@ public class SceneController : MonoBehaviour {
 	}
 
 	void Update(){
-		Debug.Log (Time.time);
+		Debug.Log (DateTime.Now.Second);
 	}
 
 	public void MakeNoise() 
