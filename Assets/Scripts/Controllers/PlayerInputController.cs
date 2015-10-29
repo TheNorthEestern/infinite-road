@@ -31,7 +31,7 @@ public class PlayerInputController : MonoBehaviour {
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		Vector3 movement;
 
-		movement = new Vector3 (moveVertical, 0.0f, 0.0f);
+		movement = new Vector3 (moveVertical, 0.0f, -moveHorizontal);
 
 		if (Application.platform == RuntimePlatform.IPhonePlayer) {
 			if ( Input.touchCount >= 0 ) {

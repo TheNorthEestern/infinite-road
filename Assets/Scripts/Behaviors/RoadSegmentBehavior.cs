@@ -14,9 +14,9 @@ public class RoadSegmentBehavior : RoadCleanupBehavior {
 	void Start() {
 
 		winter = new Color32(246, 243, 237, 255);
-		spring = new Color32(133, 66, 0, 255);
+		spring = new Color32(170, 155, 42, 255);
 		summer = new Color32(137, 182, 65, 255);
-		autumn = new Color32(246, 107, 0, 255);
+		autumn = new Color32(234, 157, 46, 255);
 		int currentSecond = DateTime.Now.Second;
 
 		GameObject.Find ("Main Camera").GetComponent<Camera>().backgroundColor = Color.gray;
