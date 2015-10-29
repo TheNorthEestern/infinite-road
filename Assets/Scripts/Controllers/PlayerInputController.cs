@@ -27,9 +27,14 @@ public class PlayerInputController : MonoBehaviour {
 
 	void FixedUpdate() 
 	{
+
+
 		float moveVertical = Input.GetAxis ("Vertical");
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		Vector3 movement;
+		Vector3 restrictor = transform.position;
+		restrictor.z = Mathf.Clamp (restrictor.z, -5.5f, -3.5f);
+
 
 		movement = new Vector3 (moveVertical, 0.0f, -moveHorizontal);
 
@@ -55,7 +60,7 @@ public class PlayerInputController : MonoBehaviour {
 		if (moveVertical < 0) {
 			_rb.drag += .5f;
 		} else if (moveVertical == 0) {
-			_rb.drag += .002f;
+			// _rb.drag += .002f;
 		} else {
 			_rb.drag = 0;
 		}
@@ -67,6 +72,7 @@ public class PlayerInputController : MonoBehaviour {
 			_sonicBoom = false;
 		}
 
+		transform.position = restrictor;
 		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, 100.0f);
 		_rb.AddForce (movement * speed);
 	}
