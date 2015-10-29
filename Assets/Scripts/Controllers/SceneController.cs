@@ -13,7 +13,7 @@ public class SceneController : MonoBehaviour {
 	}
 
 	void Update(){
-		Debug.Log (DateTime.Now.Second);
+
 	}
 
 	public void MakeNoise() 

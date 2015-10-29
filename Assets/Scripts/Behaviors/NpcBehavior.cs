@@ -7,7 +7,6 @@ public class NpcBehavior : MonoBehaviour {
 	private int arrivalNumber;
 	private float gravity = -9.8f;
 	private Vector3 movement;
-	private bool appearedOnScreen = false;
 	private bool encounteredStopSign = false;
 
 	void Start () {

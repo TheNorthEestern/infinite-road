@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class IntersectionBehavior : MonoBehaviour {
+public class IntersectionBehavior : RoadCleanupBehavior {
 
 	private int arrivalCount {get; set;}
 	private List<Transform> _stopSignTriggers;
@@ -27,7 +27,6 @@ public class IntersectionBehavior : MonoBehaviour {
 	}
 
 	private void IncrementArrivalCount() {
-		Debug.Log ("arrivalCount " + arrivalCount);
 		arrivalCount += 1;
 		Messenger<int>.Broadcast(GameEvent.NPC_SAW_OTHER_NPC, arrivalCount);
 	}
