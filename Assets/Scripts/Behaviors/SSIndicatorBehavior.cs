@@ -4,7 +4,6 @@ using System.Collections;
 public class SSIndicatorBehavior : MonoBehaviour {
 	
 	void Start () {
-		gameObject.SetActive(false);
 		Messenger.AddListener (GameEvent.APPROACHING_STOP_SIGN, Activate);
 	}
 

@@ -340,7 +340,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  gravity: -9.80000019
   rotationalSpeed: 1
   travelDirection: 1
 --- !u!1 &920988399
@@ -1001,7 +1000,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  gravity: -9.80000019
   rotationalSpeed: 1
   travelDirection: 1
 --- !u!54 &1707408362

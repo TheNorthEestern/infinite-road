@@ -6,7 +6,10 @@ public class RoadSegmentGeneratorTriggerBehavior : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		// Upon colliding with a player GameObject, this trigger emits
 		// a 'Generate' message to it's main controller.
-		mainController.SendMessage ("Generate");
+		Debug.Log (other.gameObject.name);
+		if ( other.gameObject.name != "npc" ) {
+			mainController.SendMessage ("Generate");
+		}
 	}
 
 	void Awake() {
