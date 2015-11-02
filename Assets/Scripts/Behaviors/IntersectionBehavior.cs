@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿	using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,8 @@ public class IntersectionBehavior : RoadCleanupBehavior {
 
 	private void IncrementArrivalCount() {
 		arrivalCount += 1;
-		Messenger<int>.Broadcast(GameEvent.NPC_SAW_OTHER_NPC, arrivalCount);
+		Messenger<int>.Broadcast(GameEvent.NPC_SAW_OTHER_NPC, arrivalCount, MessengerMode.DONT_REQUIRE_LISTENER);
+	
 	}
 
 	private int GetArrivalCount(int arc) {
