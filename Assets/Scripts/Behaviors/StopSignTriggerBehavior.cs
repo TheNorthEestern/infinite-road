@@ -8,9 +8,10 @@ public class StopSignTriggerBehavior : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collidingObject) {
+		Debug.Log (collidingObject.gameObject.name);
 		Messenger.Broadcast(GameEvent.STOP_SIGN_ARRIVAL);
 		collidingObject.SendMessage("EncounteredStopSign", SendMessageOptions.DontRequireReceiver);
-		if (collidingObject.name != "npc") {
+		if (collidingObject.gameObject.tag != "NPC") {
 			Messenger.Broadcast (GameEvent.RAN_STOP_SIGN);
 		}
 	}

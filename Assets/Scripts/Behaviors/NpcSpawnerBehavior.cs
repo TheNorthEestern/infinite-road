@@ -11,8 +11,9 @@ public class NpcSpawnerBehavior : MonoBehaviour {
 	void Start () {
 		GetComponent<Renderer> ().enabled = false;
 		_npcSpawnerSeed = Random.Range (1,7);
+		int randomModelName = Random.Range (0,2);
 		if ( _npcSpawnerSeed % _npcSpawnerDeterminant == 0 ) {
-			GameObject npc = Resources.Load ("Prefabs/" + npcModelNames[0]) as GameObject;
+			GameObject npc = Resources.Load ("Prefabs/" + npcModelNames[randomModelName]) as GameObject;
 			Vector3 newTransform = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 			Instantiate (npc, newTransform, transform.localRotation);
 		}
