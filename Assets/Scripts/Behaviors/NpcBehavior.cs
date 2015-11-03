@@ -16,7 +16,7 @@ public class NpcBehavior : MonoBehaviour {
 		randomSpeed = Random.Range (5, 10);
 	}
 
-	void Update () {
+	void FixedUpdate () {
 		movement = (!encounteredStopSign) ? new Vector3 (gravity, randomSpeed, 0) : 
 										    Vector3.zero;
 		movement = Vector3.ClampMagnitude (movement, randomSpeed);
