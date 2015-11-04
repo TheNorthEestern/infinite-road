@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour {
 		restrictor.z = Mathf.Clamp (restrictor.z, -5.5f, -3.3f);
 		_rb.transform.position = restrictor;
 
-		Debug.Log (moveVertical);
 		if (moveVertical < 0) {
 			_rb.drag += .5f;
 		} else if (moveVertical == 0) {
