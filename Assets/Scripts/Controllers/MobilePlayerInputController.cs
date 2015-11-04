@@ -34,6 +34,7 @@ public class MobilePlayerInputController : PlayerController {
 			}
 
 			if ( _rb.velocity.x > 0 ) {
+				moveHorizontal = Input.acceleration.x;
 				Vector3 accelerometerVector = new Vector3(Input.acceleration.x, 0, 0);
 				accelerometerVector = Vector3.ClampMagnitude(accelerometerVector, 0.1f);
 				_rb.transform.Translate(accelerometerVector);

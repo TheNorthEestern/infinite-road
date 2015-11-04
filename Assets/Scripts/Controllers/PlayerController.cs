@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour {
 		_audioSource = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
 		_rb.freezeRotation = true;
+
+		// _rb.freezeRotation = false;
+		// _rb.useGravity = true;
+		// GetComponent<CapsuleCollider>().radius = 0.060f;
 	}
 
 	public virtual void FixedUpdate() 
@@ -34,13 +38,23 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			_rb.drag = 0;
 		}
-		
+			
+		if ( moveHorizontal > 0 ) {
+			transform.localRotation = Quaternion.Euler (transform.localRotation.x, 100, transform.localRotation.z);
+		} else if ( moveHorizontal < 0 ){
+			transform.localRotation = Quaternion.Euler (transform.localRotation.x, 80, transform.localRotation.z);
+		} else if ( moveHorizontal == 0 ) {
+			transform.localRotation = Quaternion.Euler (transform.localRotation.x, 90, transform.localRotation.z);
+		}
+
 		if (_rb.velocity.x >= 70.0f && _sonicBoom == false) {
 			_audioSource.PlayOneShot (_audioSource.clip);
 			_sonicBoom = true;
 		} else if (_rb.velocity.x <= 70.0f) {
 			_sonicBoom = false;
 		}
+
+
 		
 		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, maxSpeed);
 		_rb.AddForce (movement * speed);
