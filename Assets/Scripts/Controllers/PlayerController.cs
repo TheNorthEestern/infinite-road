@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	protected const float GRAVITY = -9.8f;
 	protected static Vector3 movement;
 	protected static Vector3 restrictor;
+	[SerializeField] private float maxSpeed = 100.0f;
 
 	void Start () 
 	{
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour {
 			_sonicBoom = false;
 		}
 		
-		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, 100.0f);
+		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, maxSpeed);
 		_rb.AddForce (movement * speed);
 	}
 

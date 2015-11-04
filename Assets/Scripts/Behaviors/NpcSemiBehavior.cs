@@ -10,36 +10,21 @@ public class NpcSemiBehavior : MonoBehaviour {
 	private bool encounteredStopSign = false;
 	
 	void Start () {
-		Messenger<int>.AddListener(GameEvent.NPC_SAW_OTHER_NPC, SetArrivalNumber);
 		_cc = GetComponent<CharacterController> ();
 		arrivalNumber = 0;
 		randomSpeed = Random.Range (5, 10);
+		movement = new Vector3(randomSpeed, gravity, 0);
 	}
 	
 	void FixedUpdate () {
-		movement = (!encounteredStopSign) ? new Vector3 (randomSpeed, gravity, 0) : 
-			Vector3.zero;
+
+		movement = new Vector3 (randomSpeed, gravity, 0);
+
 		movement = Vector3.ClampMagnitude (movement, randomSpeed);
 		movement *= Time.deltaTime;
 		movement = transform.TransformDirection (movement);
 		_cc.Move (movement);
+
 	}
-	
-	void OnDestroy() {
-		Messenger<int>.RemoveListener(GameEvent.NPC_SAW_OTHER_NPC, SetArrivalNumber);
-	}
-	
-	private void SetArrivalNumber(int reportedArrivalNumber) {
-		arrivalNumber = reportedArrivalNumber;
-		StartCoroutine(ShouldProceedFromStopSign());
-	}
-	
-	private void EncounteredStopSign() {
-		encounteredStopSign = !encounteredStopSign;
-	}
-	
-	private IEnumerator ShouldProceedFromStopSign() {
-		yield return new WaitForSeconds(arrivalNumber);
-		encounteredStopSign = !encounteredStopSign;
-	}
+
 }

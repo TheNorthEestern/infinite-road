@@ -36,7 +36,6 @@ public class RoadSegmentBehavior : RoadCleanupBehavior {
 			else {
 				childRenderer.material.color = autumn;
 			}
-			// go.GetComponent<Renderer>().material.color = summer;
 		}
 	}
 
