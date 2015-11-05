@@ -88,7 +88,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		Debug.Log (other.gameObject.name);
 		if (other.gameObject.tag == "NPC") {
 			Application.LoadLevel ("hillside_scene");
 		}

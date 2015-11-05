@@ -7,16 +7,12 @@ public class StopSignTriggerBehavior : MonoBehaviour {
 		GetComponent<Renderer> ().enabled = false;
 	}
 
-	void OnTriggerEnter(Collider collidingObject) {
-		Messenger.Broadcast(GameEvent.STOP_SIGN_ARRIVAL);
-		collidingObject.SendMessage("EncounteredStopSign", SendMessageOptions.DontRequireReceiver);
-		if (collidingObject.gameObject.tag != "NPC") {
-			Messenger.Broadcast (GameEvent.RAN_STOP_SIGN);
-		}
-	}
-
 	void OnTriggerExit(Collider collidingObject) {
-	
+		collidingObject.SendMessage("EncounteredStopSign", SendMessageOptions.DontRequireReceiver);
+		if (collidingObject.gameObject.tag == "Player") {
+			Debug.Log (collidingObject.gameObject.name);
+			Messenger.Broadcast (GameEvent.RAN_STOP_SIGN, MessengerMode.DONT_REQUIRE_LISTENER);
+		}
 	}
 
 }

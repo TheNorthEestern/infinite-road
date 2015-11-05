@@ -10,7 +10,7 @@ public class NpcBehavior : MonoBehaviour {
 	private bool encounteredStopSign = false;
 
 	void Start () {
-		Messenger<int>.AddListener(GameEvent.NPC_SAW_OTHER_NPC, SetArrivalNumber);
+
 		_cc = GetComponent<CharacterController> ();
 		arrivalNumber = 0;
 		randomSpeed = Random.Range (5, 10);
@@ -23,10 +23,6 @@ public class NpcBehavior : MonoBehaviour {
 		movement *= Time.deltaTime;
 		movement = transform.TransformDirection (movement);
 		_cc.Move (movement);
-	}
-
-	void OnDestroy() {
-		Messenger<int>.RemoveListener(GameEvent.NPC_SAW_OTHER_NPC, SetArrivalNumber);
 	}
 
 	private void SetArrivalNumber(int reportedArrivalNumber) {
