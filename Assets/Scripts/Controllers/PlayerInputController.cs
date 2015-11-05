@@ -12,11 +12,14 @@ public class PlayerInputController : PlayerController {
 
 		movement = new Vector3 (moveVertical, 0.0f, 0.0f);
 
-		if ( _rb.velocity.x > 0 ) {
+
+		if ( _rb.velocity.x > 2.0f ) 
+		{
 			Vector3 wheelControl = new Vector3(moveHorizontal, 0, 0);
 			wheelControl = Vector3.ClampMagnitude(wheelControl, 0.1f);
 			_rb.transform.Translate(wheelControl);
 		}
 
 	}
+
 }

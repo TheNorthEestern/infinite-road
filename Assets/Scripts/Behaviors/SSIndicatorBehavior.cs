@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
+
 public class SSIndicatorBehavior : MonoBehaviour {
-	
-	void Start () {
+
+	void Awake () {
+		GetComponent<Image>().enabled = false;
 		Messenger.AddListener (GameEvent.APPROACHING_STOP_SIGN, Activate);
 	}
 
@@ -12,13 +15,13 @@ public class SSIndicatorBehavior : MonoBehaviour {
 	}
 
 	private void Activate() {
-		gameObject.SetActive (true);
+		GetComponent<Image>().enabled = true;
 		StartCoroutine(Deactivate());
 	}
 
 	private IEnumerator Deactivate() {
 		yield return new WaitForSeconds(2);
-		gameObject.SetActive (false);
+		GetComponent<Image>().enabled = false;
 	}
 
 }
