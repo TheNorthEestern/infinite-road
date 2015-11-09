@@ -3,8 +3,8 @@ using System.Collections;
 
 public class ParentedObjectBehavior : MonoBehaviour {
 
-	/* void OnBecameInvisible() {
+	void OnBecameInvisible() {
 		Destroy (this.gameObject);
-	}*/ 
+	}
 
 }

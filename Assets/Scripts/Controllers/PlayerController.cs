@@ -11,11 +11,19 @@ public class PlayerController : MonoBehaviour {
 	protected const float GRAVITY = -9.8f;
 	protected static Vector3 movement;
 	protected static Vector3 restrictor;
+	protected static float leftBound = -3.3f;
+	protected static float rightBound = -5.5f;
 	private bool isPassing;
+	protected bool left = false;
+	protected bool right = true;
+	protected bool lane;
+
+
 	[SerializeField] private float maxSpeed = 100.0f;
 
 	void Start () 
 	{
+		lane = right;
 		_audioSource = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
 		_rb.freezeRotation = true;
@@ -25,10 +33,11 @@ public class PlayerController : MonoBehaviour {
 		// GetComponent<CapsuleCollider>().radius = 0.060f;
 	}
 
-	private void Update() {
+	/* private void Update() {
 		// Vector3.back
-		Debug.DrawRay (transform.position, Vector3.back * 10, Color.red);
-	}
+		Vector3 oncomingRayVector = new Vector3(transform.position.x + 1, transform.position.y +1f, transform.position.z);
+		Debug.DrawRay (oncomingRayVector, Vector3.right * 5, Color.red);
+	} */
 
 	private void RestrictPlayerMovement() {
 		restrictor = transform.position;
@@ -65,14 +74,23 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void CheckIfPlayerPassing() {
-		Ray passingRay = new Ray(transform.position, Vector3.back);
+	private void CheckIfOncoming() {
+		Vector3 oncomingRayVector = new Vector3(transform.position.x + 0.5f, transform.position.y + 1f, transform.position.z);
+		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
 		RaycastHit hit;
-		if (Physics.SphereCast(passingRay, 0.75f, out hit)) {
-			isPassing = true;
+		if (Physics.SphereCast(passingRay, 0.50f, out hit)) {
+			if ( hit.distance < 2 && hit.collider.gameObject.name == "NPC" ) {
+				StartCoroutine(PlaySound ());
+			}
 		} else{
 			isPassing = false;
 		}
+	}
+
+	private IEnumerator PlaySound() {
+		// Emitting to UIController
+		Messenger.Broadcast(GameEvent.APPROACHING_ONCOMING_TRAFFIC);
+		yield return new WaitForSeconds(3);
 	}
 
 	public virtual void FixedUpdate() 
@@ -81,7 +99,7 @@ public class PlayerController : MonoBehaviour {
 		ApplyRigidbodyMechanics();
 		PlayerPivotMechanics();	
 		MonitorPlayerSpeed();
-		CheckIfPlayerPassing();
+		CheckIfOncoming();
 
 		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, maxSpeed);
 		_rb.AddForce (movement * speed);

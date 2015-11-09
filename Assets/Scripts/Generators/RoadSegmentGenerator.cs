@@ -26,7 +26,6 @@ public class RoadSegmentGenerator : MonoBehaviour {
 		// Create the a new road segment at the end of the previous road segment
 
 		int segmentChoice = Random.Range (1, 10);
-		Messenger<int>.Broadcast (GameEvent.RNG, segmentChoice);
 		if (segmentChoice % 4 == 0) {
 			Messenger.Broadcast(GameEvent.APPROACHING_STOP_SIGN);
 			Vector3 _correctedIntersectionPosition = new Vector3(_roadSegmentInstantiationPosition.x,
