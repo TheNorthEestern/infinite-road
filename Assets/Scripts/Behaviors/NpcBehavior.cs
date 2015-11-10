@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NpcBehavior : MonoBehaviour {
+public class NpcBehavior : ParentedObjectBehavior {
 	private CharacterController _cc;
 	private int randomSpeed;
 	private int arrivalNumber;
@@ -17,6 +17,7 @@ public class NpcBehavior : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
+		CheckIfOnRoad();
 		movement = (!encounteredStopSign) ? new Vector3 (gravity, randomSpeed, 0) : 
 										    Vector3.zero;
 		movement = Vector3.ClampMagnitude (movement, randomSpeed);

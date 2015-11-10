@@ -2,9 +2,10 @@
 using System.Collections;
 
 public class ParentedObjectBehavior : MonoBehaviour {
+	protected void CheckIfOnRoad() {
 
-	void OnBecameInvisible() {
-		Destroy (this.gameObject);
+		if (transform.position.y < 0) {
+			Destroy (this.gameObject);
+		}
 	}
-
 }

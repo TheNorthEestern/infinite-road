@@ -18,5 +18,4 @@ public class NpcSpawnerBehavior : MonoBehaviour {
 			Instantiate (npc, newTransform, transform.localRotation);
 		}
 	}
-
 }
