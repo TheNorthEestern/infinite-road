@@ -9,11 +9,13 @@ public class CameraBehavior : MonoBehaviour {
 	// private Camera _camera;
 	private MotionBlur _blurComponent;
 	private Vector3 offset;
+	private Animator _animator;
 
 	void Start () {
 		offset = transform.position;
 		_blurComponent = GetComponent<MotionBlur> ();
 		_blurComponent.enabled = false;
+		_animator = GetComponent<Animator>();
 		// _camera = GetComponent<Camera> ();
 	}
 
@@ -29,6 +31,12 @@ public class CameraBehavior : MonoBehaviour {
 		// Debug.Log ((float)Math.Cos (timespan.TotalSeconds)*25f);
 		// transform.localRotation = Quaternion.Euler (0f, (float)Math.Cos (timespan.TotalSeconds)*25f, 0f);
 		// transform.localRotation = Quaternion.Euler (0f, 30.0f, 0f);
+
+		if ( focalPoint.GetComponent<Rigidbody>().velocity.x >= 15) {
+			_animator.SetFloat("PlayerSpeed", 16);
+		} else {
+			_animator.SetFloat ("PlayerSpeed", 14);
+		}
 
 		transform.localRotation = Quaternion.Slerp (Quaternion.Euler (0, 45f,45f),Quaternion.Euler (0, 0, 0),  Time.time * 0.4f);
 		CheckAndUpdateMotionBlur ();

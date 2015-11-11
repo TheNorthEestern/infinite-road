@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 				float distance = Mathf.Abs(leftBound + transform.position.z);
 				float xTransitionSpeed = (Mathf.Sqrt(distance)/ .4f	) * -1.0f * Time.deltaTime;
 				if (transform.position.z < leftBound) {
-					transform.Translate(new Vector3(xTransitionSpeed, 0, 0));
+					transform.Translate(new Vector3(xTransitionSpeed * .5f, 0, 0));
 				}
 			}
 			
