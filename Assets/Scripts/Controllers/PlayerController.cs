@@ -33,11 +33,11 @@ public class PlayerController : MonoBehaviour {
 		// GetComponent<CapsuleCollider>().radius = 0.060f;
 	}
 
-	/* private void Update() {
+	private void Update() {
 		// Vector3.back
 		Vector3 oncomingRayVector = new Vector3(transform.position.x + 1, transform.position.y +1f, transform.position.z);
-		Debug.DrawRay (oncomingRayVector, Vector3.right * 5, Color.red);
-	} */
+		Debug.DrawRay (oncomingRayVector, Vector3.right * 10, Color.red);
+	}
 
 	private void RestrictPlayerMovement() {
 		restrictor = transform.position;
@@ -75,15 +75,16 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void CheckIfOncoming() {
-		Vector3 oncomingRayVector = new Vector3(transform.position.x + 0.5f, transform.position.y + 1f, transform.position.z);
+		Vector3 oncomingRayVector = new Vector3(transform.position.x + 0.5f, transform.position.y + 20.0f, transform.position.z);
 		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
 		RaycastHit hit;
-		if (Physics.SphereCast(passingRay, 0.50f, out hit)) {
-			if ( hit.distance < 2 && hit.collider.gameObject.name == "NPC" ) {
-				StartCoroutine(PlaySound ());
+		if (Physics.SphereCast(passingRay, 20f, out hit)) {
+			if ( hit.collider.CompareTag("Intersection") ) {
+				Debug.Log("Hod");
+				GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
 		} else{
-			isPassing = false;
+			GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", false);
 		}
 	}
 
