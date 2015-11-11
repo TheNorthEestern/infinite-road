@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void RestrictPlayerMovement() {
 		restrictor = transform.position;
-		restrictor.z = Mathf.Clamp (restrictor.z, -5.5f, -3.3f);
+		restrictor.z = Mathf.Clamp (restrictor.z, rightBound, leftBound);
 		_rb.transform.position = restrictor;
 	}
 
@@ -87,6 +87,36 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	private void CheckAndUpdateLaneSelection() {
+		if ( _rb.velocity.x > 2.0f ) 
+		{
+			
+			if ( moveHorizontal < 0 ) {
+				lane = left;
+			} 
+			
+			if ( moveHorizontal > 0 ) {
+				lane = right;
+			}
+			
+			if ( lane == left ) {
+				float distance = Mathf.Abs(leftBound + transform.position.z);
+				float xTransitionSpeed = (Mathf.Sqrt(distance)/ .4f	) * -1.0f * Time.deltaTime;
+				if (transform.position.z < leftBound) {
+					transform.Translate(new Vector3(xTransitionSpeed, 0, 0));
+				}
+			}
+			
+			if ( lane == right ) {
+				float distance = Mathf.Abs(rightBound - transform.position.z);
+				float xTransitionSpeed = (Mathf.Sqrt(distance)/ .4f) * 1.0f * Time.deltaTime;
+				if (transform.position.z > rightBound) {
+					transform.Translate(new Vector3(xTransitionSpeed, 0, 0));
+				}
+			}
+		}
+	}
+
 	private IEnumerator PlaySound() {
 		// Emitting to UIController
 		Messenger.Broadcast(GameEvent.APPROACHING_ONCOMING_TRAFFIC);
@@ -95,6 +125,8 @@ public class PlayerController : MonoBehaviour {
 
 	public virtual void FixedUpdate() 
 	{
+
+		CheckAndUpdateLaneSelection();
 		RestrictPlayerMovement();
 		ApplyRigidbodyMechanics();
 		PlayerPivotMechanics();	
