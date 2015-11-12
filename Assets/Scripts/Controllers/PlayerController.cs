@@ -101,18 +101,18 @@ public class PlayerController : MonoBehaviour {
 			}
 			
 			if ( lane == left ) {
-				float distance = Mathf.Abs(leftBound + transform.position.z);
-				float xTransitionSpeed = (Mathf.Sqrt(distance)/ .4f	) * -1.0f * Time.deltaTime;
+				float distance = Mathf.Abs(leftBound - transform.position.z);
+				float xTransitionSpeed = (Mathf.Sqrt(distance)/ .4f) * -1.0f;
 				if (transform.position.z < leftBound) {
-					transform.Translate(new Vector3(xTransitionSpeed * .5f, 0, 0));
+					transform.Translate(new Vector3(xTransitionSpeed * Time.deltaTime, 0, 0));
 				}
 			}
 			
 			if ( lane == right ) {
 				float distance = Mathf.Abs(rightBound - transform.position.z);
-				float xTransitionSpeed = (Mathf.Sqrt(distance)/ .4f) * 1.0f * Time.deltaTime;
+				float xTransitionSpeed = (Mathf.Sqrt(distance)/ .4f) * 1.0f;
 				if (transform.position.z > rightBound) {
-					transform.Translate(new Vector3(xTransitionSpeed, 0, 0));
+					transform.Translate(new Vector3(xTransitionSpeed * Time.deltaTime, 0, 0));
 				}
 			}
 		}
