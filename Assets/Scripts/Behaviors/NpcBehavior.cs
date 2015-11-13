@@ -10,7 +10,6 @@ public class NpcBehavior : ParentedObjectBehavior {
 	private bool encounteredStopSign = false;
 
 	void Start () {
-
 		_cc = GetComponent<CharacterController> ();
 		arrivalNumber = 0;
 		randomSpeed = Random.Range (5, 10);

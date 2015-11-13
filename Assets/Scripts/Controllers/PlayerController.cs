@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
 	protected static Vector3 restrictor;
 	protected static float leftBound = -3.3f;
 	protected static float rightBound = -5.5f;
-	private bool isPassing;
+	private bool isPaused;
 	protected bool left = false;
 	protected bool right = true;
 	protected bool lane;
@@ -126,7 +126,6 @@ public class PlayerController : MonoBehaviour {
 
 	public virtual void FixedUpdate() 
 	{
-
 		CheckAndUpdateLaneSelection();
 		RestrictPlayerMovement();
 		ApplyRigidbodyMechanics();
