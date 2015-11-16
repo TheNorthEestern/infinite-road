@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.SphereCast(passingRay, 20f, out hit)) {
 			if ( hit.collider.CompareTag("Intersection") ) {
-				Debug.Log("Hod");
 				GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
 		} else{
