@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour {
 	private void CheckAndUpdateLaneSelection() {
 		if ( _rb.velocity.x > 2.0f ) 
 		{
-			
+			Camera camera = GameObject.Find ("Main Camera").GetComponent<Camera>();
 			if ( moveHorizontal < 0 ) {
 				lane = left;
 			} 
@@ -98,8 +98,26 @@ public class PlayerController : MonoBehaviour {
 			if ( moveHorizontal > 0 ) {
 				lane = right;
 			}
-			
+
 			if ( lane == left ) {
+				Debug.Log (Time.deltaTime);
+				if ( transform.position.z < leftBound) {
+					Vector3 leftVector = Vector3.left;
+					leftVector.x *= 5;
+					_rb.MovePosition(new Vector3(transform.position.x, transform.position.y, leftBound - .1f));
+				}
+			}
+
+			if ( lane == right ) {
+				Debug.Log (Time.deltaTime);
+				if ( transform.position.z > rightBound ) {
+					Vector3 rightVector = Vector3.right;
+					rightVector.x *=  5;
+					_rb.MovePosition (new Vector3(transform.position.x, transform.position.y, rightBound));
+				}
+			}
+			
+			/*if ( lane == left ) {
 				float distance = Mathf.Abs(leftBound - transform.position.z);
 				float xTransitionSpeed = (Mathf.Sqrt(distance)/ .4f) * -1.0f;
 				if (transform.position.z < leftBound) {
@@ -113,8 +131,19 @@ public class PlayerController : MonoBehaviour {
 				if (transform.position.z > rightBound) {
 					transform.Translate(new Vector3(xTransitionSpeed * Time.deltaTime, 0, 0));
 				}
-			}
+			}*/
 		}
+	}
+
+	private IEnumerator MoveToPosition(Vector3 newPosition, float time) {
+		float elapsedTime = 0f;
+		Vector3 startingPosition = transform.position;
+		while ( elapsedTime < time ) {
+			transform.position = Vector3.Lerp(startingPosition, newPosition, (elapsedTime/time));
+			elapsedTime += Time.deltaTime;
+			yield return null;
+		}
+
 	}
 
 	private IEnumerator PlaySound() {

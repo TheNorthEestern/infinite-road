@@ -6,10 +6,9 @@ public class MobilePlayerInputController : PlayerController {
 			
 	public override void FixedUpdate () 
 	{
-		base.FixedUpdate();
 		if (Application.platform == RuntimePlatform.IPhonePlayer || 
 		    Application.platform == RuntimePlatform.Android) {
-
+			base.FixedUpdate();
 			movement = Vector3.right;
 			moveVertical = 1.0f;
 
@@ -20,12 +19,12 @@ public class MobilePlayerInputController : PlayerController {
 					moveHorizontal = -1.0f;
 				} 
 
-				else if (touch.position.x > Screen.width / 2) {
+				if (touch.position.x > Screen.width / 2) {
 					moveHorizontal = 1.0f;
 				}
 			} 
 			else {
-				moveHorizontal = 0f;
+				// moveHorizontal = 0f;
 			}
 		
 		}
