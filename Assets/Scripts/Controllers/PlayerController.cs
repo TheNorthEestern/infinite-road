@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour {
 	protected static float leftBound = -3.3f;
 	protected static float rightBound = -5.5f;
 	private bool isPaused;
-	protected bool left = false;
-	protected bool right = true;
-	protected bool lane;
+	protected string left = "left";
+	protected string right = "right";
+	protected string lane = null;
 
 
 	[SerializeField] private float maxSpeed = 100.0f;
@@ -90,30 +90,27 @@ public class PlayerController : MonoBehaviour {
 	private void CheckAndUpdateLaneSelection() {
 		if ( _rb.velocity.x > 2.0f ) 
 		{
-			Camera camera = GameObject.Find ("Main Camera").GetComponent<Camera>();
 			if ( moveHorizontal < 0 ) {
 				lane = left;
 			} 
 			
 			if ( moveHorizontal > 0 ) {
+
 				lane = right;
 			}
 
-			if ( lane == left ) {
-				Debug.Log (Time.deltaTime);
+			if ( lane == "left" ) {
+				Debug.Log (transform.position.z);
 				if ( transform.position.z < leftBound) {
-					Vector3 leftVector = Vector3.left;
-					leftVector.x *= 5;
-					_rb.MovePosition(new Vector3(transform.position.x, transform.position.y, leftBound - .1f));
+					Vector3 endPos = new Vector3(0, 0, -(leftBound));
+					_rb.MovePosition(transform.position + endPos * Time.deltaTime);
 				}
 			}
 
-			if ( lane == right ) {
-				Debug.Log (Time.deltaTime);
-				if ( transform.position.z > rightBound ) {
-					Vector3 rightVector = Vector3.right;
-					rightVector.x *=  5;
-					_rb.MovePosition (new Vector3(transform.position.x, transform.position.y, rightBound));
+			if ( lane == "right" ) {
+				if ( transform.position.z > rightBound) {
+					Vector3 endPos = new Vector3(0, 0, rightBound);
+					_rb.MovePosition(transform.position + endPos * Time.deltaTime);
 				}
 			}
 			
@@ -155,7 +152,7 @@ public class PlayerController : MonoBehaviour {
 	public virtual void FixedUpdate() 
 	{
 		CheckAndUpdateLaneSelection();
-		RestrictPlayerMovement();
+		// RestrictPlayerMovement();
 		ApplyRigidbodyMechanics();
 		PlayerPivotMechanics();	
 		MonitorPlayerSpeed();
