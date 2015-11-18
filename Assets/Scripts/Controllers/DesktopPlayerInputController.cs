@@ -1,4 +1,4 @@
-﻿#if !UNITY_IOS || !UNITY_ANDROID
+﻿#if UNITY_STANDALONE || UNITY_EDITOR
 using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 using System.Collections;

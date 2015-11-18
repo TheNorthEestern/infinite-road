@@ -14,12 +14,11 @@ public class PlayerController : MonoBehaviour {
 	protected static float leftBound = -3.3f;
 	protected static float rightBound = -5.5f;
 	private bool isPaused;
-	protected string left = "left";
-	protected string right = "right";
-	protected string lane = null;
+	protected bool left = false;
+	protected bool right = true;
+	protected bool lane;
 
-
-	[SerializeField] private float maxSpeed = 100.0f;
+	private float maxSpeed = 20.0f;
 
 	void Start () 
 	{
@@ -33,16 +32,10 @@ public class PlayerController : MonoBehaviour {
 		// GetComponent<CapsuleCollider>().radius = 0.060f;
 	}
 
-	private void Update() {
-		// Vector3.back
-		Vector3 oncomingRayVector = new Vector3(transform.position.x + 1, transform.position.y +1f, transform.position.z);
-		Debug.DrawRay (oncomingRayVector, Vector3.right * 10, Color.red);
-	}
-
 	private void RestrictPlayerMovement() {
 		restrictor = transform.position;
 		restrictor.z = Mathf.Clamp (restrictor.z, rightBound, leftBound);
-		_rb.transform.position = restrictor;
+		transform.position = restrictor;
 	}
 
 	private void ApplyRigidbodyMechanics() {
@@ -90,57 +83,25 @@ public class PlayerController : MonoBehaviour {
 	private void CheckAndUpdateLaneSelection() {
 		if ( _rb.velocity.x > 2.0f ) 
 		{
-			if ( moveHorizontal < 0 ) {
-				lane = left;
-			} 
-			
-			if ( moveHorizontal > 0 ) {
+			if ( moveHorizontal < 0 ) lane = left;
+			if ( moveHorizontal > 0 ) lane = right;
 
-				lane = right;
-			}
 
-			if ( lane == "left" ) {
-				Debug.Log (transform.position.z);
-				if ( transform.position.z < leftBound) {
+			if ( lane == left ) {
+				if ( transform.position.z < leftBound ) { 
 					Vector3 endPos = new Vector3(0, 0, -(leftBound));
-					_rb.MovePosition(transform.position + endPos * Time.deltaTime);
+					_rb.MovePosition(transform.position + endPos * Time.deltaTime * 2);
 				}
 			}
 
-			if ( lane == "right" ) {
-				if ( transform.position.z > rightBound) {
-					Vector3 endPos = new Vector3(0, 0, rightBound);
-					_rb.MovePosition(transform.position + endPos * Time.deltaTime);
-				}
-			}
-			
-			/*if ( lane == left ) {
-				float distance = Mathf.Abs(leftBound - transform.position.z);
-				float xTransitionSpeed = (Mathf.Sqrt(distance)/ .4f) * -1.0f;
-				if (transform.position.z < leftBound) {
-					transform.Translate(new Vector3(xTransitionSpeed * Time.deltaTime, 0, 0));
-				}
-			}
-			
 			if ( lane == right ) {
-				float distance = Mathf.Abs(rightBound - transform.position.z);
-				float xTransitionSpeed = (Mathf.Sqrt(distance)/ .4f) * 1.0f;
-				if (transform.position.z > rightBound) {
-					transform.Translate(new Vector3(xTransitionSpeed * Time.deltaTime, 0, 0));
+				if ( transform.position.z > rightBound ) {
+					Vector3 endPos = new Vector3(0, 0, rightBound);
+					_rb.MovePosition(transform.position + endPos * Time.deltaTime * 1.5f);
 				}
-			}*/
+			}
+	
 		}
-	}
-
-	private IEnumerator MoveToPosition(Vector3 newPosition, float time) {
-		float elapsedTime = 0f;
-		Vector3 startingPosition = transform.position;
-		while ( elapsedTime < time ) {
-			transform.position = Vector3.Lerp(startingPosition, newPosition, (elapsedTime/time));
-			elapsedTime += Time.deltaTime;
-			yield return null;
-		}
-
 	}
 
 	private IEnumerator PlaySound() {
@@ -152,7 +113,7 @@ public class PlayerController : MonoBehaviour {
 	public virtual void FixedUpdate() 
 	{
 		CheckAndUpdateLaneSelection();
-		// RestrictPlayerMovement();
+		RestrictPlayerMovement();
 		ApplyRigidbodyMechanics();
 		PlayerPivotMechanics();	
 		MonitorPlayerSpeed();
@@ -160,6 +121,7 @@ public class PlayerController : MonoBehaviour {
 
 		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, maxSpeed);
 		_rb.AddForce (movement * speed);
+
 	}
 
 	void OnCollisionEnter(Collision other) {
