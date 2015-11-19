@@ -11,10 +11,12 @@ public class UIController : MonoBehaviour {
 	private AudioSource _audioSource;
 	private int _score;
 	private GameObject _canvas;
+	private GameObject _titleScreenCanvas;
 	protected static bool isPaused = false;
 
 	void Start () {
 		_canvas = GameObject.Find("Canvas");
+		_titleScreenCanvas = GameObject.Find ("TitleScreenCanvas");
 		_canvas.SetActive (false);
 		_score = 0;
 		_pauseMenu.SetActive (isPaused);
@@ -30,6 +32,7 @@ public class UIController : MonoBehaviour {
 		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 ) {
 			Messenger.Broadcast (GameEvent.PLAYER_INITIATED_GAME);
 			_canvas.SetActive (true);
+			_titleScreenCanvas.SetActive(false);
 		}
 	}
 

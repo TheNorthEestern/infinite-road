@@ -22,11 +22,16 @@ public class PlayerController : MonoBehaviour {
 
 	void Awake() {
 		Messenger<float>.AddListener(GameEvent.SPEED_SLIDER_CHANGED, OnSpeedChanged);
-		// Messenger.AddListener (GameEvent.PLAYER_INITIATED_GAME, t);
+		Messenger.AddListener(GameEvent.PLAYER_INITIATED_GAME, LowerSpeed);
 	}
 
 	void OnDestroy() {
 		Messenger<float>.RemoveListener(GameEvent.SPEED_SLIDER_CHANGED, OnSpeedChanged);
+		Messenger.RemoveListener(GameEvent.PLAYER_INITIATED_GAME, LowerSpeed);
+	}
+
+	private void LowerSpeed() {
+		maxSpeed = 15.0f;
 	}
 
 	private void OnSpeedChanged(float newSpeed) {
