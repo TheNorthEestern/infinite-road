@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 		// Messenger.AddListener (GameEvent.PLAYER_INITIATED_GAME, t);
 	}
 
-	void Destroy() {
+	void OnDestroy() {
 		Messenger<float>.RemoveListener(GameEvent.SPEED_SLIDER_CHANGED, OnSpeedChanged);
 	}
 

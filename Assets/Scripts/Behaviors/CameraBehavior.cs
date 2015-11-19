@@ -8,7 +8,7 @@ public class CameraBehavior : MonoBehaviour {
 	public GameObject focalPoint;
 	// private Camera _camera;
 	private MotionBlur _blurComponent;
-	private SepiaTone _sepiaToneComponent;
+	private Grayscale _grayscaleComponent;
 	private Vector3 offset;
 	private Animator _animator;
 
@@ -16,20 +16,20 @@ public class CameraBehavior : MonoBehaviour {
 		Messenger.AddListener(GameEvent.PLAYER_INITIATED_GAME, DisableSepia);
 	}
 
-	void Destroy() {
-		Messenger.AddListener (GameEvent.PLAYER_INITIATED_GAME, DisableSepia);
+	void OnDestroy() {
+		Messenger.RemoveListener (GameEvent.PLAYER_INITIATED_GAME, DisableSepia);
 	}
 
 	private void DisableSepia() {
-		_sepiaToneComponent.enabled = false;
+		_grayscaleComponent.enabled = false;
 	}
 
 	void Start () {
 		offset = transform.position;
-		_sepiaToneComponent = GetComponent<SepiaTone>();
+		_grayscaleComponent = GetComponent<Grayscale>();
 		_blurComponent = GetComponent<MotionBlur> ();
 		_blurComponent.enabled = false;
-		_sepiaToneComponent.enabled = true;
+		_grayscaleComponent.enabled = true;
 		_animator = GetComponent<Animator>();
 		// _camera = GetComponent<Camera> ();
 	}

@@ -1,6 +1,5 @@
 ﻿#if UNITY_STANDALONE || UNITY_EDITOR
 using UnityEngine;
-using UnityStandardAssets.ImageEffects;
 using System.Collections;
 
 public class DesktopPlayerInputController : PlayerController {
@@ -11,7 +10,7 @@ public class DesktopPlayerInputController : PlayerController {
 		Messenger.AddListener (GameEvent.PLAYER_INITIATED_GAME, SwitchToPlayerDrivenInput);
 	}
 
-	private void Destroy() {
+	private void OnDestroy() {
 		Messenger.RemoveListener (GameEvent.PLAYER_INITIATED_GAME, SwitchToPlayerDrivenInput);
 	}
 

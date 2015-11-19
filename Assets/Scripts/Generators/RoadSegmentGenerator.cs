@@ -15,7 +15,7 @@ public class RoadSegmentGenerator : MonoBehaviour {
 		Messenger.AddListener(GameEvent.PLAYER_INITIATED_GAME, StartNormalSegmentGeneration);
 	}
 
-	void Destroy() {
+	void OnDestroy() {
 		Messenger.RemoveListener (GameEvent.PLAYER_INITIATED_GAME, StartNormalSegmentGeneration);
 	}
 

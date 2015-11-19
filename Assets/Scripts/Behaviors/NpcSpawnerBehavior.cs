@@ -13,7 +13,7 @@ public class NpcSpawnerBehavior : MonoBehaviour {
 
 	void Start () {
 		GetComponent<Renderer> ().enabled = false;
-		if (!GameObject.Find("Main Camera").GetComponent<SepiaTone>().isActiveAndEnabled) {
+		if (!GameObject.Find("Main Camera").GetComponent<Grayscale>().isActiveAndEnabled) {
 			_npcSpawnerSeed = Random.Range (1,7);
 			int randomModelName = Random.Range (0,2);
 			if ( _npcSpawnerSeed % _npcSpawnerDeterminant == 0 ) {

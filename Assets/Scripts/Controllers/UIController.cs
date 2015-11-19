@@ -10,10 +10,11 @@ public class UIController : MonoBehaviour {
 	[SerializeField] private GameObject _pauseMenu;
 	private AudioSource _audioSource;
 	private int _score;
-	[SerializeField] private GameObject _canvas;
+	private GameObject _canvas;
 	protected static bool isPaused = false;
 
 	void Start () {
+		_canvas = GameObject.Find("Canvas");
 		_canvas.SetActive (false);
 		_score = 0;
 		_pauseMenu.SetActive (isPaused);
