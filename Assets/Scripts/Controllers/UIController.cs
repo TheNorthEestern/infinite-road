@@ -10,9 +10,11 @@ public class UIController : MonoBehaviour {
 	[SerializeField] private GameObject _pauseMenu;
 	private AudioSource _audioSource;
 	private int _score;
+	[SerializeField] private GameObject _canvas;
 	protected static bool isPaused = false;
 
 	void Start () {
+		_canvas.SetActive (false);
 		_score = 0;
 		_pauseMenu.SetActive (isPaused);
 	}
@@ -24,8 +26,9 @@ public class UIController : MonoBehaviour {
 	}
 
 	void Update () {
-		if ( Input.GetKeyDown(KeyCode.Space) ) {
-			Pause ();
+		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 ) {
+			Messenger.Broadcast (GameEvent.PLAYER_INITIATED_GAME);
+			_canvas.SetActive (true);
 		}
 	}
 
@@ -50,6 +53,11 @@ public class UIController : MonoBehaviour {
 		if (!_audioSource.isPlaying) {
 			_audioSource.PlayOneShot (_warnSound);
 		}
+	}
+
+	public void OnSpeedValue(float newSpeed) {
+		Debug.Log (newSpeed);
+		Messenger<float>.Broadcast(GameEvent.SPEED_SLIDER_CHANGED, newSpeed);
 	}
 
 	private void IncrementScore() {

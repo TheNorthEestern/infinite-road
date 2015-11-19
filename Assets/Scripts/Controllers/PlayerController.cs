@@ -18,7 +18,20 @@ public class PlayerController : MonoBehaviour {
 	protected bool right = true;
 	protected bool lane;
 
-	private float maxSpeed = 20.0f;
+	private float maxSpeed = 15.0f;
+
+	void Awake() {
+		Messenger<float>.AddListener(GameEvent.SPEED_SLIDER_CHANGED, OnSpeedChanged);
+		// Messenger.AddListener (GameEvent.PLAYER_INITIATED_GAME, t);
+	}
+
+	void Destroy() {
+		Messenger<float>.RemoveListener(GameEvent.SPEED_SLIDER_CHANGED, OnSpeedChanged);
+	}
+
+	private void OnSpeedChanged(float newSpeed) {
+		maxSpeed = newSpeed;
+	}
 
 	void Start () 
 	{
@@ -26,10 +39,15 @@ public class PlayerController : MonoBehaviour {
 		_audioSource = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
 		_rb.freezeRotation = true;
-
 		// _rb.freezeRotation = false;
 		// _rb.useGravity = true;
 		// GetComponent<CapsuleCollider>().radius = 0.060f;
+	}
+
+	private void Update() {
+		// Vector3.back
+		Vector3 oncomingRayVector = new Vector3(transform.position.x + 1, transform.position.y +1f, transform.position.z);
+		Debug.DrawRay (oncomingRayVector, Vector3.right * 5, Color.red);
 	}
 
 	private void RestrictPlayerMovement() {

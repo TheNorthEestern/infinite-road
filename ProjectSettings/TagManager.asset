@@ -9,6 +9,7 @@ TagManager:
   - NPC
   - Road
   - Intersection
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

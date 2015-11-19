@@ -5,6 +5,12 @@ using System.Collections;
 public class SceneController : MonoBehaviour {
 	[SerializeField] private AudioSource _audioSource;
 
+	public SceneController() {
+		gameHasStarted = false;
+	}
+
+	public static bool gameHasStarted {get; private set;} 
+
 	void Awake () 
 	{
 		_audioSource = GetComponent<AudioSource> ();
