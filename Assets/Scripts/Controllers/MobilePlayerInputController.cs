@@ -22,12 +22,13 @@ public class MobilePlayerInputController : PlayerController {
 
       if ( Input.touchCount >= 0 ) {
         if (Input.touchCount == 0) {
-          movement = Vector3.right;
-          moveVertical = 1.0f;
+          movement = Vector3.zero;
+          moveVertical = -1.0f;
         }
         if (Input.touchCount == 1) {
-
-          foreach (Touch touch in Input.touches) {
+			movement = Vector3.right;
+			moveVertical = 1.0f;
+			foreach (Touch touch in Input.touches) {
             switch (touch.phase) {
 
               case TouchPhase.Began:
@@ -40,8 +41,10 @@ public class MobilePlayerInputController : PlayerController {
                 isSwipe = false;
                 break;
 
-              case TouchPhase.Moved:
-                float gestureTime = Time.time - fingerStartTime;
+              case TouchPhase.Stationary:
+							if ( touch.position.x < Screen.width / 2 ) moveHorizontal = -1.0f;
+							if ( touch.position.x > Screen.width / 2 ) moveHorizontal = 1.0f;
+                /*float gestureTime = Time.time - fingerStartTime;
                 float gestureDist = (touch.position - fingerStartPos).magnitude;
 
                 if (isSwipe && gestureTime < maximumSwipeTime && gestureDist > minimumSwipeDistance){
@@ -65,7 +68,7 @@ public class MobilePlayerInputController : PlayerController {
                     moveHorizontal = 1.0f;
                   }
 
-                } 
+                } */
 
 
                 break;
@@ -81,8 +84,8 @@ public class MobilePlayerInputController : PlayerController {
           }
         }
         if (Input.touchCount == 2) {
-          movement = Vector3.zero;
-          moveVertical = -1.0f;
+          movement = Vector3.right;
+          moveVertical = 1.0f;
         }
       }
 
