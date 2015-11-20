@@ -1031,8 +1031,8 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
-  m_AnchoredPosition: {x: -11.5000229, y: -75}
-  m_SizeDelta: {x: 475, y: 150}
+  m_AnchoredPosition: {x: -7.62939999e-06, y: -42}
+  m_SizeDelta: {x: 652.890015, y: 206}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &979455710
 MonoBehaviour:
@@ -2030,16 +2030,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3406193fa537d4be6ac5c5c4d4662990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPaused: 0
-  left: 0
-  right: 1
-  lane: 0
-  maxSpeed: 15
-  fingerStartTime: 0
-  fingerStartPos: {x: 0, y: 0}
-  isSwipe: 0
-  minimumSwipeDistance: 50
-  maximumSwipeTime: .5
 --- !u!114 &1707408361
 MonoBehaviour:
   m_ObjectHideFlags: 0
