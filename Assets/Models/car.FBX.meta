@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: f1565ead12cda49a78ae0ddbb1a94074
+timeCreated: 1448311998
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Box01
+    100002: Box02
+    100004: Brake lights
+    100006: //RootNode
+    100008: car inside
+    100010: Cylinder01
+    100012: Cylinder02
+    100014: Cylinder03
+    100016: Cylinder04
+    100018: Cylinder05
+    100020: Front bumper01
+    100022: Grill01
+    100024: Headlight container
+    100026: Headlights
+    100028: L-Ext02
+    100030: L-Ext03
+    100032: L-Ext04
+    100034: L-Ext05
+    100036: Rear bumber01
+    100038: Windows
+    400000: Box01
+    400002: Box02
+    400004: Brake lights
+    400006: //RootNode
+    400008: car inside
+    400010: Cylinder01
+    400012: Cylinder02
+    400014: Cylinder03
+    400016: Cylinder04
+    400018: Cylinder05
+    400020: Front bumper01
+    400022: Grill01
+    400024: Headlight container
+    400026: Headlights
+    400028: L-Ext02
+    400030: L-Ext03
+    400032: L-Ext04
+    400034: L-Ext05
+    400036: Rear bumber01
+    400038: Windows
+    2300000: Box01
+    2300002: Box02
+    2300004: Brake lights
+    2300006: car inside
+    2300008: Cylinder01
+    2300010: Cylinder02
+    2300012: Cylinder03
+    2300014: Cylinder04
+    2300016: Cylinder05
+    2300018: Front bumper01
+    2300020: Grill01
+    2300022: Headlight container
+    2300024: Headlights
+    2300026: L-Ext02
+    2300028: L-Ext03
+    2300030: L-Ext04
+    2300032: L-Ext05
+    2300034: Rear bumber01
+    2300036: Windows
+    3300000: Box01
+    3300002: Box02
+    3300004: Brake lights
+    3300006: car inside
+    3300008: Cylinder01
+    3300010: Cylinder02
+    3300012: Cylinder03
+    3300014: Cylinder04
+    3300016: Cylinder05
+    3300018: Front bumper01
+    3300020: Grill01
+    3300022: Headlight container
+    3300024: Headlights
+    3300026: L-Ext02
+    3300028: L-Ext03
+    3300030: L-Ext04
+    3300032: L-Ext05
+    3300034: Rear bumber01
+    3300036: Windows
+    4300000: Front bumper01
+    4300002: Rear bumber01
+    4300004: Grill01
+    4300006: Box02
+    4300008: Brake lights
+    4300010: Headlights
+    4300012: Headlight container
+    4300014: Cylinder01
+    4300016: Cylinder02
+    4300018: Cylinder03
+    4300020: Cylinder04
+    4300022: Windows
+    4300024: L-Ext02
+    4300026: L-Ext03
+    4300028: L-Ext04
+    4300030: L-Ext05
+    4300032: Cylinder05
+    4300034: Box01
+    4300036: car inside
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
