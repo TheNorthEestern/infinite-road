@@ -19,21 +19,24 @@ public class RoadSegmentBehavior : RoadCleanupBehavior {
 		autumn = new Color32(234, 157, 46, 255);
 		int currentSecond = DateTime.Now.Second;
 
-		GameObject.Find ("Main Camera").GetComponent<Camera>().backgroundColor = Color.gray;
+		Camera _camera = GameObject.Find ("Main Camera").GetComponent<Camera>();
 		childRenderers = this.transform.FindChild ("RoadsideGrass").GetComponentsInChildren<Renderer>();
 
 		foreach (Renderer childRenderer in childRenderers) {
-
 			if (currentSecond < 15) {
+				_camera.backgroundColor = winter;
 				childRenderer.material.color = winter;
 			} 
 			else if (currentSecond < 30) {
+				_camera.backgroundColor = spring;
 				childRenderer.material.color = spring;
 			}
 			else if (currentSecond < 45) {
+				_camera.backgroundColor = summer;
 				childRenderer.material.color = summer;
 			} 
 			else {
+				_camera.backgroundColor = autumn ;
 				childRenderer.material.color = autumn;
 			}
 		}

@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour {
 		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
 		RaycastHit hit;
 		if (Physics.SphereCast(passingRay, 25.0f, out hit)) {
-			if ( hit.collider.CompareTag("Intersection") ) {
+			if ( hit.collider.CompareTag("Intersection") || hit.collider.CompareTag("NPC") ) {
 				GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
 		} else{
@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour {
 			if ( lane == right ) {
 				if ( transform.position.z > rightBound ) {
 					Vector3 endPos = new Vector3(0, 0, rightBound);
-					_rb.MovePosition(transform.position + endPos * Time.deltaTime * 1.5f);
+					_rb.MovePosition(transform.position + endPos * Time.deltaTime * 1);
 				}
 			}
 	
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour {
 	public virtual void FixedUpdate() 
 	{
 		CheckAndUpdateLaneSelection();
-		RestrictPlayerMovement();
+		// RestrictPlayerMovement();
 		ApplyRigidbodyMechanics();
 		PlayerPivotMechanics();	
 		MonitorPlayerSpeed();
