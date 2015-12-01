@@ -14,20 +14,23 @@ public class PlayerController : MonoBehaviour {
 	protected static float leftBound = -3.3f;
 	protected static float rightBound = -5.5f;
 	private bool isPaused;
+	private bool isInBowlingMode = false;
 	protected bool left = false;
 	protected bool right = true;
 	protected bool lane;
 
-	private float maxSpeed = 15.0f;
+	private float maxSpeed = 20.0f;
 
 	void Awake() {
 		Messenger<float>.AddListener(GameEvent.SPEED_SLIDER_CHANGED, OnSpeedChanged);
 		Messenger.AddListener(GameEvent.PLAYER_INITIATED_GAME, LowerSpeed);
+		Messenger.AddListener(GameEvent.PLAYER_GOT_TEN_PASSES, ActivateBowlingMode);
 	}
 
 	void OnDestroy() {
 		Messenger<float>.RemoveListener(GameEvent.SPEED_SLIDER_CHANGED, OnSpeedChanged);
 		Messenger.RemoveListener(GameEvent.PLAYER_INITIATED_GAME, LowerSpeed);
+		Messenger.RemoveListener(GameEvent.PLAYER_GOT_TEN_PASSES, ActivateBowlingMode);
 	}
 
 	private void LowerSpeed() {
@@ -50,9 +53,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Update() {
-		// Vector3.back
-		Vector3 oncomingRayVector = new Vector3(transform.position.x + 1, transform.position.y +1f, transform.position.z + 5f);
-		Debug.DrawRay (oncomingRayVector, Vector3.right * 5, Color.red);
+
 	}
 
 	private void RestrictPlayerMovement() {
@@ -72,11 +73,16 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void PlayerPivotMechanics() {
+		Debug.Log (transform.position.z + " " + rightBound);
+		Debug.Log (transform.position.z + " " + leftBound);
 		if ( moveHorizontal > 0 ) {
+			// pivot player rightward
 			transform.localRotation = Quaternion.Euler (transform.localRotation.x, 100, transform.localRotation.z);
 		} else if ( moveHorizontal < 0 ){
+			// pivot player leftward
 			transform.localRotation = Quaternion.Euler (transform.localRotation.x, 80, transform.localRotation.z);
 		} else if ( moveHorizontal == 0 ) {
+			// re-center player
 			transform.localRotation = Quaternion.Euler (transform.localRotation.x, 90, transform.localRotation.z);
 		}
 	}
@@ -90,11 +96,20 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void CheckIfOncoming() {
-		Vector3 oncomingRayVector = new Vector3(transform.position.x + 0.5f, transform.position.y + 25.0f, transform.position.z);
+	private void OnDrawGizmos() {
+		Gizmos.color = Color.red;
+		Vector3 oncomingRayVector = new Vector3(transform.position.x + 5.5f, transform.position.y + 1.0f, transform.position.z);
 		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
+		Gizmos.DrawRay(passingRay);
+	}
+
+	private void CheckIfOncoming() {
+		Vector3 oncomingRayVector = new Vector3(transform.position.x + 5.5f, transform.position.y + 1.0f, transform.position.z);
+		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
+
 		RaycastHit hit;
-		if (Physics.SphereCast(passingRay, 25.0f, out hit)) {
+	    if (Physics.Raycast(oncomingRayVector, Vector3.right, out hit, 45.0f)){
+		//if (Physics.SphereCast(passingRay, 25.0f, out hit)) {
 			if ( hit.collider.CompareTag("Intersection") || hit.collider.CompareTag("NPC") ) {
 				GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
@@ -125,6 +140,24 @@ public class PlayerController : MonoBehaviour {
 			}
 	
 		}
+	}
+
+	private void ActivateBowlingMode() {
+		isInBowlingMode = !isInBowlingMode;
+		if (isInBowlingMode) {
+			StartCoroutine(SetBowlingPhysics());
+		}
+	}
+
+	private IEnumerator SetBowlingPhysics() {
+		float origRadius = GetComponent<CapsuleCollider>().radius;
+		_rb.freezeRotation = false;
+		_rb.useGravity = true;
+		GetComponent<CapsuleCollider>().radius = 0.060f;
+		yield return new WaitForSeconds(2);
+		_rb.freezeRotation = true;
+		_rb.useGravity = false;
+		GetComponent<CapsuleCollider>().radius = origRadius;
 	}
 
 	private IEnumerator PlaySound() {

@@ -1,14 +1,9 @@
-﻿#if !UNITY_STANDALONE || !UNITY_EDITOR
+﻿// #if !UNITY_STANDALONE || !UNITY_EDITOR
 using UnityEngine;
 using System.Collections;
 
 public class MobilePlayerInputController : PlayerController {
-	private float fingerStartTime = 0.0f;
-	private Vector2 fingerStartPos = Vector2.zero;
-	private bool isSwipe = false;
-	private float minimumSwipeDistance = 50.0f;
-	private float maximumSwipeTime = 0.5f;
-	
+
 	private IEnumerator Reorient() {
 		moveHorizontal = 0;
 		yield return null;
@@ -47,4 +42,4 @@ public class MobilePlayerInputController : PlayerController {
 		}
 	} 
 }
-#endif
+// #endif

@@ -29,6 +29,10 @@ public class UIController : MonoBehaviour {
 	}
 
 	void Update () {
+		/* if ( _score != 0 && _score % 10 == 0 ) {
+			Messenger.Broadcast(GameEvent.PLAYER_GOT_TEN_PASSES);
+		} */
+
 		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 ) {
 			Messenger.Broadcast (GameEvent.PLAYER_INITIATED_GAME);
 			_canvas.SetActive (true);
@@ -65,6 +69,13 @@ public class UIController : MonoBehaviour {
 	}
 
 	private void IncrementScore() {
+//		int randX = Random.Range(0, Screen.width);
+//		int randY = Random.Range (0, Screen.height);
+//
+//		GameObject plusOne = Resources.Load ("Prefabs/PlusOne", typeof(GameObject)) as GameObject;
+//		Vector3 textPos = new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), plusOne.transform.position.z);
+//		plusOne.transform.position = textPos;
+//		Instantiate (plusOne);
 		_score += 1;
 		_audioSource.PlayOneShot (_audioSource.clip);
 		_scoreLabel.text = _scoreLabelBacking.text = _score.ToString ();
