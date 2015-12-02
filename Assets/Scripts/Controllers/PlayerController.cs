@@ -73,8 +73,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void PlayerPivotMechanics() {
-		Debug.Log (transform.position.z + " " + rightBound);
-		Debug.Log (transform.position.z + " " + leftBound);
 		if ( moveHorizontal > 0 ) {
 			// pivot player rightward
 			transform.localRotation = Quaternion.Euler (transform.localRotation.x, 100, transform.localRotation.z);
@@ -96,21 +94,14 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void OnDrawGizmos() {
-		Gizmos.color = Color.red;
-		Vector3 oncomingRayVector = new Vector3(transform.position.x + 5.5f, transform.position.y + 1.0f, transform.position.z);
-		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
-		Gizmos.DrawRay(passingRay);
-	}
-
 	private void CheckIfOncoming() {
 		Vector3 oncomingRayVector = new Vector3(transform.position.x + 5.5f, transform.position.y + 1.0f, transform.position.z);
 		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
 
 		RaycastHit hit;
-	    if (Physics.Raycast(oncomingRayVector, Vector3.right, out hit, 45.0f)){
+	    if (Physics.Raycast(oncomingRayVector, Vector3.right, out hit)){
 		//if (Physics.SphereCast(passingRay, 25.0f, out hit)) {
-			if ( hit.collider.CompareTag("Intersection") || hit.collider.CompareTag("NPC") ) {
+			if ( hit.collider.CompareTag("Intersection") ) {
 				GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
 		} else{
