@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
@@ -8,18 +10,19 @@ public class PlayerController : MonoBehaviour {
 	protected static float speed = 10.0f;
 	protected static float moveVertical;
 	protected static float moveHorizontal;
-	protected const float GRAVITY = -9.8f;
 	protected static Vector3 movement;
 	protected static Vector3 restrictor;
 	protected static float leftBound = -3.3f;
 	protected static float rightBound = -5.5f;
-	private bool isPaused;
-	private bool isInBowlingMode = false;
+	protected const float GRAVITY = -9.8f;
 	protected bool left = false;
 	protected bool right = true;
 	protected bool lane;
+	private bool isPaused;
+	private bool isInBowlingMode = false;
+	public Vector3 startPosition;
 
-	private float maxSpeed = 20.0f;
+	private float maxSpeed = 15.0f;
 
 	void Awake() {
 		Messenger<float>.AddListener(GameEvent.SPEED_SLIDER_CHANGED, OnSpeedChanged);
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Start () 
 	{
+		startPosition = transform.position;
 		lane = right;
 		_audioSource = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
@@ -53,7 +57,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Update() {
-
+		// Debug.Log (((transform.position.x - startPosition.x)/1000) * 0.621371f + " " + Time.fixedTime);
+		// Debug.Log (Time.fixedTime);
 	}
 
 	private void RestrictPlayerMovement() {
@@ -97,14 +102,14 @@ public class PlayerController : MonoBehaviour {
 	private void CheckIfOncoming() {
 		Vector3 oncomingRayVector = new Vector3(transform.position.x + 5.5f, transform.position.y + 1.0f, transform.position.z);
 		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
-
 		RaycastHit hit;
-	    if (Physics.Raycast(oncomingRayVector, Vector3.right, out hit)){
-		//if (Physics.SphereCast(passingRay, 25.0f, out hit)) {
+	    
+		if (Physics.Raycast(oncomingRayVector, Vector3.right, out hit)){
 			if ( hit.collider.CompareTag("Intersection") ) {
 				GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
-		} else{
+		} 
+		else {
 			GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", false);
 		}
 	}

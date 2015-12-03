@@ -5,9 +5,11 @@ using System.Collections;
 public class UIController : MonoBehaviour {
 	[SerializeField] private Text _scoreLabel;
 	[SerializeField] private Text _scoreLabelBacking;
+	[SerializeField] private Text _distanceText;
 	[SerializeField] private Text _rngIndicator;
 	[SerializeField] private AudioClip _warnSound;
 	[SerializeField] private GameObject _pauseMenu;
+	[SerializeField] private GameObject _player;
 	private AudioSource _audioSource;
 	private int _score;
 	private GameObject _canvas;
@@ -32,6 +34,11 @@ public class UIController : MonoBehaviour {
 		/* if ( _score != 0 && _score % 10 == 0 ) {
 			Messenger.Broadcast(GameEvent.PLAYER_GOT_TEN_PASSES);
 		} */
+
+		if ( _canvas.activeSelf == true ) {
+			// _player.
+			_distanceText.text = ((_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x)/1000).ToString("#.##") + " miles";
+		}
 
 		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 ) {
 			Messenger.Broadcast (GameEvent.PLAYER_INITIATED_GAME);
@@ -69,13 +76,6 @@ public class UIController : MonoBehaviour {
 	}
 
 	private void IncrementScore() {
-//		int randX = Random.Range(0, Screen.width);
-//		int randY = Random.Range (0, Screen.height);
-//
-//		GameObject plusOne = Resources.Load ("Prefabs/PlusOne", typeof(GameObject)) as GameObject;
-//		Vector3 textPos = new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), plusOne.transform.position.z);
-//		plusOne.transform.position = textPos;
-//		Instantiate (plusOne);
 		_score += 1;
 		_audioSource.PlayOneShot (_audioSource.clip);
 		_scoreLabel.text = _scoreLabelBacking.text = _score.ToString ();
