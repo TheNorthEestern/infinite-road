@@ -36,8 +36,7 @@ public class UIController : MonoBehaviour {
 		} */
 
 		if ( _canvas.activeSelf == true ) {
-			// _player.
-			_distanceText.text = ((_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x)/1000).ToString("#.##") + " miles";
+			_distanceText.text = ((_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x)/1000).ToString("F") + " miles";
 		}
 
 		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 ) {
