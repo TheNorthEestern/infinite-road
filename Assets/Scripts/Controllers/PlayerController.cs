@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hit;
 	    
 		if (Physics.Raycast(oncomingRayVector, Vector3.right, out hit)){
-			if ( hit.collider.CompareTag("Intersection") ) {
+			if ( hit.collider.CompareTag("NPC") ) {
 				GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
 		} 
