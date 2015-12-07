@@ -39,7 +39,7 @@ public class UIController : MonoBehaviour {
 			_distanceText.text = ((_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x)/1000).ToString("F") + " miles";
 		}
 
-		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0 ) {
+		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount == 1 ) {
 			Messenger.Broadcast (GameEvent.PLAYER_INITIATED_GAME);
 			_canvas.SetActive (true);
 			_titleScreenCanvas.SetActive(false);

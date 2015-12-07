@@ -1,4 +1,4 @@
-﻿// #if !UNITY_STANDALONE || !UNITY_EDITOR
+﻿#if !UNITY_STANDALONE || !UNITY_EDITOR
 using UnityEngine;
 using System.Collections;
 
@@ -31,10 +31,11 @@ public class MobilePlayerInputController : PlayerController {
 					}
 				}
 			  }
-				if ( Input.touchCount == 2 ) {
+
+			  if ( Input.touchCount == 2 ) {
 					movement = Vector3.zero;
-					moveVertical = 1.0f;
-				}
+					moveVertical = -1.0f;
+			  }
 			} else {
 				moveHorizontal = 0.0f;
 			}
@@ -42,4 +43,4 @@ public class MobilePlayerInputController : PlayerController {
 		}
 	} 
 }
-// #endif
+#endif
