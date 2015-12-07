@@ -9,7 +9,7 @@ public class RoadSegmentGenerator : MonoBehaviour {
 	private Vector3 _roadSegmentInstantiationPosition;
 	private Vector3 _intersectionInstantiationPosition;
 	private float _originalInstantiationSize;
-	private bool _playerStartedGame = false;
+	public bool _playerStartedGame = false;
 
 	void Awake() {
 		Messenger.AddListener(GameEvent.PLAYER_INITIATED_GAME, StartNormalSegmentGeneration);
