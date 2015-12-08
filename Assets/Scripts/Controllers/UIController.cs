@@ -6,6 +6,7 @@ public class UIController : MonoBehaviour {
 	[SerializeField] private Text _scoreLabel;
 	[SerializeField] private Text _scoreLabelBacking;
 	[SerializeField] private Text _distanceText;
+	[SerializeField] private Text _distanceTextBacking;
 	[SerializeField] private Text _rngIndicator;
 	[SerializeField] private AudioClip _warnSound;
 	[SerializeField] private GameObject _pauseMenu;
@@ -36,7 +37,7 @@ public class UIController : MonoBehaviour {
 		} */
 
 		if ( _canvas.activeSelf == true ) {
-			_distanceText.text = ((_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x)/1000).ToString("F") + " miles";
+			_distanceText.text = _distanceTextBacking.text = ((_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x)/1000).ToString("F") + " miles";
 		}
 
 		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount == 1 ) {

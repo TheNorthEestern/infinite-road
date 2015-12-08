@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Update() {
+		Debug.DrawRay (new Vector3(transform.position.x + 8.5f, transform.position.y + 1.0f, transform.position.z), Vector3.right, Color.red);
 		// Debug.Log (((transform.position.x - startPosition.x)/1000) * 0.621371f + " " + Time.fixedTime);
 		// Debug.Log (Time.fixedTime);
 	}
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void CheckIfOncoming() {
-		Vector3 oncomingRayVector = new Vector3(transform.position.x + 5.5f, transform.position.y + 1.0f, transform.position.z);
+		Vector3 oncomingRayVector = new Vector3(transform.position.x + 8.5f, transform.position.y + 1.0f, transform.position.z);
 		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
 		RaycastHit hit;
 	    
