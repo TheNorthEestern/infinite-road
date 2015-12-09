@@ -31,8 +31,14 @@ public class RoadSegmentGenerator : MonoBehaviour {
 		_initialRoadSegmentInstance = Instantiate (_roadSegmentPrefab);
 		_roadSegmentInstantiationPosition = _initialRoadSegmentInstance.transform.position;
 		_intersectionInstantiationPosition = _intersectionPrefab.transform.position;
-
 		_originalInstantiationSize = GameObject.FindGameObjectWithTag ("OriginalRoadSegment").GetComponent<Renderer>().bounds.size.x;
+
+		// Create road segment just before the initial one the player is on to
+		// create the illusion of a truly infinite road
+		Instantiate (_roadSegmentPrefab, 
+		             new Vector3(_roadSegmentInstantiationPosition.x - _originalInstantiationSize, 
+		            			 _roadSegmentInstantiationPosition.y,
+		            			 _roadSegmentInstantiationPosition.z), Quaternion.identity);
 	}
 
 	public void Generate() {

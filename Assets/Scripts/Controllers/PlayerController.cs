@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
 	protected bool left = false;
 	protected bool right = true;
 	protected bool lane;
+	private GameObject _camera;
 	private bool isPaused;
 	private bool isInBowlingMode = false;
 	public Vector3 startPosition;
@@ -48,18 +49,13 @@ public class PlayerController : MonoBehaviour {
 	{
 		startPosition = transform.position;
 		lane = right;
+		_camera = GameObject.Find ("Main Camera");
 		_audioSource = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
 		_rb.freezeRotation = true;
 		// _rb.freezeRotation = false;
 		// _rb.useGravity = true;
 		// GetComponent<CapsuleCollider>().radius = 0.060f;
-	}
-
-	private void Update() {
-		Debug.DrawRay (new Vector3(transform.position.x + 8.5f, transform.position.y + 1.0f, transform.position.z), Vector3.right, Color.red);
-		// Debug.Log (((transform.position.x - startPosition.x)/1000) * 0.621371f + " " + Time.fixedTime);
-		// Debug.Log (Time.fixedTime);
 	}
 
 	private void RestrictPlayerMovement() {
@@ -101,18 +97,16 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void CheckIfOncoming() {
-		Vector3 oncomingRayVector = new Vector3(transform.position.x + 8.5f, transform.position.y + 1.0f, transform.position.z);
+		Vector3 oncomingRayVector = new Vector3(transform.position.x + 0.5f, transform.position.y + 20.0f, transform.position.z);
 		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
 		RaycastHit hit;
-	    
-		if (Physics.Raycast(oncomingRayVector, Vector3.right, out hit)){
+		if (Physics.SphereCast(passingRay, 1.0f, out hit, 15)) {
 			if ( hit.collider.CompareTag("NPC") ) {
 				GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
-		} 
-		else {
+		} else{
 			GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", false);
-		}
+		}	
 	}
 
 	private void CheckAndUpdateLaneSelection() {

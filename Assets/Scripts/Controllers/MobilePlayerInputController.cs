@@ -22,18 +22,13 @@ public class MobilePlayerInputController : PlayerController {
 				// Touch touch = Input.touches[0];
 			   if ( Input.touchCount == 1 ) {
 				foreach  (Touch touch in Input.touches) {
-					if ( lane == right ) {
-						moveHorizontal = -1.0f;
-					} else {
-							moveHorizontal = 1.0f;
-					}
-					/* if (touch.position.x < (Screen.width / 2) && (touch.position.y < (Screen.height / 2))) {
+					if (touch.position.x < (Screen.width / 2) && (touch.position.y < (Screen.height / 2))) {
 						moveHorizontal = -1.0f;
 					} 
 					
 					else if ((touch.position.x > (Screen.width / 2)) && (touch.position.y < (Screen.height / 2))) {
 						moveHorizontal = 1.0f;
-					} */
+					}
 				}
 			  }
 

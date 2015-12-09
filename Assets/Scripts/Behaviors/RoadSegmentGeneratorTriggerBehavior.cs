@@ -11,11 +11,8 @@ public class RoadSegmentGeneratorTriggerBehavior : MonoBehaviour {
 		}
 	}
 
-	void Awake() {
-		mainController = GameObject.Find ("SceneController");
-	}
-
 	void Start () {
+		mainController = GameObject.Find ("SceneController");
 		GetComponent<Renderer> ().enabled = false;
 	}
 

@@ -37,7 +37,7 @@ public class UIController : MonoBehaviour {
 		} */
 
 		if ( _canvas.activeSelf == true ) {
-			_distanceText.text = _distanceTextBacking.text = ((_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x)/1000).ToString("F") + " miles";
+			_distanceText.text = _distanceTextBacking.text = ((_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x)/1000).ToString("F");
 		}
 
 		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount == 1 ) {
@@ -78,6 +78,6 @@ public class UIController : MonoBehaviour {
 	private void IncrementScore() {
 		_score += 1;
 		_audioSource.PlayOneShot (_audioSource.clip);
-		_scoreLabel.text = _scoreLabelBacking.text = _score.ToString ();
+		_scoreLabel.text = _scoreLabelBacking.text = '$' + _score.ToString ();
 	}
 }

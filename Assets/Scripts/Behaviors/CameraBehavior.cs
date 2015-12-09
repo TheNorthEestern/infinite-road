@@ -6,7 +6,7 @@ using System.Collections;
 public class CameraBehavior : MonoBehaviour {
 
 	public GameObject focalPoint;
-	// private Camera _camera;
+	private bool _levelStarted = false;
 	private MotionBlur _blurComponent;
 	private Grayscale _grayscaleComponent;
 	private Vector3 offset;
@@ -24,6 +24,10 @@ public class CameraBehavior : MonoBehaviour {
 		_grayscaleComponent.enabled = false;
 	}
 
+	void OnLevelWasLoaded(int level) {
+		_levelStarted = true;
+	}
+
 	void Start () {
 		offset = transform.position;
 		_grayscaleComponent = GetComponent<Grayscale>();
@@ -31,7 +35,6 @@ public class CameraBehavior : MonoBehaviour {
 		_blurComponent.enabled = false;
 		_grayscaleComponent.enabled = true;
 		_animator = GetComponent<Animator>();
-		// _camera = GetComponent<Camera> ();
 	}
 
 	private IEnumerator Pause() {
@@ -39,15 +42,9 @@ public class CameraBehavior : MonoBehaviour {
 	}
 
 	void Update () {
-		// TimeSpan timespan = DateTime.Now.TimeOfDay;
-		// DateTime time = DateTime.Now;
-		// transform.position.Set (0, 0, 0);
-		// Trippy camera effect
-		// Debug.Log ((float)Math.Cos (timespan.TotalSeconds)*25f);
-		// transform.localRotation = Quaternion.Euler (0f, (float)Math.Cos (timespan.TotalSeconds)*25f, 0f);
-		// transform.localRotation = Quaternion.Euler (0f, 30.0f, 0f);
-
-		transform.localRotation = Quaternion.Slerp (Quaternion.Euler (0, 45f,45f),Quaternion.Euler (0, 0, 0),  Time.time * 0.4f);
+		if (_levelStarted) {
+			transform.localRotation = Quaternion.Slerp (Quaternion.Euler (0, 45f,45f),Quaternion.Euler (0, 0, 0),  Time.time * 0.4f);
+		}
 		CheckAndUpdateMotionBlur ();
 		transform.position = focalPoint.transform.position + offset;
 	}
