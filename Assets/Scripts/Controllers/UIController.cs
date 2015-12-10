@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour {
 	private bool _gameHasStarted = false;
 	private float _distanceDrivenBeforeGameStarted;
 	private float _distanceDrivenAfterGameStarted;
+	private float distanceFromOrigin;
 	public float totalScore = 0;
 	protected static bool isPaused = false;
 
@@ -40,9 +41,12 @@ public class UIController : MonoBehaviour {
 		_distanceDrivenBeforeGameStarted =_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x;
 
 		if ( _canvas.activeSelf == true ) {
-			float distanceFromOrigin = ((_distanceDrivenBeforeGameStarted - _distanceDrivenAfterGameStarted)/1000);
-			totalScore = distanceFromOrigin * _score;
-			_distanceText.text = _distanceTextBacking.text = distanceFromOrigin.ToString("F");
+			distanceFromOrigin = ((_distanceDrivenBeforeGameStarted - _distanceDrivenAfterGameStarted)/1000);
+			if ( _score > 1 ) {
+				distanceFromOrigin *= _score;
+			}
+			totalScore = distanceFromOrigin;
+			_distanceText.text = _distanceTextBacking.text = distanceFromOrigin.ToString("N");
 		}
 
 		if ( (Input.GetKeyDown(KeyCode.Space) || Input.touchCount == 1) && !_gameHasStarted ) {
@@ -85,6 +89,7 @@ public class UIController : MonoBehaviour {
 
 	private void IncrementScore() {
 		_score += 1;
+		distanceFromOrigin *= _score;
 		_audioSource.PlayOneShot (_audioSource.clip);
 		_scoreLabel.text = _scoreLabelBacking.text = '$' + _score.ToString ();
 	}

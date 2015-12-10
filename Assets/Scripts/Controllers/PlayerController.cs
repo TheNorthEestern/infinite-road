@@ -174,7 +174,10 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other) {
 		if (other.gameObject.tag == "NPC") {
-			// PlayerPrefs.SetFloat ("highscore", 0);
+			// _uiController.GetComponent<UIController>().totalScore;
+			if ( PlayerPrefs.GetFloat ("highscore") < _uiController.GetComponent<UIController>().totalScore ) {
+				PlayerPrefs.SetFloat ("highscore", _uiController.GetComponent<UIController>().totalScore);
+			}
 			Application.LoadLevel ("hillside_scene");
 		}
 	}
