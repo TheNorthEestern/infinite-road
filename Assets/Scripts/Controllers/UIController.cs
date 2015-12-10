@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour {
 	private int _score;
 	private GameObject _canvas;
 	private GameObject _titleScreenCanvas;
+	private bool _gameHasStarted = false;
 	private float _distanceDrivenBeforeGameStarted;
 	private float _distanceDrivenAfterGameStarted;
 	public float totalScore = 0;
@@ -44,13 +45,14 @@ public class UIController : MonoBehaviour {
 			_distanceText.text = _distanceTextBacking.text = distanceFromOrigin.ToString("F");
 		}
 
-		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount == 1 ) {
+		if ( (Input.GetKeyDown(KeyCode.Space) || Input.touchCount == 1) && !_gameHasStarted ) {
+			_gameHasStarted = true;
 			_distanceDrivenAfterGameStarted	= _player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x;
-			Debug.Log ("DIST: " + _distanceDrivenAfterGameStarted);
 			Messenger.Broadcast (GameEvent.PLAYER_INITIATED_GAME);
 			_canvas.SetActive (true);
 			_titleScreenCanvas.SetActive(false);
 		}
+
 	}
 
 	void OnDestroy() {
