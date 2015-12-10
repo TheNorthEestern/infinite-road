@@ -15,10 +15,13 @@ public class UIController : MonoBehaviour {
 	private int _score;
 	private GameObject _canvas;
 	private GameObject _titleScreenCanvas;
+	private float _distanceDrivenBeforeGameStarted;
+	private float _distanceDrivenAfterGameStarted;
+	public float totalScore = 0;
 	protected static bool isPaused = false;
 
 	void Start () {
-		_canvas = GameObject.Find("Canvas");
+		_canvas = GameObject.Find("HUD");
 		_titleScreenCanvas = GameObject.Find ("TitleScreenCanvas");
 		_canvas.SetActive (false);
 		_score = 0;
@@ -32,15 +35,18 @@ public class UIController : MonoBehaviour {
 	}
 
 	void Update () {
-		/* if ( _score != 0 && _score % 10 == 0 ) {
-			Messenger.Broadcast(GameEvent.PLAYER_GOT_TEN_PASSES);
-		} */
+
+		_distanceDrivenBeforeGameStarted =_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x;
 
 		if ( _canvas.activeSelf == true ) {
-			_distanceText.text = _distanceTextBacking.text = ((_player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x)/1000).ToString("F");
+			float distanceFromOrigin = ((_distanceDrivenBeforeGameStarted - _distanceDrivenAfterGameStarted)/1000);
+			totalScore = distanceFromOrigin * _score;
+			_distanceText.text = _distanceTextBacking.text = distanceFromOrigin.ToString("F");
 		}
 
 		if ( Input.GetKeyDown(KeyCode.Space) || Input.touchCount == 1 ) {
+			_distanceDrivenAfterGameStarted	= _player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x;
+			Debug.Log ("DIST: " + _distanceDrivenAfterGameStarted);
 			Messenger.Broadcast (GameEvent.PLAYER_INITIATED_GAME);
 			_canvas.SetActive (true);
 			_titleScreenCanvas.SetActive(false);

@@ -19,9 +19,10 @@ public class PlayerController : MonoBehaviour {
 	protected bool right = true;
 	protected bool lane;
 	private GameObject _camera;
+	[SerializeField] private GameObject _uiController;
 	private bool isPaused;
 	private bool isInBowlingMode = false;
-	public Vector3 startPosition;
+	public Vector3 startPosition = Vector3.zero;
 
 	private float maxSpeed = 15.0f;
 
@@ -102,10 +103,10 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.SphereCast(passingRay, 1.0f, out hit, 15)) {
 			if ( hit.collider.CompareTag("NPC") ) {
-				GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", true);
+				_camera.GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
 		} else{
-			GameObject.Find ("Main Camera").GetComponent<Animator>().SetBool("NearingIntersection", false);
+				_camera.GetComponent<Animator>().SetBool("NearingIntersection", false);
 		}	
 	}
 
@@ -173,6 +174,7 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other) {
 		if (other.gameObject.tag == "NPC") {
+			// PlayerPrefs.SetFloat ("highscore", 0);
 			Application.LoadLevel ("hillside_scene");
 		}
 	}

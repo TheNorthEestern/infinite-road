@@ -8,7 +8,6 @@ public class NpcSpawnerBehavior : MonoBehaviour {
 	private GameObject _sceneController;
 	private int _npcSpawnerDeterminant = 2;
 	private int _npcSpawnerSeed;
-	private bool _isActive = false;
 	private string[] npcModelNames = new string[] {"NPCSemi", "NPC"};
 
 	void Start () {

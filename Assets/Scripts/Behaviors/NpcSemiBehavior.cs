@@ -4,14 +4,11 @@ using System.Collections;
 public class NpcSemiBehavior : ParentedObjectBehavior {
 	private CharacterController _cc;
 	private int randomSpeed;
-	private int arrivalNumber;
 	private float gravity = -9.8f;
 	private Vector3 movement;
-	private bool encounteredStopSign = false;
-	
+
 	void Start () {
 		_cc = GetComponent<CharacterController> ();
-		arrivalNumber = 0;
 		randomSpeed = Random.Range (5, 10);
 		movement = new Vector3(randomSpeed, gravity, 0);
 	}

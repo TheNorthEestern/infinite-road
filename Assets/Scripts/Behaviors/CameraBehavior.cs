@@ -10,7 +10,6 @@ public class CameraBehavior : MonoBehaviour {
 	private MotionBlur _blurComponent;
 	private Grayscale _grayscaleComponent;
 	private Vector3 offset;
-	private Animator _animator;
 
 	void Awake() {
 		Messenger.AddListener(GameEvent.PLAYER_INITIATED_GAME, DisableSepia);
@@ -34,7 +33,6 @@ public class CameraBehavior : MonoBehaviour {
 		_blurComponent = GetComponent<MotionBlur> ();
 		_blurComponent.enabled = false;
 		_grayscaleComponent.enabled = true;
-		_animator = GetComponent<Animator>();
 	}
 
 	private IEnumerator Pause() {

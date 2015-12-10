@@ -14,9 +14,9 @@ SceneSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: .5, g: .5, b: .5, a: 1}
-  m_FogMode: 3
+  m_FogMode: 2
   m_FogDensity: 1
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
@@ -2263,6 +2263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc2c345a09ea490a8b8c0a66bb66735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiController: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &871510313
 GameObject:
@@ -2458,6 +2459,7 @@ MonoBehaviour:
   _warnSound: {fileID: 8300000, guid: e3f5271fb052146f3b4815da647e28fe, type: 3}
   _pauseMenu: {fileID: 871510313}
   _player: {fileID: 2004578320}
+  totalScore: 0
 --- !u!4 &920988401
 Transform:
   m_ObjectHideFlags: 0
@@ -2479,7 +2481,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 97d60b5a2aa424fe6a6b89e14feb5027, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7604777ea04fe4d739a8e86c4af51466, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2967,6 +2969,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 495141a75700d4300bfa05260c585ef1, type: 3}
       propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 495141a75700d4300bfa05260c585ef1, type: 3}
+      propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3675,7 +3681,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1713116715}
-  m_LocalRotation: {x: .239117637, y: .369643837, z: -.0990457758, w: .892399073}
+  m_LocalRotation: {x: .199964136, y: .373612344, z: -.0828278661, w: .901979864}
   m_LocalPosition: {x: -.00683367252, y: -.554641008, z: -1.34171152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3803,6 +3809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3406193fa537d4be6ac5c5c4d4662990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiController: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &2004578324
 MonoBehaviour:
@@ -3815,6 +3822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc2c345a09ea490a8b8c0a66bb66735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiController: {fileID: 920988399}
   startPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &2004578327 stripped
 Transform:
@@ -4041,7 +4049,7 @@ GameObject:
   - 114: {fileID: 2130905689}
   - 114: {fileID: 2130905688}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
