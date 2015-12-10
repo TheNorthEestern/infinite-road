@@ -178,7 +178,8 @@ public class PlayerController : MonoBehaviour {
 			if ( PlayerPrefs.GetFloat ("highscore") < _uiController.GetComponent<UIController>().totalScore ) {
 				PlayerPrefs.SetFloat ("highscore", _uiController.GetComponent<UIController>().totalScore);
 			}
-			Application.LoadLevel ("hillside_scene");
+			Messenger.Broadcast (GameEvent.GAME_ENDED);
+			// Application.LoadLevel ("hillside_scene");
 		}
 	}
 

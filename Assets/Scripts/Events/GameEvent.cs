@@ -2,6 +2,7 @@
 	public const string SPEED_SLIDER_CHANGED = "SPEED_SLIDER_CHANGED";
 	public const string PLAYER_INITIATED_GAME = "PLAYER_INITIATED_GAME";
 	public const string PLAYER_GOT_TEN_PASSES = "PLAYER_GOT_TEN_PASSES";
+	public const string GAME_ENDED = "GAME_ENDED";
 	public const string RAN_STOP_SIGN = "RAN_STOP_SIGN";
 	public const string STOP_SIGN_ARRIVAL = "STOP_SIGN_ARRIVAL";
 	public const string NPC_SAW_OTHER_NPC = "NPC_SAW_OTHER_NPC";

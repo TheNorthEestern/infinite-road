@@ -16,6 +16,11 @@ public class NpcSpawnerBehavior : MonoBehaviour {
 			_npcSpawnerSeed = Random.Range (1,7);
 			int randomModelName = Random.Range (0,2);
 			if ( _npcSpawnerSeed % _npcSpawnerDeterminant == 0 ) {
+
+				if (transform.gameObject.name.Contains("SB")) {
+					transform.parent.FindChild("Road").FindChild("RoadText").gameObject.SetActive(true);
+				}
+
 				GameObject npc = Resources.Load ("Prefabs/" + npcModelNames[randomModelName]) as GameObject;
 				Vector3 newTransform = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 				Instantiate (npc, newTransform, transform.localRotation);

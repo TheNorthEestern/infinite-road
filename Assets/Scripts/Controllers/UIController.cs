@@ -12,9 +12,10 @@ public class UIController : MonoBehaviour {
 	[SerializeField] private GameObject _pauseMenu;
 	[SerializeField] private GameObject _player;
 	private AudioSource _audioSource;
-	private int _score;
+	public int score;
 	private GameObject _canvas;
 	private GameObject _titleScreenCanvas;
+	private GameObject _gameOverScreenCanvas;
 	private bool _gameHasStarted = false;
 	private float _distanceDrivenBeforeGameStarted;
 	private float _distanceDrivenAfterGameStarted;
@@ -25,8 +26,10 @@ public class UIController : MonoBehaviour {
 	void Start () {
 		_canvas = GameObject.Find("HUD");
 		_titleScreenCanvas = GameObject.Find ("TitleScreenCanvas");
+		_gameOverScreenCanvas = GameObject.Find("GameOverScreenCanvas");
+		_gameOverScreenCanvas.SetActive(false);
 		_canvas.SetActive (false);
-		_score = 0;
+		score = 0;
 		_pauseMenu.SetActive (isPaused);
 	}
 
@@ -34,6 +37,7 @@ public class UIController : MonoBehaviour {
 		_audioSource = GetComponent<AudioSource> ();
 		Messenger.AddListener(GameEvent.RAN_STOP_SIGN, IncrementScore);
 		Messenger.AddListener (GameEvent.APPROACHING_ONCOMING_TRAFFIC, PlayWarnSound);
+		Messenger.AddListener (GameEvent.GAME_ENDED, ShowGameOverScreen);
 	}
 
 	void Update () {
@@ -42,8 +46,8 @@ public class UIController : MonoBehaviour {
 
 		if ( _canvas.activeSelf == true ) {
 			distanceFromOrigin = ((_distanceDrivenBeforeGameStarted - _distanceDrivenAfterGameStarted)/1000);
-			if ( _score > 1 ) {
-				distanceFromOrigin *= _score;
+			if ( score > 1 ) {
+				distanceFromOrigin *= score;
 			}
 			totalScore = distanceFromOrigin;
 			_distanceText.text = _distanceTextBacking.text = distanceFromOrigin.ToString("N");
@@ -62,6 +66,7 @@ public class UIController : MonoBehaviour {
 	void OnDestroy() {
 		Messenger.RemoveListener (GameEvent.RAN_STOP_SIGN, IncrementScore);
 		Messenger.RemoveListener(GameEvent.APPROACHING_ONCOMING_TRAFFIC, PlayWarnSound);
+		Messenger.RemoveListener (GameEvent.GAME_ENDED, ShowGameOverScreen);
 	}
 
 	public void Pause() {
@@ -82,15 +87,25 @@ public class UIController : MonoBehaviour {
 		}
 	}
 
+	private void ShowGameOverScreen() {
+		_gameOverScreenCanvas.SetActive(true);
+		Time.timeScale = 0;
+	}
+
+	public void StartNewGame() {
+		Time.timeScale = 1;
+		Application.LoadLevel("hillside_scene");
+	}
+
 	public void OnSpeedValue(float newSpeed) {
 		Debug.Log (newSpeed);
 		Messenger<float>.Broadcast(GameEvent.SPEED_SLIDER_CHANGED, newSpeed);
 	}
 
 	private void IncrementScore() {
-		_score += 1;
-		distanceFromOrigin *= _score;
+		score += 1;
+		distanceFromOrigin *= score;
 		_audioSource.PlayOneShot (_audioSource.clip);
-		_scoreLabel.text = _scoreLabelBacking.text = '$' + _score.ToString ();
+		_scoreLabel.text = _scoreLabelBacking.text = score.ToString ("C0");
 	}
 }

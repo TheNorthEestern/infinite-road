@@ -12,9 +12,7 @@ public class RoadBehavior : MonoBehaviour {
 		if ( GameObject.Find ("SceneController").GetComponent<RoadSegmentGenerator>()._playerStartedGame ) {
 			PlaceCoin();
 		}
-		TextMesh t = transform.FindChild("RoadText").GetComponent<TextMesh>();
 		_textureChoice = Random.Range (0, 2);
-		t.text = Time.realtimeSinceStartup.ToString ("F");
 		_meshRenderer = GetComponent<MeshRenderer> ();
 		_meshRenderer.material = materialList [_textureChoice];
 	}
