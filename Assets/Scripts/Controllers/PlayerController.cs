@@ -160,6 +160,18 @@ public class PlayerController : MonoBehaviour {
 
 	public virtual void FixedUpdate() 
 	{
+		for ( int i = 0; i < 20; i++ ) {
+			if ( Input.GetAxis ("Vertical") < 0) {
+				Debug.Log ("YES");
+			}
+			if ( Input.GetAxis ("Vertical") > 0) {
+				Debug.Log ("No");
+			}
+			if(Input.GetKeyDown("joystick 1 button "+i)){
+				print("joystick 1 button "+i);
+			}
+		}
+
 		CheckAndUpdateLaneSelection();
 		// RestrictPlayerMovement();
 		ApplyRigidbodyMechanics();
@@ -174,7 +186,7 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other) {
 		if (other.gameObject.tag == "NPC") {
-			// _uiController.GetComponent<UIController>().totalScore;
+			PlayerPrefs.SetFloat ("CurrentScore", _uiController.GetComponent<UIController>().score);
 			if ( PlayerPrefs.GetFloat ("highscore") < _uiController.GetComponent<UIController>().totalScore ) {
 				PlayerPrefs.SetFloat ("highscore", _uiController.GetComponent<UIController>().totalScore);
 			}
