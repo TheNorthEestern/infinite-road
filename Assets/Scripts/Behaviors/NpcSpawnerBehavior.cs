@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NpcSpawnerBehavior : MonoBehaviour {
 	// Together with _npcSpawnerSeed, this variable determines
@@ -12,7 +13,30 @@ public class NpcSpawnerBehavior : MonoBehaviour {
 
 	void Start () {
 		GetComponent<Renderer> ().enabled = false;
-		if (!GameObject.Find("Main Camera").GetComponent<Grayscale>().isActiveAndEnabled) {
+		_sceneController = GameObject.Find ("SceneController");
+		List<GameObject> npcPrefabs = _sceneController.GetComponent<SceneController>().SemiPrefabs;
+
+		for ( int i = 0; i < npcPrefabs.Count; i++ ) {
+			if (!npcPrefabs[i].activeInHierarchy) {
+				if (!GameObject.Find("Main Camera").GetComponent<Grayscale>().isActiveAndEnabled) {
+					_npcSpawnerSeed = Random.Range (1,7);
+					int randomModelName = Random.Range (0,2);
+					if ( _npcSpawnerSeed % _npcSpawnerDeterminant == 0 ) {
+
+						if (transform.gameObject.name.Contains("SB")) {
+							transform.parent.FindChild("Road").FindChild("RoadText").gameObject.SetActive(true);
+						}
+
+						npcPrefabs[i].transform.position = transform.position;
+						npcPrefabs[i].transform.rotation = transform.rotation;
+						npcPrefabs[i].SetActive(true);
+						break;
+					}
+				}
+			}
+		}
+
+		/* if (!GameObject.Find("Main Camera").GetComponent<Grayscale>().isActiveAndEnabled) {
 			_npcSpawnerSeed = Random.Range (1,7);
 			int randomModelName = Random.Range (0,2);
 			if ( _npcSpawnerSeed % _npcSpawnerDeterminant == 0 ) {
@@ -25,6 +49,6 @@ public class NpcSpawnerBehavior : MonoBehaviour {
 				Vector3 newTransform = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 				Instantiate (npc, newTransform, transform.localRotation);
 			}
-		}
+		} */
 	}
 }

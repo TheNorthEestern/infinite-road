@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RoadSegmentGenerator : MonoBehaviour {
 	private GameObject _initialRoadSegmentInstance;
@@ -25,8 +26,7 @@ public class RoadSegmentGenerator : MonoBehaviour {
 
 	void Start () {
 		// Load prefabs for various road segments
-
-		_intersectionPrefab = Resources.Load ("Prefabs/Intersection", typeof(GameObject)) as GameObject;
+ 		_intersectionPrefab = Resources.Load ("Prefabs/Intersection", typeof(GameObject)) as GameObject;
 		_roadSegmentPrefab = Resources.Load ("Prefabs/RoadSegment", typeof(GameObject)) as GameObject;
 		_initialRoadSegmentInstance = Instantiate (_roadSegmentPrefab);
 		_roadSegmentInstantiationPosition = _initialRoadSegmentInstance.transform.position;

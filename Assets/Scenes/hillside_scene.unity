@@ -3449,6 +3449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 0}
+  npc: {fileID: 198440, guid: 6480324dd555141bc984c8210c5def9a, type: 2}
 --- !u!82 &1475718518
 AudioSource:
   m_ObjectHideFlags: 0
