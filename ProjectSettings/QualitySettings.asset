@@ -130,7 +130,7 @@ QualitySettings:
     name: Fantastic
     pixelLightCount: 4
     shadows: 2
-    shadowResolution: 2
+    shadowResolution: 1
     shadowProjection: 0
     shadowCascades: 4
     shadowDistance: 150
@@ -163,7 +163,7 @@ QualitySettings:
     Standalone: 3
     Tizen: 2
     WP8: 5
-    Web: 5
+    Web: 3
     WebGL: 3
     Wii U: 5
     Windows Store Apps: 5

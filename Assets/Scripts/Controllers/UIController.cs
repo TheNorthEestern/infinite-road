@@ -53,7 +53,11 @@ public class UIController : MonoBehaviour {
 			_distanceText.text = _distanceTextBacking.text = distanceFromOrigin.ToString("N");
 		}
 
-		if ( (Input.GetKeyDown(KeyCode.Space) || Input.touchCount == 1 || Input.GetAxis ("Vertical") > 0) && !_gameHasStarted ) {
+		if ( (Input.GetKeyDown(KeyCode.Space) || 
+		      Input.touchCount == 1 || 
+		      Input.GetAxis ("Vertical") > 0 || 
+		      Input.GetAxis ("Pivotal") > 0) && 
+		   	  !_gameHasStarted ) {
 			_gameHasStarted = true;
 			_distanceDrivenAfterGameStarted	= _player.transform.position.x - _player.GetComponent<PlayerController>().startPosition.x;
 			Messenger.Broadcast (GameEvent.PLAYER_INITIATED_GAME);
@@ -89,13 +93,18 @@ public class UIController : MonoBehaviour {
 
 	private void ShowGameOverScreen() {
 		_gameOverScreenCanvas.SetActive(true);
-		Time.timeScale = 0;
+		// Time.timeScale = 0;
 		StartCoroutine(StartNewGame ());
 	}
 
 	public IEnumerator StartNewGame() {
+		float counter = 2;
 		Time.timeScale = 1;
-		yield return new WaitForSeconds(2);
+		while (counter > 0) {
+			_gameOverScreenCanvas.transform.Find ("HighScoreText").GetComponent<Text>().text = counter.ToString();
+			counter--;
+			yield return new WaitForSeconds(1.0f);
+		}
 		Application.LoadLevel("hillside_scene");
 	}
 

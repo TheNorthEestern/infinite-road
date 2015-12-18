@@ -5,9 +5,11 @@ using System.Collections.Generic;
 
 public class SceneController : MonoBehaviour {
 	[SerializeField] private AudioSource _audioSource;
-	private float prefabAmount = 4;
+	private float prefabAmount = 8;
 	public List<GameObject> SemiPrefabs { get; private set; }
-	public GameObject npc;
+	public GameObject smallNpc;
+	public GameObject largeNpc;
+	private GameObject[] npcChoices;
 
 	public SceneController() {
 		gameHasStarted = false;
@@ -17,9 +19,10 @@ public class SceneController : MonoBehaviour {
 
 	void Start() 
 	{
+		npcChoices = new GameObject[2] {smallNpc, largeNpc};
 		SemiPrefabs = new List<GameObject>();
 		for (int i = 0; i < prefabAmount; i++ ) { 
-			GameObject obj = (GameObject)Instantiate (npc);
+			GameObject obj = (GameObject)Instantiate (npcChoices[UnityEngine.Random.Range(0,2)]);
 			obj.SetActive(false);
 		 	SemiPrefabs.Add (obj);
 		}

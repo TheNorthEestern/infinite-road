@@ -18,7 +18,21 @@ public class MobilePlayerInputController : PlayerController {
 			movement = Vector3.right;
 			moveVertical  = 1.0f;
 
-			if ( Input.touchCount > 0 ) {
+			if ( Input.acceleration.x < -0.30 ) {
+				Debug.Log ("Left");
+				moveHorizontal = -1.0f;
+			}
+
+			if ( Input.acceleration.x > 0.30 ){
+				Debug.Log ("Right");
+				moveHorizontal = 1.0f; 
+			}
+
+			if (Input.acceleration.x < 0.30 && Input.acceleration.x > -0.30) {
+				moveHorizontal = 0.0f;
+			}
+
+			/*if ( Input.touchCount > 0 ) {
 				// Touch touch = Input.touches[0];
 			   if ( Input.touchCount == 1 ) {
 				foreach  (Touch touch in Input.touches) {
@@ -31,15 +45,17 @@ public class MobilePlayerInputController : PlayerController {
 					}
 				}
 			  }
+			} */
 
-			  if ( Input.touchCount == 2 ) {
-					movement = Vector3.zero;
-					moveVertical = -1.0f;
-			  }
-			} else {
+		Debug.Log (Input.acceleration.x);
+
+		  if ( Input.touchCount == 2 ) {
+				movement = Vector3.zero;
+				moveVertical = -1.0f;
+		  }
+			/* else {
 				moveHorizontal = 0.0f;
-			}
-			
+			}*/
 		}
 	} 
 }

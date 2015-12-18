@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		startPosition = transform.position;
 		lane = right;
+		_uiController = GameObject.Find ("UIController");
 		_camera = GameObject.Find ("Main Camera");
 		_audioSource = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
@@ -76,16 +77,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void PlayerPivotMechanics() {
-		if ( moveHorizontal > 0 ) {
-			// pivot player rightward
-			transform.localRotation = Quaternion.Euler (transform.localRotation.x, 100, transform.localRotation.z);
-		} else if ( moveHorizontal < 0 ){
-			// pivot player leftward
-			transform.localRotation = Quaternion.Euler (transform.localRotation.x, 80, transform.localRotation.z);
-		} else if ( moveHorizontal == 0 ) {
-			// re-center player
-			transform.localRotation = Quaternion.Euler (transform.localRotation.x, 90, transform.localRotation.z);
+
+		if ( !isInBowlingMode ) {
+			float computedTurnAngle = (Convert.ToBoolean(moveHorizontal)) ? ((0.2f * moveHorizontal) * 100.0f) + 90.0f : 90.0f;
+			Debug.Log (computedTurnAngle);
+			Vector3 turnAngle = new Vector3(transform.rotation.x, computedTurnAngle, transform.rotation.z);
+			transform.rotation = Quaternion.Euler (turnAngle);
 		}
+
 	}
 
 	private void MonitorPlayerSpeed() {
@@ -101,7 +100,7 @@ public class PlayerController : MonoBehaviour {
 		Vector3 oncomingRayVector = new Vector3(transform.position.x + 0.5f, transform.position.y + 20.0f, transform.position.z);
 		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
 		RaycastHit hit;
-		if (Physics.SphereCast(passingRay, 1.0f, out hit, 15)) {
+		if (Physics.SphereCast(passingRay, 25.0f, out hit, 15)) {
 			if ( hit.collider.CompareTag("NPC") ) {
 				_camera.GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
@@ -146,7 +145,7 @@ public class PlayerController : MonoBehaviour {
 		_rb.freezeRotation = false;
 		_rb.useGravity = true;
 		GetComponent<CapsuleCollider>().radius = 0.060f;
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(5);
 		_rb.freezeRotation = true;
 		_rb.useGravity = false;
 		GetComponent<CapsuleCollider>().radius = origRadius;
@@ -166,7 +165,11 @@ public class PlayerController : MonoBehaviour {
 		ApplyRigidbodyMechanics();
 		PlayerPivotMechanics();	
 		MonitorPlayerSpeed();
-		CheckIfOncoming();
+		// CheckIfOncoming();
+
+		if (Input.GetKeyDown(KeyCode.F)) {
+			ActivateBowlingMode();
+		}
 
 		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, maxSpeed);
 		_rb.AddForce (movement * speed);
@@ -174,7 +177,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		if (other.gameObject.tag == "NPC") {
+		if (other.gameObject.tag == "NPC" && !isInBowlingMode) {
 			PlayerPrefs.SetFloat ("CurrentScore", _uiController.GetComponent<UIController>().score);
 			if ( PlayerPrefs.GetFloat ("highscore") < _uiController.GetComponent<UIController>().totalScore ) {
 				PlayerPrefs.SetFloat ("highscore", _uiController.GetComponent<UIController>().totalScore);
