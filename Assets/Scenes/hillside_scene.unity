@@ -3451,6 +3451,8 @@ MonoBehaviour:
   _audioSource: {fileID: 0}
   smallNpc: {fileID: 198440, guid: 6480324dd555141bc984c8210c5def9a, type: 2}
   largeNpc: {fileID: 164426, guid: 932fa8a1a6b8946f6a8c6b00652aa0ce, type: 2}
+  roadSegment: {fileID: 174156, guid: 77f5b2537c64d43ec86dad434f1d87ba, type: 2}
+  intersectionSegment: {fileID: 166556, guid: 20a8272eb295b49188229d9aaaa1c56e, type: 2}
 --- !u!82 &1475718518
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4228,8 +4230,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3406193fa537d4be6ac5c5c4d4662990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  left: 0
+  right: 1
+  lane: 0
+  _camera: {fileID: 0}
   _uiController: {fileID: 0}
+  isPaused: 0
+  isInBowlingMode: 0
   startPosition: {x: 0, y: 0, z: 0}
+  maxSpeed: 15
 --- !u!114 &2004578324
 MonoBehaviour:
   m_ObjectHideFlags: 0

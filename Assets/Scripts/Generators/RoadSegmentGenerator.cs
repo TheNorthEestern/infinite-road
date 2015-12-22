@@ -6,6 +6,7 @@ public class RoadSegmentGenerator : MonoBehaviour {
 	private GameObject _initialRoadSegmentInstance;
 	private GameObject _roadSegmentPrefab;
 	private GameObject _intersectionPrefab;
+	private GameObject _sceneController;
 	private GameObject[] spawnPoints;
 	private Vector3 _roadSegmentInstantiationPosition;
 	private Vector3 _intersectionInstantiationPosition;
@@ -43,7 +44,8 @@ public class RoadSegmentGenerator : MonoBehaviour {
 
 	public void Generate() {
 		// Create the a new road segment at the end of the previous road segment
-
+		_sceneController = GameObject.Find ("SceneController");
+		List<GameObject> roadSegmentPrefabs = _sceneController.GetComponent<SceneController>().RoadSegmentPrefabs;
 		int segmentChoice = Random.Range (1, 10);
 		if (segmentChoice % 4 == 0 && _playerStartedGame) {
 			Vector3 _correctedIntersectionPosition = new Vector3(_roadSegmentInstantiationPosition.x,

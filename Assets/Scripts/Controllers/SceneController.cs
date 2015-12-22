@@ -5,11 +5,16 @@ using System.Collections.Generic;
 
 public class SceneController : MonoBehaviour {
 	[SerializeField] private AudioSource _audioSource;
-	private float prefabAmount = 8;
-	public List<GameObject> SemiPrefabs { get; private set; }
+	private float npcPrefabCount = 8;
+	private float roadSegmentPrefabCount = 3;
+	public List<GameObject> NpcPrefabs { get; private set; }
+	public List<GameObject> RoadSegmentPrefabs { get; private set; }
 	public GameObject smallNpc;
 	public GameObject largeNpc;
+	public GameObject roadSegment;
+	public GameObject intersectionSegment;
 	private GameObject[] npcChoices;
+	private GameObject[] roadSegmentChoices;
 
 	public SceneController() {
 		gameHasStarted = false;
@@ -20,11 +25,20 @@ public class SceneController : MonoBehaviour {
 	void Start() 
 	{
 		npcChoices = new GameObject[2] {smallNpc, largeNpc};
-		SemiPrefabs = new List<GameObject>();
-		for (int i = 0; i < prefabAmount; i++ ) { 
+		roadSegmentChoices = new GameObject[2] {roadSegment, intersectionSegment};
+		NpcPrefabs = new List<GameObject>();
+		RoadSegmentPrefabs = new List<GameObject>();
+
+		for (int i = 0; i < roadSegmentPrefabCount; i++) {
+			GameObject obj = (GameObject)Instantiate (roadSegmentChoices[UnityEngine.Random.Range (0, 2)]);
+			obj.SetActive(false);
+			RoadSegmentPrefabs.Add (obj);
+		}
+
+		for (int i = 0; i < npcPrefabCount; i++ ) { 
 			GameObject obj = (GameObject)Instantiate (npcChoices[UnityEngine.Random.Range(0,2)]);
 			obj.SetActive(false);
-		 	SemiPrefabs.Add (obj);
+		 	NpcPrefabs.Add (obj);
 		}
 	}
 

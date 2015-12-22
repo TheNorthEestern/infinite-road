@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour {
 
 		if ( !isInBowlingMode ) {
 			float computedTurnAngle = (Convert.ToBoolean(moveHorizontal)) ? ((0.2f * moveHorizontal) * 100.0f) + 90.0f : 90.0f;
-			Debug.Log (computedTurnAngle);
 			Vector3 turnAngle = new Vector3(transform.rotation.x, computedTurnAngle, transform.rotation.z);
 			transform.rotation = Quaternion.Euler (turnAngle);
 		}

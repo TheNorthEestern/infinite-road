@@ -3,12 +3,8 @@ using System.Collections;
 
 public class ParentedObjectBehavior : MonoBehaviour {
 
-	protected Vector3 origPos;
+	// protected Vector3 origPos;
 	protected Quaternion origRot;
-
-	void Awake() {
-		origPos = transform.position;
-	}
 
 	protected void CheckIfOnRoad() {
 		if (transform.position.y < 0) {
@@ -17,7 +13,7 @@ public class ParentedObjectBehavior : MonoBehaviour {
 	}
 
 	private void Destroy() {
-		origPos = transform.parent.transform.position;
+		// origPos = transform.parent.transform.position;
 		gameObject.transform.parent.gameObject.SetActive(false);
 	}
 
