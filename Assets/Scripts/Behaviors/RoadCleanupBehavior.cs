@@ -6,10 +6,11 @@ public class RoadCleanupBehavior : MonoBehaviour {
 	// OnBecameInvisible is called when the object is out of the camera's
 	// view frustum
 	void OnBecameInvisible () {
-		Invoke ("Discard", 2);
+		Invoke ("Discard", 1f);
 	}
 	
 	void Discard() {
-		Destroy (this.gameObject);
+		// Destroy (this.gameObject);
+		gameObject.SetActive(false);
 	}
 }

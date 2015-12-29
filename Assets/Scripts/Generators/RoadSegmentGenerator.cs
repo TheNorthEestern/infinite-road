@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -49,14 +50,32 @@ public class RoadSegmentGenerator : MonoBehaviour {
 
 		int segmentChoice = Random.Range (1, 10);
 		if (segmentChoice % 4 == 0 && _playerStartedGame) {
+			var filtered = roadSegmentPrefabs.Where(road => road.activeInHierarchy == false && road.name.Contains("Intersection"));
 			Vector3 _correctedIntersectionPosition = new Vector3(_roadSegmentInstantiationPosition.x,
 			                                                     _intersectionInstantiationPosition.y,
 			                                                     _roadSegmentInstantiationPosition.z);
-			Instantiate (_intersectionPrefab, _correctedIntersectionPosition, Quaternion.identity);
+			// Instantiate (_intersectionPrefab, _correctedIntersectionPosition, Quaternion.identity);
 			_roadSegmentInstantiationPosition.x += _originalInstantiationSize;
+			if (filtered.Count () != 0) {
+				filtered.First().transform.position = _correctedIntersectionPosition;
+				filtered.First().transform.rotation = Quaternion.identity;
+				filtered.First ().SetActive(true);
+			} else {
+				Generate ();
+			}
 		} else {
+			var filtered = roadSegmentPrefabs.Where(road => road.activeInHierarchy == false && road.name.Contains ("RoadSegment"));
 			_roadSegmentInstantiationPosition.x += _originalInstantiationSize;
-			Instantiate (_roadSegmentPrefab, _roadSegmentInstantiationPosition, Quaternion.identity);
+			// Instantiate (_roadSegmentPrefab, _roadSegmentInstantiationPosition, Quaternion.identity);
+			// Debug.Log (filtered.Count ());
+			if (filtered.Count () != 0) {
+				filtered.First().transform.position = _roadSegmentInstantiationPosition;
+				filtered.First().transform.rotation = Quaternion.identity;
+				filtered.First().SetActive(true);
+			} else {
+				Generate ();
+			}
 		}
+
 	}
 }
