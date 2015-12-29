@@ -7,8 +7,15 @@ public class RoadBehavior : MonoBehaviour {
 	public Material[] materialList;
 	private	float[] coinPositions = { -5.35f, -3.0f };
 	private int _textureChoice;
+	private bool _gameHasStarted = false;
+
+	void OnEnable() {
+		if (_gameHasStarted) 
+			this.Start ();
+	}
 
 	void Start () {		                          
+		_gameHasStarted = true;
 		if ( GameObject.Find ("SceneController").GetComponent<RoadSegmentGenerator>()._playerStartedGame ) {
 			PlaceCoin();
 		}

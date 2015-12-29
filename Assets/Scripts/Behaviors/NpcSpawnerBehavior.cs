@@ -19,7 +19,6 @@ public class NpcSpawnerBehavior : MonoBehaviour {
 	}
 
 	void Start () {
-		Debug.Log ("HAS Started");
 		GetComponent<Renderer> ().enabled = false;
 		_sceneController = GameObject.Find ("SceneController");
 		List<GameObject> npcPrefabs = _sceneController.GetComponent<SceneController>().NpcPrefabs;
@@ -29,9 +28,7 @@ public class NpcSpawnerBehavior : MonoBehaviour {
 
 		if (!GameObject.Find("Main Camera").GetComponent<Grayscale>().isActiveAndEnabled) {
 			if (Convert.ToBoolean(filtered.Count())) {
-				// _npcSpawnerSeed = UnityEngine.Random.Range (1,7);
-				_npcSpawnerSeed = 2;
-				Debug.Log ("Time " + Time.realtimeSinceStartup);
+				_npcSpawnerSeed = UnityEngine.Random.Range (1,7);
 				if ( _npcSpawnerSeed % _npcSpawnerDeterminant == 0 ) {
 					filtered.First().transform.position = transform.position;
 					filtered.First().transform.rotation = transform.rotation;

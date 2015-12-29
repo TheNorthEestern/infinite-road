@@ -11,6 +11,10 @@ public class RoadSegmentBehavior : RoadCleanupBehavior {
 	private Color32 autumn;
 	private Renderer[] childRenderers;
 
+	void OnEnable() {
+		this.Start ();
+	}
+	 
 	void Start() {
 
 		winter = new Color32(246, 243, 237, 255);
