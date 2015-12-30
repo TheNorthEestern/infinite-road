@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private GameObject _uiController;
 	private bool isPaused;
 	private bool isInBowlingMode = false;
+	private float originalYPosition;
+	private float originalYRotation;
 	public Vector3 startPosition = Vector3.zero;
 
 	private float maxSpeed = 15.0f;
@@ -55,6 +57,8 @@ public class PlayerController : MonoBehaviour {
 		_audioSource = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
 		_rb.freezeRotation = true;
+		originalYPosition = transform.position.y;
+		originalYRotation = transform.rotation.y;
 		// _rb.freezeRotation = false;
 		// _rb.useGravity = true;
 		// GetComponent<CapsuleCollider>().radius = 0.060f;
@@ -77,7 +81,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void PlayerPivotMechanics() {
-
 		if ( !isInBowlingMode ) {
 			float computedTurnAngle = (Convert.ToBoolean(moveHorizontal)) ? ((0.2f * moveHorizontal) * 100.0f) + 90.0f : 90.0f;
 			Vector3 turnAngle = new Vector3(transform.rotation.x, computedTurnAngle, transform.rotation.z);
@@ -133,7 +136,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void ActivateBowlingMode() {
-		isInBowlingMode = !isInBowlingMode;
+		isInBowlingMode = true;
+		Debug.Log (isInBowlingMode);
 		if (isInBowlingMode) {
 			StartCoroutine(SetBowlingPhysics());
 		}
@@ -144,10 +148,16 @@ public class PlayerController : MonoBehaviour {
 		_rb.freezeRotation = false;
 		_rb.useGravity = true;
 		GetComponent<CapsuleCollider>().radius = 0.060f;
+
 		yield return new WaitForSeconds(5);
+
 		_rb.freezeRotation = true;
 		_rb.useGravity = false;
 		GetComponent<CapsuleCollider>().radius = origRadius;
+		isInBowlingMode = false;
+
+		transform.position = new Vector3(transform.position.x, .36f, transform.position.z);
+		transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, originalYRotation, transform.position.z));
 	}
 
 	private IEnumerator PlaySound() {
@@ -165,8 +175,7 @@ public class PlayerController : MonoBehaviour {
 		PlayerPivotMechanics();	
 		MonitorPlayerSpeed();
 		// CheckIfOncoming();
-
-		if (Input.GetKeyDown(KeyCode.F)) {
+		if (Input.GetKeyUp(KeyCode.F)) {
 			ActivateBowlingMode();
 		}
 

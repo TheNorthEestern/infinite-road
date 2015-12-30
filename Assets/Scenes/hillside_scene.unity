@@ -4230,15 +4230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3406193fa537d4be6ac5c5c4d4662990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  left: 0
-  right: 1
-  lane: 0
-  _camera: {fileID: 0}
-  _uiController: {fileID: 0}
-  isPaused: 0
-  isInBowlingMode: 0
-  startPosition: {x: 0, y: 0, z: 0}
-  maxSpeed: 15
 --- !u!114 &2004578324
 MonoBehaviour:
   m_ObjectHideFlags: 0
