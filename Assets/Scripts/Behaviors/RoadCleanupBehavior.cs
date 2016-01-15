@@ -10,7 +10,6 @@ public class RoadCleanupBehavior : MonoBehaviour {
 	}
 	
 	void Discard() {
-		// Destroy (this.gameObject);
 		gameObject.SetActive(false);
 	}
 }

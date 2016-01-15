@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: d6a1fc472a6ac4a71bf45c9884207d29
+timeCreated: 1452227735
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Cube
+    100002: Cube.002
+    100004: Cube.003
+    100006: Door Windows
+    100008: Front Bumper
+    100010: Front Right Tire
+    100012: Front-Left-Tire
+    100014: Left Door Handle
+    100016: Left Headlight
+    100018: //RootNode
+    100020: Rear Left Tire
+    100022: Rear Right Tire
+    100024: RearWindowPane
+    100026: Right Door Handle
+    100028: Right Headlight
+    100030: Text
+    100032: Truck
+    100034: Windshield
+    400000: Cube
+    400002: Cube.002
+    400004: Cube.003
+    400006: Door Windows
+    400008: Front Bumper
+    400010: Front Right Tire
+    400012: Front-Left-Tire
+    400014: Left Door Handle
+    400016: Left Headlight
+    400018: //RootNode
+    400020: Rear Left Tire
+    400022: Rear Right Tire
+    400024: RearWindowPane
+    400026: Right Door Handle
+    400028: Right Headlight
+    400030: Text
+    400032: Truck
+    400034: Windshield
+    2300000: Cube
+    2300002: Cube.002
+    2300004: Cube.003
+    2300006: Door Windows
+    2300008: Front Bumper
+    2300010: Front Right Tire
+    2300012: Front-Left-Tire
+    2300014: Left Door Handle
+    2300016: Left Headlight
+    2300018: Rear Left Tire
+    2300020: Rear Right Tire
+    2300022: RearWindowPane
+    2300024: Right Door Handle
+    2300026: Right Headlight
+    2300028: Text
+    2300030: Truck
+    2300032: Windshield
+    3300000: Cube
+    3300002: Cube.002
+    3300004: Cube.003
+    3300006: Door Windows
+    3300008: Front Bumper
+    3300010: Front Right Tire
+    3300012: Front-Left-Tire
+    3300014: Left Door Handle
+    3300016: Left Headlight
+    3300018: Rear Left Tire
+    3300020: Rear Right Tire
+    3300022: RearWindowPane
+    3300024: Right Door Handle
+    3300026: Right Headlight
+    3300028: Text
+    3300030: Truck
+    3300032: Windshield
+    4300000: Cube.003
+    4300002: Cube.002
+    4300004: Cube
+    4300006: Text
+    4300008: Left Door Handle
+    4300010: Right Door Handle
+    4300012: Right Headlight
+    4300014: Left Headlight
+    4300016: Front Bumper
+    4300018: RearWindowPane
+    4300020: Rear Left Tire
+    4300022: Rear Right Tire
+    4300024: Front Right Tire
+    4300026: Front-Left-Tire
+    4300028: Door Windows
+    4300030: Windshield
+    4300032: Truck
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

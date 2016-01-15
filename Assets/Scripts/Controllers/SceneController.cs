@@ -6,13 +6,14 @@ using System.Collections.Generic;
 public class SceneController : MonoBehaviour {
 	[SerializeField] private AudioSource _audioSource;
 	private float npcPrefabCount = 8;
-	private float roadSegmentPrefabCount = 8;
+	private float roadSegmentPrefabCount = 16;
 	public List<GameObject> NpcPrefabs { get; private set; }
 	public List<GameObject> RoadSegmentPrefabs { get; private set; }
 	public GameObject smallNpc;
 	public GameObject largeNpc;
 	public GameObject roadSegment;
 	public GameObject intersectionSegment;
+	[SerializeField] private GameObject[] npcs;
 	private GameObject[] npcChoices;
 	private GameObject[] roadSegmentChoices;
 
@@ -41,7 +42,7 @@ public class SceneController : MonoBehaviour {
 		}
 
 		for (int i = 0; i < npcPrefabCount; i++ ) { 
-			GameObject obj = (GameObject)Instantiate (npcChoices[UnityEngine.Random.Range(0,2)]);
+			GameObject obj = (GameObject)Instantiate (npcs[UnityEngine.Random.Range(0,5)]);
 			obj.SetActive(false);
 		 	NpcPrefabs.Add (obj);
 		}

@@ -17,11 +17,11 @@ public class NpcBehavior : ParentedObjectBehavior {
 
 	void FixedUpdate () {
 		CheckIfOnRoad();
-		movement = (!encounteredStopSign) ? new Vector3 (gravity, randomSpeed, 0) : 
+		movement = (!encounteredStopSign) ? new Vector3 (0, randomSpeed, gravity) : 
 										    Vector3.zero;
 		movement = Vector3.ClampMagnitude (movement, randomSpeed);
 		movement *= Time.deltaTime;
-		movement = transform.TransformDirection (movement);
+		movement = transform.TransformDirection (-movement);
 		_cc.Move (movement);
 	}
 

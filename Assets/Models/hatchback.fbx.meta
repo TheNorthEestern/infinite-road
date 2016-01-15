@@ -1,0 +1,138 @@
+fileFormatVersion: 2
+guid: 45466bc46ca564085b14e8a5f784a000
+timeCreated: 1452622681
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Front Bumper.002
+    100002: Front Right Tire.001
+    100004: Front-Left-Tire.001
+    100006: //RootNode
+    100008: Left Door Handle
+    100010: Left Headlight.001
+    100012: Left Headlight.002
+    100014: Rear Left Tire.001
+    100016: Rear Right Tire.001
+    100018: Rear Spare
+    100020: Right Door Handle
+    100022: Text
+    100024: Vehicle Chassis
+    100026: Windows
+    400000: Front Bumper.002
+    400002: Front Right Tire.001
+    400004: Front-Left-Tire.001
+    400006: //RootNode
+    400008: Left Door Handle
+    400010: Left Headlight.001
+    400012: Left Headlight.002
+    400014: Rear Left Tire.001
+    400016: Rear Right Tire.001
+    400018: Rear Spare
+    400020: Right Door Handle
+    400022: Text
+    400024: Vehicle Chassis
+    400026: Windows
+    2300000: Front Bumper.002
+    2300002: Front Right Tire.001
+    2300004: Front-Left-Tire.001
+    2300006: Left Door Handle
+    2300008: Left Headlight.001
+    2300010: Left Headlight.002
+    2300012: Rear Left Tire.001
+    2300014: Rear Right Tire.001
+    2300016: Rear Spare
+    2300018: Right Door Handle
+    2300020: Text
+    2300022: Vehicle Chassis
+    2300024: Windows
+    3300000: Front Bumper.002
+    3300002: Front Right Tire.001
+    3300004: Front-Left-Tire.001
+    3300006: Left Door Handle
+    3300008: Left Headlight.001
+    3300010: Left Headlight.002
+    3300012: Rear Left Tire.001
+    3300014: Rear Right Tire.001
+    3300016: Rear Spare
+    3300018: Right Door Handle
+    3300020: Text
+    3300022: Vehicle Chassis
+    3300024: Windows
+    4300000: Text
+    4300002: Front Bumper.002
+    4300004: Left Headlight.002
+    4300006: Left Headlight.001
+    4300008: Right Door Handle
+    4300010: Left Door Handle
+    4300012: Rear Left Tire.001
+    4300014: Rear Right Tire.001
+    4300016: Front Right Tire.001
+    4300018: Front-Left-Tire.001
+    4300020: Rear Spare
+    4300022: Windows
+    4300024: Vehicle Chassis
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
