@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class RoadSegmentBehavior : RoadCleanupBehavior {
+public class RoadSegmentBehavior : MonoBehaviour {
 
 	private Color32 winter;
 	private Color32 spring;

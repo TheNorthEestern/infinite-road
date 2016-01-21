@@ -44,7 +44,7 @@ GameObject:
   - 4: {fileID: 426760}
   - 114: {fileID: 11456096}
   - 143: {fileID: 14378420}
-  - 64: {fileID: 6493924}
+  - 65: {fileID: 6513620}
   m_Layer: 0
   m_Name: box_truck_long
   m_TagString: NPC
@@ -412,8 +412,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168936}
   m_Mesh: {fileID: 4300002, guid: e85f74cf117f54b8f8b498336bb5a02d, type: 3}
---- !u!64 &6493924
-MeshCollider:
+--- !u!65 &6513620
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -422,8 +422,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 0}
+  m_Size: {x: 6.09, y: 7.5, z: 16.84}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11456096
 MonoBehaviour:
   m_ObjectHideFlags: 1

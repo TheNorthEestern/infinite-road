@@ -300,6 +300,7 @@ GameObject:
   - 4: {fileID: 429392}
   - 23: {fileID: 2336602}
   - 114: {fileID: 11408496}
+  - 114: {fileID: 11447038}
   m_Layer: 0
   m_Name: RoadSegment
   m_TagString: Untagged
@@ -1287,6 +1288,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainController: {fileID: 0}
+--- !u!114 &11447038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b95917b20ec4c9884f269f19fca936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11467128
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -49,8 +49,10 @@ public class UIController : MonoBehaviour {
 			if ( score > 1 ) {
 				distanceFromOrigin *= score;
 			}
-			totalScore = distanceFromOrigin;
-			_distanceText.text = _distanceTextBacking.text = distanceFromOrigin.ToString("N");
+			totalScore = score;
+			// _distanceText.text = _distanceTextBacking.text = distanceFromOrigin.ToString("N");
+			_distanceTextBacking.text = "High Score: $" + PlayerPrefs.GetFloat("hiscore");
+			_distanceText.text = "High Score: $" + PlayerPrefs.GetFloat("hiscore");
 		}
 
 		if ( (Input.GetKeyDown(KeyCode.Space) || 

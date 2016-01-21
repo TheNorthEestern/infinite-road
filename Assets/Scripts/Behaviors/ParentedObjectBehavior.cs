@@ -12,7 +12,7 @@ public class ParentedObjectBehavior : MonoBehaviour {
 		}
 	}
 
-	private void Destroy() {
+	protected void Destroy() {
 		// origPos = transform.parent.transform.position;
 		gameObject.SetActive(false);
 	}

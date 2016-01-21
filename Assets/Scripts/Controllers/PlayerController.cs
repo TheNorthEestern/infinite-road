@@ -6,6 +6,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 	protected static AudioSource _audioSource;
 	protected static Rigidbody _rb;
+	protected static CharacterController _cc;
 	protected static bool _sonicBoom = false;
 	protected static float speed = 10.0f;
 	protected static float moveVertical;
@@ -21,23 +22,21 @@ public class PlayerController : MonoBehaviour {
 	private GameObject _camera;
 	[SerializeField] private GameObject _uiController;
 	private bool isPaused;
-	private bool isInBowlingMode = false;
+	private bool isInFireballMode = true;
 	private float originalYPosition;
 	private float originalYRotation;
 	public Vector3 startPosition = Vector3.zero;
 
-	private float maxSpeed = 15.0f;
+	private float maxSpeed = 20.0f;
 
 	void Awake() {
 		Messenger<float>.AddListener(GameEvent.SPEED_SLIDER_CHANGED, OnSpeedChanged);
 		Messenger.AddListener(GameEvent.PLAYER_INITIATED_GAME, LowerSpeed);
-		Messenger.AddListener(GameEvent.PLAYER_GOT_TEN_PASSES, ActivateBowlingMode);
 	}
 
 	void OnDestroy() {
 		Messenger<float>.RemoveListener(GameEvent.SPEED_SLIDER_CHANGED, OnSpeedChanged);
 		Messenger.RemoveListener(GameEvent.PLAYER_INITIATED_GAME, LowerSpeed);
-		Messenger.RemoveListener(GameEvent.PLAYER_GOT_TEN_PASSES, ActivateBowlingMode);
 	}
 
 	private void LowerSpeed() {
@@ -81,12 +80,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void PlayerPivotMechanics() {
-		if ( !isInBowlingMode ) {
-			float computedTurnAngle = (Convert.ToBoolean(moveHorizontal)) ? ((0.2f * moveHorizontal) * 100.0f) + 90.0f : 90.0f;
-			Vector3 turnAngle = new Vector3(transform.rotation.x, computedTurnAngle, transform.rotation.z);
-			transform.rotation = Quaternion.Euler (turnAngle);
-		}
-
+		float computedTurnAngle = (Convert.ToBoolean(moveHorizontal)) ? ((0.2f * moveHorizontal) * 100.0f) + 90.0f : 90.0f;
+		Vector3 turnAngle = new Vector3(transform.rotation.x, computedTurnAngle, transform.rotation.z);
+		transform.rotation = Quaternion.Euler (turnAngle);
 	}
 
 	private void MonitorPlayerSpeed() {
@@ -104,6 +100,7 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.SphereCast(passingRay, 25.0f, out hit, 15)) {
 			if ( hit.collider.CompareTag("NPC") ) {
+				// Messenger.Broadcast(GameEvent.NPC_HIT_BY_PLAYER_CHARACTER);
 				_camera.GetComponent<Animator>().SetBool("NearingIntersection", true);
 			}
 		} else{
@@ -135,30 +132,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void ActivateBowlingMode() {
-		isInBowlingMode = true;
-		Debug.Log (isInBowlingMode);
-		if (isInBowlingMode) {
-			StartCoroutine(SetBowlingPhysics());
-		}
-	}
 
-	private IEnumerator SetBowlingPhysics() {
-		float origRadius = GetComponent<CapsuleCollider>().radius;
-		_rb.freezeRotation = false;
-		_rb.useGravity = true;
-		GetComponent<CapsuleCollider>().radius = 0.060f;
-
-		yield return new WaitForSeconds(5);
-
-		_rb.freezeRotation = true;
-		_rb.useGravity = false;
-		GetComponent<CapsuleCollider>().radius = origRadius;
-		isInBowlingMode = false;
-
-		transform.position = new Vector3(transform.position.x, .36f, transform.position.z);
-		transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, originalYRotation, transform.position.z));
-	}
 
 	private IEnumerator PlaySound() {
 		// Emitting to UIController
@@ -168,15 +142,15 @@ public class PlayerController : MonoBehaviour {
 
 	public virtual void FixedUpdate() 
 	{
-	
 		CheckAndUpdateLaneSelection();
 		// RestrictPlayerMovement();
 		ApplyRigidbodyMechanics();
 		PlayerPivotMechanics();	
 		MonitorPlayerSpeed();
-		// CheckIfOncoming();
+		CheckIfOncoming();
 		if (Input.GetKeyUp(KeyCode.F)) {
-			ActivateBowlingMode();
+			// ActivateBowlingMode();
+			// ActivateFireballMode();
 		}
 
 		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, maxSpeed);
@@ -185,12 +159,13 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		if (other.gameObject.tag == "NPC" && !isInBowlingMode) {
+		if (other.gameObject.tag == "NPC") {
 			PlayerPrefs.SetFloat ("CurrentScore", _uiController.GetComponent<UIController>().score);
-			if ( PlayerPrefs.GetFloat ("highscore") < _uiController.GetComponent<UIController>().totalScore ) {
-				PlayerPrefs.SetFloat ("highscore", _uiController.GetComponent<UIController>().totalScore);
+			if ( PlayerPrefs.GetFloat ("hiscore") < _uiController.GetComponent<UIController>().score) {
+				PlayerPrefs.SetFloat ("hiscore", _uiController.GetComponent<UIController>().score);
 			}
 			Messenger.Broadcast (GameEvent.GAME_ENDED);
+			_rb.velocity = Vector3.zero;
 			// Application.LoadLevel ("hillside_scene");
 		}
 	}

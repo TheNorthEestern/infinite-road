@@ -44,7 +44,7 @@ GameObject:
   - 4: {fileID: 414212}
   - 114: {fileID: 11495822}
   - 143: {fileID: 14308490}
-  - 64: {fileID: 6454240}
+  - 65: {fileID: 6544764}
   m_Layer: 0
   m_Name: pickup
   m_TagString: NPC
@@ -1106,8 +1106,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114818}
   m_Mesh: {fileID: 4300024, guid: d6a1fc472a6ac4a71bf45c9884207d29, type: 3}
---- !u!64 &6454240
-MeshCollider:
+--- !u!65 &6544764
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1116,8 +1116,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 0}
+  m_Size: {x: 2, y: 2.2, z: 4.74}
+  m_Center: {x: 0, y: 1.15, z: -0.21}
 --- !u!114 &11432716
 MonoBehaviour:
   m_ObjectHideFlags: 1

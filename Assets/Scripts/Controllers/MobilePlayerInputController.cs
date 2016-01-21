@@ -14,21 +14,21 @@ public class MobilePlayerInputController : PlayerController {
 		if (Application.platform == RuntimePlatform.IPhonePlayer || 
 		    Application.platform == RuntimePlatform.Android) {
 			base.FixedUpdate();
-
+			Debug.Log("ACCEL: " + Input.acceleration.y * 1);
 			movement = Vector3.right;
 			moveVertical  = 1.0f;
 
-			if ( Input.acceleration.x < -0.30 ) {
+			if ( Input.acceleration.x < -0.60 ) {
 				Debug.Log ("Left");
 				moveHorizontal = -1.0f;
 			}
 
-			if ( Input.acceleration.x > 0.30 ){
+			if ( Input.acceleration.x > 0.60 ){
 				Debug.Log ("Right");
 				moveHorizontal = 1.0f; 
 			}
 
-			if (Input.acceleration.x < 0.30 && Input.acceleration.x > -0.30) {
+			if (Input.acceleration.x < 0.60 && Input.acceleration.x > -0.60) {
 				moveHorizontal = 0.0f;
 			}
 

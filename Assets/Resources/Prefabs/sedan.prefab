@@ -198,7 +198,7 @@ GameObject:
   - 4: {fileID: 463292}
   - 114: {fileID: 11450278}
   - 143: {fileID: 14356122}
-  - 64: {fileID: 6404440}
+  - 65: {fileID: 6573884}
   m_Layer: 0
   m_Name: sedan
   m_TagString: NPC
@@ -295,7 +295,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182118}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 7.72, y: 0.42, z: -3.29}
+  m_LocalPosition: {x: 11.048, y: 0.25, z: -3.29}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 487766}
@@ -854,8 +854,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124706}
   m_Mesh: {fileID: 4300010, guid: 23758e0cb28d34847a9f772ee83fa649, type: 3}
---- !u!64 &6404440
-MeshCollider:
+--- !u!65 &6573884
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -864,8 +864,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 0}
+  m_Size: {x: 2.02, y: 2.23, z: 4.96}
+  m_Center: {x: 0, y: 1.25, z: 0.24}
 --- !u!114 &11450278
 MonoBehaviour:
   m_ObjectHideFlags: 1

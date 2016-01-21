@@ -147,7 +147,7 @@ GameObject:
   - 4: {fileID: 445764}
   - 114: {fileID: 11450006}
   - 143: {fileID: 14360656}
-  - 64: {fileID: 6499246}
+  - 65: {fileID: 6502426}
   m_Layer: 0
   m_Name: hatchback
   m_TagString: NPC
@@ -854,8 +854,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128008}
   m_Mesh: {fileID: 4300012, guid: 45466bc46ca564085b14e8a5f784a000, type: 3}
---- !u!64 &6499246
-MeshCollider:
+--- !u!65 &6502426
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -864,8 +864,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 0}
+  m_Size: {x: 1.87, y: 2.83, z: 4.4}
+  m_Center: {x: 0, y: 1.56, z: 0.64}
 --- !u!114 &11450006
 MonoBehaviour:
   m_ObjectHideFlags: 1
