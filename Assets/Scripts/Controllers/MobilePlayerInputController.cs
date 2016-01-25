@@ -14,23 +14,9 @@ public class MobilePlayerInputController : PlayerController {
 		if (Application.platform == RuntimePlatform.IPhonePlayer || 
 		    Application.platform == RuntimePlatform.Android) {
 			base.FixedUpdate();
-			Debug.Log("ACCEL: " + Input.acceleration.y * 1);
+
 			movement = Vector3.right;
 			moveVertical  = 1.0f;
-
-			if ( Input.acceleration.x < -0.60 ) {
-				Debug.Log ("Left");
-				moveHorizontal = -1.0f;
-			}
-
-			if ( Input.acceleration.x > 0.60 ){
-				Debug.Log ("Right");
-				moveHorizontal = 1.0f; 
-			}
-
-			if (Input.acceleration.x < 0.60 && Input.acceleration.x > -0.60) {
-				moveHorizontal = 0.0f;
-			}
 
 			/*if ( Input.touchCount > 0 ) {
 				// Touch touch = Input.touches[0];
@@ -47,8 +33,6 @@ public class MobilePlayerInputController : PlayerController {
 			  }
 			} */
 
-		Debug.Log (Input.acceleration.x);
-
 		  if ( Input.touchCount == 2 ) {
 				movement = Vector3.zero;
 				moveVertical = -1.0f;
@@ -58,5 +42,13 @@ public class MobilePlayerInputController : PlayerController {
 			}*/
 		}
 	} 
+
+	public void Left() {
+		moveHorizontal = -1.0f;
+	}
+
+	public void Right() {
+		moveHorizontal = 1.0f;
+	}
 }
 #endif

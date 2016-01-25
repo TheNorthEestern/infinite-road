@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class RoadSegmentGenerator : MonoBehaviour {
 	private GameObject _initialRoadSegmentInstance;
 	private GameObject _roadSegmentPrefab;
+	private List<GameObject> _roadSegmentPrefabs;
 	private GameObject _intersectionPrefab;
 	private GameObject _sceneController;
 	private GameObject[] spawnPoints;
@@ -28,6 +29,7 @@ public class RoadSegmentGenerator : MonoBehaviour {
 
 	void Start () {
 		// Load prefabs for various road segments
+		_sceneController = GameObject.Find ("SceneController");
  		_intersectionPrefab = Resources.Load ("Prefabs/Intersection", typeof(GameObject)) as GameObject;
 		_roadSegmentPrefab = Resources.Load ("Prefabs/RoadSegment", typeof(GameObject)) as GameObject;
 		_initialRoadSegmentInstance = Instantiate (_roadSegmentPrefab);
@@ -45,12 +47,11 @@ public class RoadSegmentGenerator : MonoBehaviour {
 
 	public void Generate() {
 		// Create the a new road segment at the end of the previous road segment
-		_sceneController = GameObject.Find ("SceneController");
-		List<GameObject> roadSegmentPrefabs = _sceneController.GetComponent<SceneController>().RoadSegmentPrefabs;
+		_roadSegmentPrefabs = _sceneController.GetComponent<SceneController>().RoadSegmentPrefabs;
 
 		int segmentChoice = Random.Range (1, 10);
 		if (segmentChoice % 4 == 0 && _playerStartedGame) {
-			var filtered = roadSegmentPrefabs.Where(road => road.activeInHierarchy == false && road.name.Contains("Intersection"));
+			var filtered = _roadSegmentPrefabs.Where(road => road.activeInHierarchy == false && road.name.Contains("Intersection"));
 			Vector3 _correctedIntersectionPosition = new Vector3(_roadSegmentInstantiationPosition.x,
 			                                                     _intersectionInstantiationPosition.y,
 			                                                     _roadSegmentInstantiationPosition.z);
@@ -61,10 +62,11 @@ public class RoadSegmentGenerator : MonoBehaviour {
 				filtered.First().transform.rotation = Quaternion.identity;
 				filtered.First ().SetActive(true);
 			} else {
+				Debug.LogError("No Intersection Available");
 				Generate ();
 			}
 		} else {
-			var filtered = roadSegmentPrefabs.Where(road => road.activeInHierarchy == false && road.name.Contains ("RoadSegment"));
+			var filtered = _roadSegmentPrefabs.Where(road => road.activeInHierarchy == false && road.name.Contains ("RoadSegment"));
 			_roadSegmentInstantiationPosition.x += _originalInstantiationSize;
 			// Instantiate (_roadSegmentPrefab, _roadSegmentInstantiationPosition, Quaternion.identity);
 			// Debug.Log (filtered.Count ());
@@ -73,6 +75,7 @@ public class RoadSegmentGenerator : MonoBehaviour {
 				filtered.First().transform.rotation = Quaternion.identity;
 				filtered.First().SetActive(true);
 			} else {
+				Debug.LogError("No Road Segment Available");
 				Generate ();
 			}
 		}

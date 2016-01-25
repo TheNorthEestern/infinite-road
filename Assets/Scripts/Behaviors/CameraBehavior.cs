@@ -39,7 +39,7 @@ public class CameraBehavior : MonoBehaviour {
 		yield return new WaitForSeconds(2);
 	}
 
-	void Update () {
+	void LateUpdate () {
 		if (_levelStarted) {
 			transform.localRotation = Quaternion.Slerp (Quaternion.Euler (0, 45f,45f),Quaternion.Euler (0, 0, 0),  Time.time * 0.4f);
 		}

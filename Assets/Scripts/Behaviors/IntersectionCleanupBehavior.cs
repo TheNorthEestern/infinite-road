@@ -3,28 +3,30 @@ using System;
 using System.Collections;
 
 public class IntersectionCleanupBehavior : MonoBehaviour {
-	private bool _playerEnteredVicinity = true;
-	private int counter;
+	private bool _wasDiscarded = false;
+	private int counter = 0;
 
-	void Update() {
+	void OnEnable() {
+		counter = 0;
+	}
+
+	void LateUpdate() {
 		RaycastHit hit;
 		Vector3 segmentCenter = transform.GetChild(0).transform.position;
 		Collider[]  hitColliders = Physics.OverlapSphere(segmentCenter, 25.0f);
+	
+		if (Array.Exists(hitColliders, element => element.CompareTag("Player"))) { counter++; }
 
-		if (Array.Exists(hitColliders, element => element.CompareTag("Player"))) {
-			// Debug.LogError("SEEING");
-			print("Player! " + transform.name + " " + transform.GetInstanceID() + " " + Time.realtimeSinceStartup);
-			counter++;
-		} 
-
-		else if (!Array.Exists(hitColliders, element => CompareTag("Player")) && counter > 0){
-			Invoke("Discard", 1f);
+		else if (!Array.Exists(hitColliders, element => element.CompareTag("Player")) 
+			     && counter > 0){
+			Debug.LogError("HILO");
+			// Invoke("Discard", 1f);
+			IntersectionCleanupBehavior.Discard(this);
 		}
 	}
 
-
-	private void Discard() {
-		gameObject.SetActive(false);
+	private static void Discard(IntersectionCleanupBehavior roadSegment) {
+		roadSegment.gameObject.SetActive(false);
 	}
 
 }

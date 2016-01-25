@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour {
 	[SerializeField] private Text _scoreLabel;
@@ -73,6 +74,10 @@ public class UIController : MonoBehaviour {
 		Messenger.RemoveListener (GameEvent.RAN_STOP_SIGN, IncrementScore);
 		Messenger.RemoveListener(GameEvent.APPROACHING_ONCOMING_TRAFFIC, PlayWarnSound);
 		Messenger.RemoveListener (GameEvent.GAME_ENDED, ShowGameOverScreen);
+	}
+
+	public void RestartGame() {
+		SceneManager.LoadScene(0);
 	}
 
 	public void Pause() {
