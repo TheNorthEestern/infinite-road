@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class LogoSplashScreenBehavior : MonoBehaviour {
@@ -15,6 +16,6 @@ public class LogoSplashScreenBehavior : MonoBehaviour {
 
 	private IEnumerator TitleScreenDuration() {
 		yield return new WaitForSeconds(3);
-		Application.LoadLevel("hillside_scene");
+		SceneManager.LoadScene("hillside_scene");
 	}
 }

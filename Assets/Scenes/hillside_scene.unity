@@ -4707,10 +4707,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 0}
-  smallNpc: {fileID: 198440, guid: 6480324dd555141bc984c8210c5def9a, type: 2}
-  largeNpc: {fileID: 164426, guid: 932fa8a1a6b8946f6a8c6b00652aa0ce, type: 2}
   roadSegment: {fileID: 174156, guid: 77f5b2537c64d43ec86dad434f1d87ba, type: 2}
   intersectionSegment: {fileID: 166556, guid: 20a8272eb295b49188229d9aaaa1c56e, type: 2}
+  coinPrefab: {fileID: 119210, guid: e072cc3373cd445ea8277ee957139556, type: 2}
   npcs:
   - {fileID: 162202, guid: 683392c4826c54eda999eef43a49ab0f, type: 2}
   - {fileID: 129532, guid: dc491626b160b4a3a8e663acec094286, type: 2}

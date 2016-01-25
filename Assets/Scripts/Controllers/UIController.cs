@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class UIController : MonoBehaviour {
 	[SerializeField] private Text _scoreLabel;
@@ -77,7 +77,7 @@ public class UIController : MonoBehaviour {
 	}
 
 	public void RestartGame() {
-		SceneManager.LoadScene(0);
+		SceneManager.LoadScene("hillside_scene");
 	}
 
 	public void Pause() {
@@ -112,7 +112,7 @@ public class UIController : MonoBehaviour {
 			counter--;
 			yield return new WaitForSeconds(1.0f);
 		}
-		Application.LoadLevel("hillside_scene");
+		SceneManager.LoadScene("hillside_scene");
 	}
 
 	public void OnSpeedValue(float newSpeed) {

@@ -7,14 +7,14 @@ public class SceneController : MonoBehaviour {
 	[SerializeField] private AudioSource _audioSource;
 	private float npcPrefabCount = 8;
 	private float roadSegmentPrefabCount = 16;
+	private float coinPrefabCount = 6;
 	public List<GameObject> NpcPrefabs { get; private set; }
 	public List<GameObject> RoadSegmentPrefabs { get; private set; }
-	public GameObject smallNpc;
-	public GameObject largeNpc;
+	public List<GameObject> CoinPrefabs { get; private set; }
 	public GameObject roadSegment;
 	public GameObject intersectionSegment;
+	public GameObject coinPrefab;
 	[SerializeField] private GameObject[] npcs;
-	private GameObject[] npcChoices;
 	private GameObject[] roadSegmentChoices;
 
 	public SceneController() {
@@ -25,10 +25,11 @@ public class SceneController : MonoBehaviour {
 
 	void Start() 
 	{
-		npcChoices = new GameObject[2] {smallNpc, largeNpc};
 		roadSegmentChoices = new GameObject[2] {roadSegment, intersectionSegment};
-		NpcPrefabs = new List<GameObject>();
+
+		NpcPrefabs 		   = new List<GameObject>();
 		RoadSegmentPrefabs = new List<GameObject>();
+		CoinPrefabs 	   = new List<GameObject>();
 
 		for (int i = 0; i < roadSegmentPrefabCount; i++) {
 			GameObject obj;
@@ -41,10 +42,16 @@ public class SceneController : MonoBehaviour {
 			RoadSegmentPrefabs.Add (obj);
 		}
 
-		for (int i = 0; i < npcPrefabCount; i++ ) { 
+		for (int i = 0; i < npcPrefabCount; i++) { 
 			GameObject obj = (GameObject)Instantiate (npcs[UnityEngine.Random.Range(0,5)]);
 			obj.SetActive(false);
 		 	NpcPrefabs.Add (obj);
+		}
+
+		for (int i = 0; i < coinPrefabCount; i++) {
+			GameObject obj = (GameObject)Instantiate (coinPrefab);
+			obj.SetActive(false);
+			CoinPrefabs.Add(obj);
 		}
 	}
 

@@ -45,10 +45,17 @@ public class MobilePlayerInputController : PlayerController {
 
 	public void Left() {
 		moveHorizontal = -1.0f;
+		StartCoroutine(Center());
 	}
 
 	public void Right() {
 		moveHorizontal = 1.0f;
+		StartCoroutine(Center());
+	}
+
+	private IEnumerator Center() {
+		yield return new WaitForSeconds(0.25f);
+		moveHorizontal = 0.0f;
 	}
 }
 #endif
