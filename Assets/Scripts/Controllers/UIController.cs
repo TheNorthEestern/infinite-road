@@ -13,7 +13,6 @@ public class UIController : MonoBehaviour {
 	[SerializeField] private GameObject _pauseMenu;
 	[SerializeField] private GameObject _player;
 	private AudioSource _audioSource;
-	public int score;
 	private GameObject _canvas;
 	private GameObject _titleScreenCanvas;
 	private GameObject _gameOverScreenCanvas;
@@ -22,7 +21,10 @@ public class UIController : MonoBehaviour {
 	private float _distanceDrivenBeforeGameStarted;
 	private float _distanceDrivenAfterGameStarted;
 	private float distanceFromOrigin;
+	public GameObject messageText;
+	public GameObject messageTextBacking;
 	public float totalScore = 0;
+	public int score;
 	protected static bool isPaused = false;
 
 	void Start () {
@@ -136,8 +138,17 @@ public class UIController : MonoBehaviour {
 			Debug.Log("GO GO GO!");
 			_comboChainStarted = true;
 		} else if (playerDidMissCoin && _comboChainStarted) {
-			Debug.Log("COMBO BREAKER!");
-			_comboChainStarted = false;			
+			StartCoroutine(ShowBreakerMessage());
+			_comboChainStarted = false;
 		}
+	}
+
+	private IEnumerator ShowBreakerMessage() {
+		messageText.SetActive(true);
+		messageTextBacking.GetComponent<TextMesh>().text = 
+		messageText.GetComponent<TextMesh>().text = "COMBO BREAKER";
+		iTween.RotateBy(messageText, iTween.Hash("x", .25, "easeType", "easeInOutBack", "loopType", "pingPong", "delay", .4));
+		yield return new WaitForSeconds(2);		
+		messageText.SetActive(false);
 	}
 }
