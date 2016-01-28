@@ -64,7 +64,7 @@ public class SceneController : MonoBehaviour {
 		
 	public void MakeNoise() 
 	{
-		_audioSource.PlayOneShot (_audioSource.clip);
+		_audioSource.Play();
 	}
 
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class CoinPickupBehavior : MonoBehaviour {
+
 	void OnBecameInvisible() {
 		Discard();
 	}

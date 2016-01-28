@@ -21,6 +21,7 @@ public class RoadSegmentBehavior : MonoBehaviour {
 		spring = new Color32(170, 155, 42, 255);
 		summer = new Color32(137, 182, 65, 255);
 		autumn = new Color32(234, 157, 46, 255);
+
 		int currentSecond = DateTime.Now.Second;
 
 		Camera _camera = GameObject.Find ("Main Camera").GetComponent<Camera>();
@@ -28,19 +29,19 @@ public class RoadSegmentBehavior : MonoBehaviour {
 
 		foreach (Renderer childRenderer in childRenderers) {
 			if (currentSecond < 15) {
-				_camera.backgroundColor = winter;
+				// _camera.backgroundColor = winter;
 				childRenderer.material.color = winter;
 			} 
 			else if (currentSecond < 30) {
-				_camera.backgroundColor = spring;
+				// _camera.backgroundColor = spring;
 				childRenderer.material.color = spring;
 			}
 			else if (currentSecond < 45) {
-				_camera.backgroundColor = summer;
+				// _camera.backgroundColor = summer;
 				childRenderer.material.color = summer;
 			} 
 			else {
-				_camera.backgroundColor = autumn ;
+				// _camera.backgroundColor = autumn ;
 				childRenderer.material.color = autumn;
 			}
 		}

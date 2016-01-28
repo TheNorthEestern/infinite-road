@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour {
 	private GameObject _titleScreenCanvas;
 	private GameObject _gameOverScreenCanvas;
 	private bool _gameHasStarted = false;
+	private bool _comboChainStarted = false;
 	private float _distanceDrivenBeforeGameStarted;
 	private float _distanceDrivenAfterGameStarted;
 	private float distanceFromOrigin;
@@ -39,6 +40,14 @@ public class UIController : MonoBehaviour {
 		Messenger.AddListener(GameEvent.RAN_STOP_SIGN, IncrementScore);
 		Messenger.AddListener (GameEvent.APPROACHING_ONCOMING_TRAFFIC, PlayWarnSound);
 		Messenger.AddListener (GameEvent.GAME_ENDED, ShowGameOverScreen);
+		Messenger<bool>.AddListener (GameEvent.COIN_EVENT, UpdateComboStatus);
+	}
+
+	void OnDestroy() {
+		Messenger.RemoveListener (GameEvent.RAN_STOP_SIGN, IncrementScore);
+		Messenger.RemoveListener(GameEvent.APPROACHING_ONCOMING_TRAFFIC, PlayWarnSound);
+		Messenger.RemoveListener (GameEvent.GAME_ENDED, ShowGameOverScreen);
+		Messenger<bool>.RemoveListener (GameEvent.COIN_EVENT, UpdateComboStatus);
 	}
 
 	void Update () {
@@ -68,12 +77,6 @@ public class UIController : MonoBehaviour {
 			_titleScreenCanvas.SetActive(false);
 		}
 
-	}
-
-	void OnDestroy() {
-		Messenger.RemoveListener (GameEvent.RAN_STOP_SIGN, IncrementScore);
-		Messenger.RemoveListener(GameEvent.APPROACHING_ONCOMING_TRAFFIC, PlayWarnSound);
-		Messenger.RemoveListener (GameEvent.GAME_ENDED, ShowGameOverScreen);
 	}
 
 	public void RestartGame() {
@@ -125,5 +128,16 @@ public class UIController : MonoBehaviour {
 		distanceFromOrigin *= score;
 		_audioSource.PlayOneShot (_audioSource.clip);
 		_scoreLabel.text = _scoreLabelBacking.text = score.ToString ("C0");
+	}
+
+	private void UpdateComboStatus(bool playerDidMissCoin) {
+		Debug.Log(Time.realtimeSinceStartup + " " + playerDidMissCoin);
+		if (!playerDidMissCoin) {
+			Debug.Log("GO GO GO!");
+			_comboChainStarted = true;
+		} else if (playerDidMissCoin && _comboChainStarted) {
+			Debug.Log("COMBO BREAKER!");
+			_comboChainStarted = false;			
+		}
 	}
 }

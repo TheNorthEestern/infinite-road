@@ -10,7 +10,7 @@ public class StopSignTriggerBehavior : MonoBehaviour {
 	void OnTriggerExit(Collider collidingObject) {
 		collidingObject.SendMessage("EncounteredStopSign", SendMessageOptions.DontRequireReceiver);
 		if (collidingObject.CompareTag("Player")) {
-			Messenger.Broadcast (GameEvent.RAN_STOP_SIGN, MessengerMode.DONT_REQUIRE_LISTENER);
+			Messenger.Broadcast (GameEvent.RAN_STOP_SIGN);
 		}
 	}
 
