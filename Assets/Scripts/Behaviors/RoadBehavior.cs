@@ -32,7 +32,7 @@ public class RoadBehavior : MonoBehaviour {
 	}
 
 	private void PlaceCoin() {
-		foreach (GameObject coin in _coinPrefabs) {
+		/* foreach (GameObject coin in _coinPrefabs) {
 			if (!coin.activeInHierarchy) {
 				Vector3 newPosition = new Vector3(transform.position.x + 3.0f, transform.position.y, coinPositions[Random.Range (0,2)]);
 				coin.transform.position = newPosition;
@@ -40,9 +40,9 @@ public class RoadBehavior : MonoBehaviour {
 				coin.SetActive(true);
 				break;
 			}
-		}
-		// _coin = Resources.Load ("Prefabs/CoinPickup", typeof(GameObject)) as GameObject;
-		//	Vector3 newPosition = new Vector3(transform.position.x + 3.0f, transform.position.y, coinPositions[Random.Range (0,2)]);
-		// _coin = Instantiate(_coin, newPosition, Quaternion.Inverse (transform.localRotation)) as GameObject;
+		}*/
+		_coin = Resources.Load ("Prefabs/CoinPickup", typeof(GameObject)) as GameObject;
+		Vector3 newPosition = new Vector3(transform.position.x + 3.0f, transform.position.y, coinPositions[Random.Range (0,2)]);
+		_coin = Instantiate(_coin, newPosition, Quaternion.Inverse (transform.localRotation)) as GameObject;
 	}
 }

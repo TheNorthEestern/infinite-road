@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour {
 	private float originalYPosition;
 	private float originalYRotation;
 	public Vector3 startPosition = Vector3.zero;
-
+	public bool LaneState { 
+		get { return lane; } 
+	}
 	private float maxSpeed = 20.0f;
 
 	void Awake() {
