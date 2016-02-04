@@ -25,6 +25,8 @@ public class UIController : MonoBehaviour {
 	public GameObject messageTextBacking;
 	public GameObject comboMessageText;
 	public GameObject comboMessageTextBacking;
+	public Text multiplierText;
+	public Text multiplierTextBacking;
 	public float totalScore = 0;
 	public int comboCounter = 0;
 	public int score;
@@ -116,7 +118,7 @@ public class UIController : MonoBehaviour {
 		float counter = 2;
 		Time.timeScale = 1;
 		while (counter > 0) {
-			_gameOverScreenCanvas.transform.Find ("HighScoreText").GetComponent<Text>().text = counter.ToString();
+			Debug.Log(counter);
 			counter--;
 			yield return new WaitForSeconds(1.0f);
 		}
@@ -132,11 +134,21 @@ public class UIController : MonoBehaviour {
 		_scoreLabel.text = _scoreLabelBacking.text = text.ToString("C0");
 	}
 
+	private void SetMultiplierText(int text) {
+		if (text == 0) {
+			multiplierText.text = multiplierTextBacking.text = "";
+		} else {
+			multiplierText.text = multiplierTextBacking.text = text.ToString() + "x";
+		}
+	}
+
 	private void IncrementScore(float playerPosition) {
-		int scoreAmount = 0;
-		score += scoreAmount = (Mathf.Abs(playerPosition) < 5) ? 3 : 1;
-		GameObject scoreText = Instantiate(Resources.Load("Prefabs/MessageText", typeof(GameObject))) as GameObject;
-		scoreText.GetComponent<MessageTextBehavior>().MessageText = "+" + scoreAmount;
+		int chainAmount = comboCounter * (comboCounter + 1);
+		score += (comboCounter > 1 && score > 1) ? chainAmount : 1;
+		if ( comboCounter >= 1 ) {
+			GameObject scoreText = Instantiate(Resources.Load("Prefabs/MessageText", typeof(GameObject))) as GameObject;
+			scoreText.GetComponent<MessageTextBehavior>().MessageText = "+" + chainAmount;
+		}
 		distanceFromOrigin *= score;
 		_audioSource.PlayOneShot (_audioSource.clip);
 		SetScoreLabelText(score);
@@ -146,25 +158,29 @@ public class UIController : MonoBehaviour {
 		if (!playerDidMissCoin) {
 			_comboChainStarted = true;
 			comboCounter += 1;
+			SetMultiplierText(comboCounter);
 		} else if (playerDidMissCoin && _comboChainStarted) {
 			StartCoroutine(ShowBreakerMessage());
+			SetMultiplierText(0);
 			_comboChainStarted = false;
 		}
 	}
 
 	private IEnumerator ShowBreakerMessage() {
 		// StartCoroutine(MoveMessageOnScreen(comboCounter));
-		if (comboCounter > 1) {
+		if (comboCounter >= 5) {
 			comboMessageTextBacking.GetComponent<Text>().text = 
-				comboMessageText.GetComponent<Text>().text = "Combo Breaker!\n" + comboCounter + " Coin Streak\n" + comboCounter + "X multipler = " + comboCounter + " x $25 = " + comboCounter * 25;
+			comboMessageText.GetComponent<Text>().text = "Combo Breaker!\n" + comboCounter + " Coin Streak\n" + comboCounter + "X multipler = " + comboCounter + " x $25 = " + comboCounter * 25;
 			int bonus = comboCounter * 25;
 			score += bonus;
 			SetScoreLabelText(score);
+			comboCounter = 0;
 			iTween.MoveTo(comboMessageText, iTween.Hash("x", 280.0f, "easeType", "easeInOutBack", "loopType", "none"));
 			yield return new WaitForSeconds(3);		
 			iTween.MoveTo(comboMessageText, iTween.Hash("x", -350.0f, "easeType", "easeInOutBack", "loopType", "none"));
-		}
+		} 
 		comboCounter = 0;
+		yield return null;
 	}
 
 }

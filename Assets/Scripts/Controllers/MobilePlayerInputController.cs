@@ -4,6 +4,9 @@ using System.Collections;
 
 public class MobilePlayerInputController : PlayerController {
 
+	private Vector2 _touchOrigin = -Vector2.zero;
+	private float yVelocity = 0.0f;
+
 	private IEnumerator Reorient() {
 		moveHorizontal = 0;
 		yield return null;
@@ -18,28 +21,42 @@ public class MobilePlayerInputController : PlayerController {
 			movement = Vector3.right;
 			moveVertical  = 1.0f;
 
-			/*if ( Input.touchCount > 0 ) {
-				// Touch touch = Input.touches[0];
-			   if ( Input.touchCount == 1 ) {
-				foreach  (Touch touch in Input.touches) {
-					if (touch.position.x < (Screen.width / 2) && (touch.position.y < (Screen.height / 2))) {
-						moveHorizontal = -1.0f;
-					} 
-					
-					else if ((touch.position.x > (Screen.width / 2)) && (touch.position.y < (Screen.height / 2))) {
-						moveHorizontal = 1.0f;
-					}
-				}
-			  }
-			} */
+			/*if ( Input.touchCount == 0 ) {
+				moveHorizontal = Mathf.Lerp(moveHorizontal, 0, 0.3f);
+				// moveHorizontal = Mathf.SmoothDamp(moveHorizontal, 0, ref yVelocity, 0.3f);
+				// moveHorizontal = 0;
+			}*/
 
-		  if ( Input.touchCount == 2 ) {
+			if ( Input.touchCount > 0 ) {
+
+				Touch playerTouch = Input.touches[0];
+
+				if (playerTouch.phase == TouchPhase.Began) {
+					_touchOrigin = playerTouch.position;	
+				}
+
+				else if (playerTouch.phase == TouchPhase.Ended && _touchOrigin.x >= 0 ||
+						 playerTouch.phase == TouchPhase.Moved && _touchOrigin.x >= 0) {
+
+					Vector2 touchEnd = playerTouch.position;
+
+					float x = touchEnd.x - _touchOrigin.x;
+					float y = touchEnd.y - _touchOrigin.y;
+
+					if (Mathf.Abs(x) > Mathf.Abs(y)) {
+						moveHorizontal = (x > 0) ? 1 : -1;
+					}
+
+					StartCoroutine(Center());
+					_touchOrigin.x = -1;
+				}
+			}
+
+
+			if ( Input.touchCount == 2 ) {
 				movement = Vector3.zero;
 				moveVertical = -1.0f;
-		  }
-			/* else {
-				moveHorizontal = 0.0f;
-			}*/
+			}
 		}
 	} 
 
