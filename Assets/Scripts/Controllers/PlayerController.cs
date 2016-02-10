@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
 	protected static Vector3 restrictor;
 	protected static float leftBound = -3.3f;
 	protected static float rightBound = -5.5f;
-	protected const float GRAVITY = -9.8f;
+	protected float gravity = 0;
 	protected bool left = false;
 	protected bool right = true;
 	protected bool lane;
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
 	private bool isInFireballMode = true;
 	private float originalYPosition;
 	private float originalYRotation;
+	private Animator _animator;
 	public Vector3 startPosition = Vector3.zero;
 	public bool LaneState { 
 		get { return lane; } 
@@ -57,12 +58,8 @@ public class PlayerController : MonoBehaviour {
 		_camera = GameObject.Find ("Main Camera");
 		_audioSource = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
-		_rb.freezeRotation = true;
-		originalYPosition = transform.position.y;
-		originalYRotation = transform.rotation.y;
-		// _rb.freezeRotation = false;
-		// _rb.useGravity = true;
-		// GetComponent<CapsuleCollider>().radius = 0.060f;
+		_animator = GetComponent<Animator>();
+		_animator.enabled = false;
 	}
 
 	private void RestrictPlayerMovement() {
@@ -134,15 +131,27 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-
-
 	private IEnumerator PlaySound() {
 		// Emitting to UIController
 		Messenger.Broadcast(GameEvent.APPROACHING_ONCOMING_TRAFFIC);
 		yield return new WaitForSeconds(3);
 	}
 
-	public virtual void FixedUpdate() 
+	private IEnumerator ActivateBowlingMode () {
+		gravity = -.5f;
+		_animator.SetBool("isInBowlingMode", true);
+		_animator.enabled = true;
+		_rb.freezeRotation = false;
+		yield return new WaitForSeconds(1);	
+	}
+
+	public void DeactivateBowlingMode() {
+		_animator.enabled = false;
+		_animator.SetBool("isInBowlingMode", false);
+		gravity = 0;
+	}
+
+	protected virtual void FixedUpdate() 
 	{
 		CheckAndUpdateLaneSelection();
 		// RestrictPlayerMovement();
@@ -151,13 +160,11 @@ public class PlayerController : MonoBehaviour {
 		MonitorPlayerSpeed();
 		CheckIfOncoming();
 		if (Input.GetKeyUp(KeyCode.F)) {
-			// ActivateBowlingMode();
+			StartCoroutine(ActivateBowlingMode());
 			// ActivateFireballMode();
 		}
-
 		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, maxSpeed);
 		_rb.AddForce (movement * speed);
-
 	}
 
 	void OnCollisionEnter(Collision other) {
@@ -167,7 +174,6 @@ public class PlayerController : MonoBehaviour {
 				PlayerPrefs.SetFloat ("hiscore", _uiController.GetComponent<UIController>().score);
 			}
 			Messenger.Broadcast (GameEvent.GAME_ENDED);
-			_rb.velocity = Vector3.zero;
 			// Application.LoadLevel ("hillside_scene");
 		}
 	}

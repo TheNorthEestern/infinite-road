@@ -42,7 +42,7 @@ public class RoadBehavior : MonoBehaviour {
 			}
 		}*/
 		_coin = Resources.Load ("Prefabs/CoinPickup", typeof(GameObject)) as GameObject;
-		Vector3 newPosition = new Vector3(transform.position.x + 3.0f, transform.position.y, coinPositions[Random.Range (0,2)]);
+		Vector3 newPosition = new Vector3(transform.position.x - 10.0f, transform.position.y, coinPositions[Random.Range (0,2)]);
 		_coin = Instantiate(_coin, newPosition, Quaternion.Inverse (transform.localRotation)) as GameObject;
 	}
 }

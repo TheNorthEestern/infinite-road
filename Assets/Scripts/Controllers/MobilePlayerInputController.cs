@@ -12,7 +12,7 @@ public class MobilePlayerInputController : PlayerController {
 		yield return null;
 	}
 	
-	public override void FixedUpdate () 
+	protected override void FixedUpdate () 
 	{
 		if (Application.platform == RuntimePlatform.IPhonePlayer || 
 		    Application.platform == RuntimePlatform.Android) {

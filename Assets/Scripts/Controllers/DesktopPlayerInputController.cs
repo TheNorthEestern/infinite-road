@@ -14,7 +14,7 @@ public class DesktopPlayerInputController : PlayerController {
 		Messenger.RemoveListener (GameEvent.PLAYER_INITIATED_GAME, SwitchToPlayerDrivenInput);
 	}
 
-	public override void FixedUpdate() 
+	protected override void FixedUpdate() 
 	{
 		if ( Application.platform != RuntimePlatform.IPhonePlayer ||
 		     Application.platform != RuntimePlatform.Android ) {
