@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour {
 		_audioSource = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
 		_animator = GetComponent<Animator>();
-		_animator.enabled = false;
 	}
 
 	private void RestrictPlayerMovement() {
@@ -79,9 +78,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void PlayerPivotMechanics() {
-		float computedTurnAngle = (Convert.ToBoolean(moveHorizontal)) ? ((0.2f * moveHorizontal) * 100.0f) + 90.0f : 90.0f;
-		Vector3 turnAngle = new Vector3(transform.rotation.x, computedTurnAngle, transform.rotation.z);
-		transform.rotation = Quaternion.Euler (turnAngle);
+		if (!_animator.GetBool("isInBowlingMode")) {
+			float computedTurnAngle = (Convert.ToBoolean(moveHorizontal)) ? ((0.2f * moveHorizontal) * 100.0f) + 90.0f : 90.0f;
+			Vector3 turnAngle = new Vector3(transform.localRotation.x, computedTurnAngle, transform.localRotation.z);
+			transform.localRotation = Quaternion.Euler (turnAngle);
+		}
 	}
 
 	private void MonitorPlayerSpeed() {
@@ -113,6 +114,8 @@ public class PlayerController : MonoBehaviour {
 			if ( moveHorizontal < 0 ) lane = left;
 			if ( moveHorizontal > 0 ) lane = right;
 
+			Vector3 heightRestrictor = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, 0.9f, 0.9f), transform.position.z);
+			transform.position = heightRestrictor;
 
 			if ( lane == left ) {
 				if ( transform.position.z < leftBound ) { 
@@ -137,38 +140,40 @@ public class PlayerController : MonoBehaviour {
 		yield return new WaitForSeconds(3);
 	}
 
-	private IEnumerator ActivateBowlingMode () {
-		gravity = -.5f;
-		_animator.SetBool("isInBowlingMode", true);
+	private void ActivateBowlingMode () {
 		_animator.enabled = true;
-		_rb.freezeRotation = false;
-		yield return new WaitForSeconds(1);	
+		_animator.SetBool("isInBowlingMode", true);
 	}
 
 	public void DeactivateBowlingMode() {
-		_animator.enabled = false;
 		_animator.SetBool("isInBowlingMode", false);
-		gravity = 0;
+		_rb.constraints = RigidbodyConstraints.FreezeRotationX;
+		_animator.enabled = false;
 	}
 
 	protected virtual void FixedUpdate() 
 	{
 		CheckAndUpdateLaneSelection();
-		// RestrictPlayerMovement();
+		RestrictPlayerMovement();
 		ApplyRigidbodyMechanics();
 		PlayerPivotMechanics();	
-		MonitorPlayerSpeed();
+		// MonitorPlayerSpeed();
 		CheckIfOncoming();
-		if (Input.GetKeyUp(KeyCode.F)) {
-			StartCoroutine(ActivateBowlingMode());
-			// ActivateFireballMode();
-		}
+
 		_rb.velocity = Vector3.ClampMagnitude (_rb.velocity, maxSpeed);
 		_rb.AddForce (movement * speed);
+
+		if (Input.GetKeyDown(KeyCode.F)) {
+			ActivateBowlingMode();
+		}
+
 	}
 
 	void OnCollisionEnter(Collision other) {
-		if (other.gameObject.tag == "NPC") {
+		if (other.gameObject.CompareTag("NPC") && _animator.GetBool("isInBowlingMode")) {
+			other.gameObject.GetComponent<ParentedObjectBehavior>().Destroy();	
+		}
+		else if (other.gameObject.tag == "NPC") {
 			PlayerPrefs.SetFloat ("CurrentScore", _uiController.GetComponent<UIController>().score);
 			if ( PlayerPrefs.GetFloat ("hiscore") < _uiController.GetComponent<UIController>().score) {
 				PlayerPrefs.SetFloat ("hiscore", _uiController.GetComponent<UIController>().score);

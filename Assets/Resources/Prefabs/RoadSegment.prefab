@@ -117,7 +117,7 @@ GameObject:
   - 4: {fileID: 427440}
   - 23: {fileID: 2347090}
   - 102: {fileID: 10265592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RoadText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,10 +234,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 479350}
   - 33: {fileID: 3395788}
-  - 65: {fileID: 6559230}
   - 23: {fileID: 2374480}
   - 114: {fileID: 11498940}
-  m_Layer: 0
+  - 65: {fileID: 6505176}
+  m_Layer: 8
   m_Name: Road
   m_TagString: OriginalRoadSegment
   m_Icon: {fileID: 0}
@@ -888,6 +888,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6505176
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179426}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6535442
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -923,18 +935,6 @@ BoxCollider:
   m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &6559230
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179426}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!102 &10265592
 TextMesh:
