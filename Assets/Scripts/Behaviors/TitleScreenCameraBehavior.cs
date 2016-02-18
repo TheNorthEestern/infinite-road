@@ -3,10 +3,8 @@ using System.Collections;
 
 public class TitleScreenCameraBehavior : MonoBehaviour {
 
+	public GameObject sdLogo;
 	void Start () {
-		iTween.CameraFadeAdd();
-		iTween.CameraFadeTo (iTween.Hash ("amount", 1.0f, "time", 2.0f, "delay", 3.0f));
-		iTween.CameraFadeAdd();
-		iTween.CameraFadeTo(iTween.Hash("amount", 1.0f, "time", 2.0f, "delay", 3.0f));
+		iTween.ScaleTo(sdLogo, iTween.Hash("scale", new Vector3(0.3f,0.3f,0.3f), "delay", 0.2f, "easeType", "easeInSine"));
 	}
 }

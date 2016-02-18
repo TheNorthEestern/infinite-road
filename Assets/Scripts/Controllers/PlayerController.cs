@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
-	protected static AudioSource _audioSource;
 	protected static Rigidbody _rb;
 	protected static CharacterController _cc;
 	protected static bool _sonicBoom = false;
@@ -20,13 +19,15 @@ public class PlayerController : MonoBehaviour {
 	protected bool right = true;
 	protected bool lane;
 	private GameObject _camera;
-	[SerializeField] private GameObject _uiController;
+	private GameObject _laneWarning;
+	private AudioSource _engineSound;
 	private bool isPaused;
 	private bool isInFireballMode = true;
 	private float originalYPosition;
 	private float originalYRotation;
 	private Animator _animator;
 	public Vector3 startPosition = Vector3.zero;
+	public GameObject uiController;
 	public bool LaneState { 
 		get { return lane; } 
 	}
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void LowerSpeed() {
 		maxSpeed = 15.0f;
+		_engineSound.Play();
 	}
 
 	private void OnSpeedChanged(float newSpeed) {
@@ -54,11 +56,12 @@ public class PlayerController : MonoBehaviour {
 	{
 		startPosition = transform.position;
 		lane = right;
-		_uiController = GameObject.Find ("UIController");
+		uiController = GameObject.Find ("UIController");
 		_camera = GameObject.Find ("Main Camera");
-		_audioSource = GetComponent<AudioSource> ();
+		_engineSound = GetComponent<AudioSource> ();
 		_rb = GetComponent<Rigidbody> ();
 		_animator = GetComponent<Animator>();
+		_laneWarning = transform.FindChild("LaneWarning").gameObject;
 	}
 
 	private void RestrictPlayerMovement() {
@@ -85,34 +88,45 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	private void MonitorPlayerSpeed() {
+	/* private void MonitorPlayerSpeed() {
 		if (_rb.velocity.x >= 70.0f && _sonicBoom == false) {
 			_audioSource.PlayOneShot (_audioSource.clip);
 			_sonicBoom = true;
 		} else if (_rb.velocity.x <= 70.0f) {
 			_sonicBoom = false;
 		}
-	}
+	} */
 
 	private void CheckIfOncoming() {
-		Vector3 oncomingRayVector = new Vector3(transform.position.x + 0.5f, transform.position.y + 20.0f, transform.position.z);
-		Ray passingRay = new Ray(oncomingRayVector, Vector3.right);
+		// Only track objects in the 'Default' layer
+		LayerMask mask = 1;
+		Ray ray = new Ray(transform.position, transform.forward);
 		RaycastHit hit;
-		if (Physics.SphereCast(passingRay, 25.0f, out hit, 15)) {
-			if ( hit.collider.CompareTag("NPC") ) {
-				// Messenger.Broadcast(GameEvent.NPC_HIT_BY_PLAYER_CHARACTER);
+		if (Physics.Raycast(ray, out hit, 100, mask.value)) {
+			if (hit.collider.CompareTag("NPC") && lane == left) {
+				Debug.Log(hit.collider.name + " " + hit.distance);
 				_camera.GetComponent<Animator>().SetBool("NearingIntersection", true);
-			}
-		} else{
+				_laneWarning.SetActive(true);
+			} else {
+				_laneWarning.SetActive(false);
 				_camera.GetComponent<Animator>().SetBool("NearingIntersection", false);
-		}	
+			}
+		}
 	}
 
 	private void CheckAndUpdateLaneSelection() {
 		if ( _rb.velocity.x > 2.0f ) 
 		{
-			if ( moveHorizontal < 0 ) lane = left;
-			if ( moveHorizontal > 0 ) lane = right;
+			if ( moveHorizontal < 0 ) {
+				_engineSound.pitch = 0.95f;
+				uiController.GetComponent<UIController>().PlayScreechSound();
+				lane = left;
+			}
+			if ( moveHorizontal > 0 ) {
+				_engineSound.pitch = 1.05f;
+				uiController.GetComponent<UIController>().PlayScreechSound();
+				lane = right;
+			}
 
 			Vector3 heightRestrictor = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, 0.9f, 0.9f), transform.position.z);
 			transform.position = heightRestrictor;
@@ -174,9 +188,10 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.GetComponent<ParentedObjectBehavior>().Destroy();	
 		}
 		else if (other.gameObject.tag == "NPC") {
-			PlayerPrefs.SetFloat ("CurrentScore", _uiController.GetComponent<UIController>().score);
-			if ( PlayerPrefs.GetFloat ("hiscore") < _uiController.GetComponent<UIController>().score) {
-				PlayerPrefs.SetFloat ("hiscore", _uiController.GetComponent<UIController>().score);
+			_engineSound.Stop();
+			PlayerPrefs.SetFloat ("CurrentScore", uiController.GetComponent<UIController>().score);
+			if ( PlayerPrefs.GetFloat ("hiscore") < uiController.GetComponent<UIController>().score) {
+				PlayerPrefs.SetFloat ("hiscore", uiController.GetComponent<UIController>().score);
 			}
 			Messenger.Broadcast (GameEvent.GAME_ENDED);
 			// Application.LoadLevel ("hillside_scene");

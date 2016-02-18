@@ -15,7 +15,7 @@ public class LogoSplashScreenBehavior : MonoBehaviour {
 	}
 
 	private IEnumerator TitleScreenDuration() {
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(5);
 		SceneManager.LoadScene("hillside_scene");
 	}
 }

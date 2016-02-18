@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 422416}
   - 33: {fileID: 3381062}
   - 23: {fileID: 2361316}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RoadsideGrassEast2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ GameObject:
   - 23: {fileID: 2326882}
   - 114: {fileID: 11424628}
   - 54: {fileID: 5441314}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RoadSegmentGeneratorTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - 65: {fileID: 6538360}
   - 23: {fileID: 2307026}
   - 114: {fileID: 11467128}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: npcSpawnerNB
   m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457442}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RoadsideGrass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - 4: {fileID: 403510}
   - 33: {fileID: 3376346}
   - 23: {fileID: 2396792}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: basic_terrain_hilly_cleaned
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - 65: {fileID: 6542112}
   - 23: {fileID: 2355580}
   - 114: {fileID: 11473972}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: npcSpawnerSB
   m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 421576}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Vegetation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - 4: {fileID: 475180}
   - 33: {fileID: 3313240}
   - 23: {fileID: 2306394}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - 4: {fileID: 455954}
   - 33: {fileID: 3336398}
   - 23: {fileID: 2320518}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RoadsideGrassEast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - 4: {fileID: 463484}
   - 33: {fileID: 3358208}
   - 23: {fileID: 2354650}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: tree 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - 23: {fileID: 2336602}
   - 114: {fileID: 11408496}
   - 114: {fileID: 11447038}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RoadSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - 4: {fileID: 478142}
   - 33: {fileID: 3336594}
   - 23: {fileID: 2349446}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RoadsideGrassWest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - 4: {fileID: 449740}
   - 33: {fileID: 3349450}
   - 23: {fileID: 2348956}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: tree 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

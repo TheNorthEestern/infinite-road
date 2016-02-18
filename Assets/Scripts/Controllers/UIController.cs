@@ -12,7 +12,8 @@ public class UIController : MonoBehaviour {
 	[SerializeField] private AudioClip _warnSound;
 	[SerializeField] private GameObject _pauseMenu;
 	[SerializeField] private GameObject _player;
-	private AudioSource _audioSource;
+	public AudioSource pickupSound;
+	public AudioSource tireScreech;
 	private GameObject _canvas;
 	private GameObject _titleScreenCanvas;
 	private GameObject _gameOverScreenCanvas;
@@ -43,7 +44,6 @@ public class UIController : MonoBehaviour {
 	}
 
 	void Awake() {
-		_audioSource = GetComponent<AudioSource> ();
 		Messenger.AddListener (GameEvent.APPROACHING_ONCOMING_TRAFFIC, PlayWarnSound);
 		Messenger.AddListener (GameEvent.GAME_ENDED, ShowGameOverScreen);
 		Messenger<float>.AddListener(GameEvent.RAN_STOP_SIGN, IncrementScore);
@@ -103,8 +103,15 @@ public class UIController : MonoBehaviour {
 	}
 
 	private void PlayWarnSound() { 
-		if (!_audioSource.isPlaying) {
-			_audioSource.PlayOneShot (_warnSound);
+		if (!pickupSound.isPlaying) {
+			pickupSound.PlayOneShot (_warnSound);
+		}
+	}
+
+	public void PlayScreechSound() {
+		if (!tireScreech.isPlaying) {
+			// tireScreech.pitch = Random.Range(0.85f, 1.0f);
+			tireScreech.Play();		
 		}
 	}
 
@@ -118,7 +125,6 @@ public class UIController : MonoBehaviour {
 		float counter = 2;
 		Time.timeScale = 1;
 		while (counter > 0) {
-			Debug.Log(counter);
 			counter--;
 			yield return new WaitForSeconds(1.0f);
 		}
@@ -150,7 +156,7 @@ public class UIController : MonoBehaviour {
 			scoreText.GetComponent<MessageTextBehavior>().MessageText = "+" + chainAmount;
 		}
 		distanceFromOrigin *= score;
-		_audioSource.PlayOneShot (_audioSource.clip);
+		pickupSound.PlayOneShot (pickupSound.clip);
 		SetScoreLabelText(score);
 	}
 

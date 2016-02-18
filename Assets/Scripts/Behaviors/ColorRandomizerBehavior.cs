@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
+// using System;
 
 public class ColorRandomizerBehavior : MonoBehaviour {
 
 	private Renderer objectRenderer;
 
 	private Color32 generateRandomColor(Color32 mix) {
-		System.Random random = new System.Random();
-		byte red = (byte) random.Next(256);
-		byte green = (byte) random.Next(256);
-		byte blue = (byte) random.Next(256);
+		// UnityEngine.Random random = new UnityEngine.Random();
+		byte red = (byte) Random.Range(0,256);
+		byte green = (byte) Random.Range(0,256);
+		byte blue = (byte) Random.Range(0,256);
 
 		if (!mix.Equals(null)) {
 			red = (byte) ((red + mix.r) / 2);
@@ -29,7 +29,7 @@ public class ColorRandomizerBehavior : MonoBehaviour {
 
 	void OnEnable() {
 		this.Start();
-		objectRenderer.material.color = generateRandomColor(new Color32(0, 0, 0, 255));
+		// objectRenderer.material.color = generateRandomColor(new Color32(0, 0, 0, 255));
 	}
 
 }
