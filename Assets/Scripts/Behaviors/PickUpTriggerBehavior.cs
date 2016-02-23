@@ -9,7 +9,6 @@ public class PickUpTriggerBehavior : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if ( other.CompareTag ("Player") ) {
-			Debug.Log(other.transform.position.z);
 			Messenger<float>.Broadcast (GameEvent.RAN_STOP_SIGN, other.transform.position.z);
 			Messenger<bool>.Broadcast(GameEvent.COIN_EVENT, false);
 			Discard();

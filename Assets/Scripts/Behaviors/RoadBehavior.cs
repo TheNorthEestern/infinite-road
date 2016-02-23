@@ -9,6 +9,7 @@ public class RoadBehavior : MonoBehaviour {
 	private List<GameObject> _coinPrefabs;
 	public Material[] materialList;
 	private	float[] coinPositions = { -5.35f, -3.0f };
+	private	string[] coinType = { "CoinPickup", "PickupGroup" };
 	private int _textureChoice;
 	private bool _gameHasStarted = false;
 
@@ -41,7 +42,7 @@ public class RoadBehavior : MonoBehaviour {
 				break;
 			}
 		}*/
-		_coin = Resources.Load ("Prefabs/CoinPickup", typeof(GameObject)) as GameObject;
+		_coin = Resources.Load ("Prefabs/" + coinType[Random.Range(0,2)], typeof(GameObject)) as GameObject;
 		Vector3 newPosition = new Vector3(transform.position.x - 10.0f, transform.position.y, coinPositions[Random.Range (0,2)]);
 		_coin = Instantiate(_coin, newPosition, Quaternion.Inverse (transform.localRotation)) as GameObject;
 	}

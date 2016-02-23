@@ -22,9 +22,6 @@ public class PlayerController : MonoBehaviour {
 	private GameObject _laneWarning;
 	private AudioSource _engineSound;
 	private bool isPaused;
-	private bool isInFireballMode = true;
-	private float originalYPosition;
-	private float originalYRotation;
 	private Animator _animator;
 	public Vector3 startPosition = Vector3.zero;
 	public GameObject uiController;
@@ -88,14 +85,14 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	/* private void MonitorPlayerSpeed() {
-		if (_rb.velocity.x >= 70.0f && _sonicBoom == false) {
+	private void MonitorPlayerSpeed() {
+		/* if (_rb.velocity.x >= 70.0f && _sonicBoom == false) {
 			_audioSource.PlayOneShot (_audioSource.clip);
 			_sonicBoom = true;
 		} else if (_rb.velocity.x <= 70.0f) {
 			_sonicBoom = false;
-		}
-	} */
+		} */
+	}
 
 	private void CheckIfOncoming() {
 		// Only track objects in the 'Default' layer
@@ -103,13 +100,27 @@ public class PlayerController : MonoBehaviour {
 		Ray ray = new Ray(transform.position, transform.forward);
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, 100, mask.value)) {
-			if (hit.collider.CompareTag("NPC") && lane == left) {
-				Debug.Log(hit.collider.name + " " + hit.distance);
-				_camera.GetComponent<Animator>().SetBool("NearingIntersection", true);
-				_laneWarning.SetActive(true);
+			if (hit.collider.CompareTag("NPC")) {
+				if ( lane == left ) {
+					TogglePlayerWarnings(true);
+				} 
+				else if ( lane == right ) {
+
+					if ( hit.distance < 5.0f ) {
+						_rb.drag = 4.0f;
+					}
+
+					Vector3 segmentCenter = transform.position;
+					Collider[]  hitColliders = Physics.OverlapSphere(segmentCenter, 10.0f);
+					if (Array.FindAll(hitColliders, 
+						element => element.CompareTag("NPC")).Length > 1) {
+						TogglePlayerWarnings(true);
+					} else {
+						TogglePlayerWarnings(false);
+					}
+				}
 			} else {
-				_laneWarning.SetActive(false);
-				_camera.GetComponent<Animator>().SetBool("NearingIntersection", false);
+				TogglePlayerWarnings(false);
 			}
 		}
 	}
@@ -146,6 +157,11 @@ public class PlayerController : MonoBehaviour {
 			}
 	
 		}
+	}
+
+	private void TogglePlayerWarnings(bool warningState) {
+		_camera.GetComponent<Animator>().SetBool("NearingIntersection", warningState);
+		_laneWarning.SetActive(warningState);
 	}
 
 	private IEnumerator PlaySound() {
@@ -189,6 +205,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (other.gameObject.tag == "NPC") {
 			_engineSound.Stop();
+			SpecialEffects.MakeCrashExplosion(transform.position);
 			PlayerPrefs.SetFloat ("CurrentScore", uiController.GetComponent<UIController>().score);
 			if ( PlayerPrefs.GetFloat ("hiscore") < uiController.GetComponent<UIController>().score) {
 				PlayerPrefs.SetFloat ("hiscore", uiController.GetComponent<UIController>().score);

@@ -1,6 +1,7 @@
 ﻿public static class GameEvent {
 	public const string SPEED_SLIDER_CHANGED = "SPEED_SLIDER_CHANGED";
 	public const string COIN_EVENT = "COIN_EVENT";
+	public const string PLAYER_STOPPED = "PLAYER_STOPPED";
 	public const string NPC_HIT_BY_PLAYER_CHARACTER = "NPC_HIT_BY_PLAYER_CHARACTER";
 	public const string PLAYER_INITIATED_GAME = "PLAYER_INITIATED_GAME";
 	public const string PLAYER_GOT_TEN_PASSES = "PLAYER_GOT_TEN_PASSES";

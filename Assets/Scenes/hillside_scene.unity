@@ -4265,6 +4265,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 19806130, guid: 4201b0529a05448b382176f6b07cea54, type: 2}
+  crashExplosionEffect: {fileID: 19814004, guid: a034ee05e8a1f4fa9babaae2e92bc37c,
+    type: 2}
   trailPrefab: {fileID: 132638, guid: eae747b5a03684d788de998416cb0666, type: 2}
 --- !u!82 &920988404
 AudioSource:
@@ -5298,6 +5300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0424bac78cc974e9a9700eed96b43243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  licenseImage: {fileID: 0}
 --- !u!1 &1475718514
 GameObject:
   m_ObjectHideFlags: 0

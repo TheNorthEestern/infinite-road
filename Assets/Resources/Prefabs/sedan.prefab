@@ -199,6 +199,7 @@ GameObject:
   - 114: {fileID: 11450278}
   - 143: {fileID: 14356122}
   - 65: {fileID: 6573884}
+  - 95: {fileID: 9558668}
   m_Layer: 0
   m_Name: sedan
   m_TagString: NPC
@@ -866,6 +867,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.02, y: 2.23, z: 4.96}
   m_Center: {x: 0, y: 1.25, z: 0.24}
+--- !u!95 &9558668
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182118}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8b47a61daf0844222b4195f8c10f49d6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11450278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -904,7 +922,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.36, z: -0.13}
+  m_Center: {x: 0, y: 1.5, z: -0.13}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

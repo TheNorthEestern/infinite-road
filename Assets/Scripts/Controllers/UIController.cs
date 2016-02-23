@@ -46,6 +46,7 @@ public class UIController : MonoBehaviour {
 	void Awake() {
 		Messenger.AddListener (GameEvent.APPROACHING_ONCOMING_TRAFFIC, PlayWarnSound);
 		Messenger.AddListener (GameEvent.GAME_ENDED, ShowGameOverScreen);
+		Messenger.AddListener (GameEvent.PLAYER_STOPPED, DecrementScore);
 		Messenger<float>.AddListener(GameEvent.RAN_STOP_SIGN, IncrementScore);
 		Messenger<bool>.AddListener (GameEvent.COIN_EVENT, UpdateComboStatus);
 	}
@@ -53,6 +54,7 @@ public class UIController : MonoBehaviour {
 	void OnDestroy() {
 		Messenger.RemoveListener(GameEvent.APPROACHING_ONCOMING_TRAFFIC, PlayWarnSound);
 		Messenger.RemoveListener (GameEvent.GAME_ENDED, ShowGameOverScreen);
+		Messenger.RemoveListener(GameEvent.PLAYER_STOPPED, DecrementScore);
 		Messenger<float>.RemoveListener (GameEvent.RAN_STOP_SIGN, IncrementScore);
 		Messenger<bool>.RemoveListener (GameEvent.COIN_EVENT, UpdateComboStatus);
 	}
@@ -68,8 +70,7 @@ public class UIController : MonoBehaviour {
 			}
 			totalScore = score;
 			// _distanceText.text = _distanceTextBacking.text = distanceFromOrigin.ToString("N");
-			_distanceTextBacking.text = "High Score: $" + PlayerPrefs.GetFloat("hiscore");
-			_distanceText.text = "High Score: $" + PlayerPrefs.GetFloat("hiscore");
+			_distanceTextBacking.text = _distanceText.text = "High Score: " + PlayerPrefs.GetFloat("hiscore").ToString("C0");
 		}
 
 		if ( (Input.GetKeyDown(KeyCode.Space) || 
@@ -157,6 +158,11 @@ public class UIController : MonoBehaviour {
 		}
 		distanceFromOrigin *= score;
 		pickupSound.PlayOneShot (pickupSound.clip);
+		SetScoreLabelText(score);
+	}
+
+	private void DecrementScore() {
+		score -= 1;	
 		SetScoreLabelText(score);
 	}
 
